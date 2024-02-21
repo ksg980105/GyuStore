@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "board.BoardBean">
+	<select id="getTotalCount" resultType="int">
+		select count(*) from board
+		<if test="whatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		<if test="whatColumn == 'member_id'">
+			where member_id like #{keyword}
+		</if>
+	</select>
+	
+	<select id="getAllBoard" resultType="board.model.BoardBean">
+		select * from board
+		<if test="whatColumn == 'title'">
+			where title like #{keyword}
+		</if>
+		<if test="whatColumn == 'member_id'">
+			where member_id like #{keyword}
+		</if>
+		order by board_number desc
+	</select>
+	
+	<insert id="insertBoard">
+		insert into board
+		values(board_seq.nextval, #{board_category}, #{title}, #{content}, #{write_date}, #{member_id})
+	</insert>
+	
+	<select id="getBoardByNum" resultType="board.model.BoardBean">
+		select * from board where board_number = #{board_number}
+	</select>
+	
+	<update id="updateBoard">
+		update board set board_category=#{board_category}, title=#{title}, content=#{content}, write_date=#{write_date} where board_number=#{board_number}
+	</update>
+	
+	<delete id="deleteBoard">
+		delete from board where board_number=#{board_number}
+	</delete>
+</mapper> 

@@ -1,0 +1,49 @@
+DROP TABLE member cascade constraints;
+DROP TABLE board cascade constraints;
+DROP TABLE category cascade constraints;
+DROP TABLE product cascade constraints;
+
+drop sequence board_seq;
+drop sequence category_seq;
+drop sequence product_seq;
+
+create sequence board_seq;
+create sequence category_seq;
+create sequence product_seq;
+
+CREATE TABLE member (
+   member_id   varchar2(30)   PRIMARY KEY,
+   nickname   varchar2(30)   NOT NULL,
+   name   varchar2(15)   NOT NULL,
+   password   varchar2(20)   NOT NULL,
+   phone   varchar2(20)   NOT NULL,
+   email   varchar2(30)   NOT NULL,
+   address1   varchar2(100)   NOT NULL,
+   address2   varchar2(100)   NOT NULL
+);
+
+create table board(
+	board_number number primary key,
+	board_category varchar2(30),
+	title varchar2(50) not null,
+	content varchar2(300) not null,
+	write_date Date,
+	member_id varchar2(30) not null
+);
+
+create table category(
+	category_number number primary key,
+	category_name varchar2(30)
+);
+
+create table product(
+	pnum number primary key,
+	pname varchar2(30),
+	pcategory varchar2(30),
+	publisher varchar2(50),
+	pimage varchar2(200) not null,
+	pqty number,
+	price number,
+	summary varchar2(600),
+	point number
+);

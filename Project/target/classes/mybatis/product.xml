@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "product.ProductBean">
+	<insert id="insertProduct">
+		insert into product (pnum, pname, pcategory, publisher, pimage, pqty, price, summary, point)
+		values(product_seq.nextval, #{pname}, #{pcategory}, #{publisher}, #{pimage}, #{pqty}, #{price}, #{summary}, #{point})
+	</insert>
+	
+	<select id="getAllProduct" resultType="product.model.ProductBean">
+		select * from product order by pnum asc
+	</select>
+	
+	<delete id="deleteProduct">
+		delete from product where pnum=#{pnum}
+	</delete>
+</mapper> 
