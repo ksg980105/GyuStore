@@ -38,10 +38,10 @@ public class ProductUpdateController {
 	ServletContext servletContext;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String updateGet(Model model) {
+	public String updateGet(Model model, int pnum) {
 		
-		List<ProductBean> lists = productDao.getAllProduct();
-		model.addAttribute("productList", lists);
+		ProductBean product = productDao.getProductByNum(pnum);
+		model.addAttribute("product", product);
 		
 		List<CategoryBean> clists = categoryDao.getAllCategory();
 		model.addAttribute("categoryList", clists);
@@ -52,12 +52,12 @@ public class ProductUpdateController {
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public void updatePost(ProductBean productBean, HttpServletResponse response, HttpServletRequest request,
 							HttpSession session) throws IOException {
-		
+
 		PrintWriter out;
 		out = response.getWriter();
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String path = servletContext.getRealPath("/resources/memberImage");
+		String path = servletContext.getRealPath("/resources/productImage");
 
 		File directory = new File(path);
 		if (!directory.exists()) {
@@ -72,6 +72,8 @@ public class ProductUpdateController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		productDao.updateProduct(productBean);
 		
 		System.out.println(productBean.getPimage());
 		System.out.println(productBean.getPname());

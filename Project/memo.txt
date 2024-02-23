@@ -41,7 +41,7 @@ create table product(
 	pname varchar2(30),
 	pcategory varchar2(30),
 	publisher varchar2(50),
-	pimage varchar2(200) not null,
+	pimage varchar2(200),
 	pqty number,
 	price number,
 	summary varchar2(600),

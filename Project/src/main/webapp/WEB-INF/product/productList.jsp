@@ -67,11 +67,24 @@
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript">
 	function deleteNum(){
-		var num = prompt("삭제할 번호를 입력하세요.", "");
-		if(num == "" || isNaN(num)){
+		var deleteNum = prompt("삭제할 번호를 입력하세요.", "");
+		if(deleteNum == "" || isNaN(deleteNum)){
 			alert('잘못 입력되었습니다.');
+		}else if(deleteNum == null){
+			alert('취소했습니다.');
 		}else{
-			location.href="delete.product?pnum=" + num;
+			location.href="delete.product?pnum=" + deleteNum;
+		}
+	}
+	
+	function updateNum(){
+		var updateNum = prompt("수정할 번호를 입력하세요.", "");
+		if(updateNum == "" || isNaN(updateNum)){
+			alert('잘못 입력되었습니다.');
+		}else if(updateNum == null){
+			alert('취소했습니다.');
+		}else{
+			location.href = "update.product?pnum=" + updateNum;
 		}
 	}
 </script>
@@ -129,9 +142,7 @@
 	  		<a href="insert.product">
 	  			<input type="button" class="mybutton" value="등록">
 	  		</a>
-	  		<a href="update.product">
-	  			<input type="button" class="mybutton" value="수정">
-	  		</a>
+	  		<input type="button" class="mybutton" value="수정" onClick="updateNum()">
 	  		<input type="button" class="mybutton" value="삭제" onClick="deleteNum()">
 	  	</td>
 	  </tr>

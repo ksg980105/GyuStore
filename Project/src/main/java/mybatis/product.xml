@@ -15,4 +15,14 @@
 	<delete id="deleteProduct">
 		delete from product where pnum=#{pnum}
 	</delete>
+	
+	<select id="getProductByNum" resultType="product.model.ProductBean">
+		select * from product where pnum=#{pnum}
+	</select>
+	
+	<update id="updateProduct">
+		update product
+		set pname=#{pname}, pcategory=#{pcategory}, publisher=#{publisher}, pimage=#{pimage}, pqty=#{pqty}, price=#{price}, summary=#{summary}, point=#{point}
+		where pnum=#{pnum}
+	</update>
 </mapper> 

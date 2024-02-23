@@ -87,6 +87,8 @@
 </head>
 <br>
 <form name="f" action="update.product" method="post" onsubmit="return updateCheck()" enctype="multipart/form-data">
+	<input type="hidden" name="pnum" value="${product.pnum}">
+	<input type="hidden" name="summary" value="${product.summary}">
 	<table class="table table-bordered border-success" style="width: 1000px; margin: auto;">
   <tr>
   	<th>번호</th>
@@ -99,13 +101,12 @@
   	<th>줄거리</th>
   	<th>포인트</th>
   </tr>
-  <c:forEach var="product" items="${productList}">
 	  <tr align="center" style="font: bold;">
 	  	<td>${product.pnum}</td>
 	  	<td>
-	  		<img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" width="200"><hr>
-	  		<input type="file" class="form-control mb-3" id="upload" name="upload" style="border-color: black;" onchange="previewImage()">
-	  	</td>
+		    <img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" width="200"><hr>
+		    <input type="file" class="form-control mb-3" id="upload" name="upload" style="border-color: black;" onchange="previewImage()">
+		</td>
 	  	<td>
 			<select name="pcategory">
 		  		<c:forEach var="category" items="${categoryList}">
@@ -126,13 +127,12 @@
 	  		<input type="text" name="price" size="5" value="${product.price}">
 	  	</td>
 	  	<td>
-	  		<textarea rows="10" cols="10">${product.summary}</textarea>
+	  		<textarea rows="10" cols="10" >${product.summary}</textarea>
 	  	</td>
 	  	<td>
 	  		<input type="text" name="point" size="5" value="${product.point}">
 	  	</td>
 	  </tr>
-  </c:forEach>
   <tr>
   	<td colspan="9" align="center">
   		<input type="submit" class="mybutton" value="수정">

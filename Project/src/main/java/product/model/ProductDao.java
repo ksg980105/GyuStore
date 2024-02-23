@@ -29,4 +29,13 @@ public class ProductDao {
 	public void deleteProduct(int pnum) {
 		sqlSessionTemplate.delete(namespace + ".deleteProduct", pnum);
 	}
+
+	public ProductBean getProductByNum(int pnum) {
+		ProductBean pb = sqlSessionTemplate.selectOne(namespace + ".getProductByNum", pnum);
+		return pb;
+	}
+
+	public void updateProduct(ProductBean productBean) {
+		sqlSessionTemplate.update(namespace + ".updateProduct", productBean);
+	}
 }
