@@ -130,7 +130,7 @@
 	  		<textarea rows="10" cols="10" >${product.summary}</textarea>
 	  	</td>
 	  	<td>
-	  		<input type="text" name="point" size="5" value="${product.point}">
+	  		<input type="text" name="point" size="5" value="${product.point} ">
 	  	</td>
 	  </tr>
   <tr>
