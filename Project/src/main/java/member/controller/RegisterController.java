@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,9 @@ public class RegisterController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
+	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String registerGet() {
 		
@@ -43,6 +47,10 @@ public class RegisterController {
 		if (bresult.hasErrors()) {
 			return viewPage;
 		}
+		
+		//비밀번호 암호화
+		String pwd = pwdEncoder.encode(mb.getPassword());
+		mb.setPassword(pwd);
 		
 		memberDao.memberRegister(mb);
 		

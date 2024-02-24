@@ -9,8 +9,12 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/member-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/main-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/spring-security.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/product-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/board-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/category-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
 	</autoconfigs>
