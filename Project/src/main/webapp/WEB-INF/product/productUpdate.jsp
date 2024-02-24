@@ -82,6 +82,46 @@
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+	
+	function updateCheck(){
+		if(f.upload.value == ""){
+			alert('이미지를 등록하세요.');
+			return false;
+		}
+		if(f.pname.value == ""){
+			alert('제목을 입력하세요.');
+			return false;
+		}
+		if(f.publisher.value == ""){
+			alert('출판사를 입력하세요.');
+			return false;
+		}
+		if(f.pqty.value == ""){
+			alert('수량을 입력하세요.');
+			return false;
+		}else if(isNaN(f.pqty.value)){
+			alert('수량은 숫자만 입력가능합니다.');
+			return false;
+		}
+		if(f.price.value == ""){
+			alert('가격을 입력하세요.');
+			return false;
+		}else if(isNaN(f.price.value)){
+			alert('가격은 숫자만 입력가능합니다.');
+			return false;
+		}
+		if(f.summaryCheck.value == ""){
+			alert('줄거리를 입력하세요.');
+			return false;
+		}
+		if(f.point.value == ""){
+			alert('포인트를 입력하세요.');
+			return false;
+		}else if(isNaN(f.point.value)){
+			alert('포인트는 숫자만 입력가능합니다.');
+			return false;
+		}
+	}
 </script>
 
 </head>
@@ -127,10 +167,10 @@
 	  		<input type="text" name="price" size="5" value="${product.price}">
 	  	</td>
 	  	<td>
-	  		<textarea rows="10" cols="10" >${product.summary}</textarea>
+	  		<textarea rows="10" cols="10" name="summaryCheck">${product.summary}</textarea>
 	  	</td>
 	  	<td>
-	  		<input type="text" name="point" size="5" value="${product.point} ">
+	  		<input type="text" name="point" size="5" value="${product.point}">
 	  	</td>
 	  </tr>
   <tr>
