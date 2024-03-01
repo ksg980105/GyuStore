@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,9 @@ public class LoginController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String loginGet() {
@@ -44,7 +48,8 @@ public class LoginController {
 			out.println("<script>alert('아이디나 비밀번호가 틀렸습니다.'); location.href='" + request.getContextPath() + "/login.member';</script>");
 		
 		}else { //회원정보가 있을 때
-			if(memberBean.getPassword().equals(password)) {  //비밀번호가 일치할 때
+			
+			if(pwdEncoder.matches(password, memberBean.getPassword())) {  //비밀번호가 일치할 때
 				session.setAttribute("loginInfo", memberBean);
 				out.println("<script>alert('로그인되었습니다.'); location.href='" + request.getContextPath() + "/view.main';</script>");
 			
