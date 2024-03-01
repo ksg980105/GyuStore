@@ -1,4 +1,4 @@
-package main.controller;
+package product.controller;
 
 import java.util.List;
 
@@ -11,17 +11,19 @@ import product.model.ProductBean;
 import product.model.ProductDao;
 
 @Controller
-public class MainViewController {
+public class ProductViewController {
 
-	private final String command = "view.main";
-	private final String viewPage = "main";
+	private final String command = "/view.product";
+	private final String viewPage = "productView";
 	
 	@Autowired
-	ProductDao productDao;
+	private ProductDao productDao;
 	
 	@RequestMapping(value = command)
-	public String main() {
+	public String viewGet(Model model) {
 		
+		List<ProductBean> lists = productDao.getAllProduct();
+		model.addAttribute("productList", lists);
 		return viewPage;
 	}
 }
