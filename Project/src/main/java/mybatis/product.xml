@@ -8,8 +8,29 @@
 		values(product_seq.nextval, #{pname}, #{pcategory}, #{publisher}, #{pimage}, #{pqty}, #{price}, #{summary}, #{point})
 	</insert>
 	
+	<select id="getAllProducts" resultType="product.model.ProductBean">
+		select * from product order by pnum asc;
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from product
+		<if test="whatColumn == 'pname'">
+			where pname like #{keyword}
+		</if>
+		<if test="whatColumn == 'pcategory'">
+			where pcategory like #{keyword}
+		</if>
+	</select>
+	
 	<select id="getAllProduct" resultType="product.model.ProductBean">
-		select * from product order by pnum asc
+		select * from product 
+		<if test="whatColumn == 'pname'">
+			where pname like #{keyword}
+		</if>
+		<if test="whatColumn == 'pcategory'">
+			where pcategory like #{keyword}
+		</if>
+		order by pnum desc
 	</select>
 	
 	<delete id="deleteProduct">
@@ -25,4 +46,13 @@
 		set pname=#{pname}, pcategory=#{pcategory}, publisher=#{publisher}, pimage=#{pimage}, pqty=#{pqty}, price=#{price}, summary=#{summary}, point=#{point}
 		where pnum=#{pnum}
 	</update>
+	
+	<select id="ProductByPriceAsc" resultType="product.model.ProductBean">
+		select * from product order by price asc
+	</select>
+	
+	<select id="ProductByPriceDesc" resultType="product.model.ProductBean">
+		select * from product order by price desc
+	</select>
+	
 </mapper> 

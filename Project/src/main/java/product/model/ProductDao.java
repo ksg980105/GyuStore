@@ -1,10 +1,14 @@
 package product.model;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import utility.Paging;
 
 @Component("ProductDao")
 public class ProductDao {
@@ -21,8 +25,14 @@ public class ProductDao {
 		sqlSessionTemplate.insert(namespace + ".insertProduct", pb);
 	}
 
-	public List<ProductBean> getAllProduct() {
+	public List<ProductBean> getAllProducts() {
 		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".getAllProduct");
+		return lists;
+	}
+	
+	public List<ProductBean> getAllProduct(Map<String, String> map, Paging pageInfo) {
+		RowBounds rowbounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".getAllProduct", map, rowbounds);
 		return lists;
 	}
 
@@ -38,4 +48,20 @@ public class ProductDao {
 	public void updateProduct(ProductBean productBean) {
 		sqlSessionTemplate.update(namespace + ".updateProduct", productBean);
 	}
+
+	public List<ProductBean> ProductByPriceAsc() {
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".ProductByPriceAsc");
+		return lists;
+	}
+
+	public List<ProductBean> ProductByPriceDesc() {
+		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".ProductByPriceDesc");
+		return lists;
+	}
+
+	public int getTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".getTotalCount", map);
+		return cnt;
+	}
+
 }
