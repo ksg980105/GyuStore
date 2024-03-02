@@ -49,16 +49,6 @@ public class ProductDao {
 		sqlSessionTemplate.update(namespace + ".updateProduct", productBean);
 	}
 
-	public List<ProductBean> ProductByPriceAsc() {
-		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".ProductByPriceAsc");
-		return lists;
-	}
-
-	public List<ProductBean> ProductByPriceDesc() {
-		List<ProductBean> lists = sqlSessionTemplate.selectList(namespace + ".ProductByPriceDesc");
-		return lists;
-	}
-
 	public int getTotalCount(Map<String, String> map) {
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".getTotalCount", map);
 		return cnt;

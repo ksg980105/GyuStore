@@ -30,11 +30,13 @@ public class ProductViewController {
 	public String viewGet(Model model, @RequestParam(value = "whatColumn", required = false) String whatColumn,
 						  @RequestParam(value = "keyword", required = false) String keyword,
 						  @RequestParam(value = "pageNumber", required = false) String pageNumber,
+						  @RequestParam(value = "price_order", required = false) String price_order,
 						  HttpServletRequest request) {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("whatColumn", whatColumn);
 		map.put("keyword", "%" + keyword + "%");
+		map.put("price_order", price_order);
 		
 		int totalCount = productDao.getTotalCount(map);
 		System.out.println("totalCount:" + totalCount);

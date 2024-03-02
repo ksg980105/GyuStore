@@ -30,7 +30,15 @@
 		<if test="whatColumn == 'pcategory'">
 			where pcategory like #{keyword}
 		</if>
-		order by pnum desc
+		<if test="price_order == 'low'">
+        	order by price asc
+	    </if>
+	    <if test="price_order == 'high'">
+	        order by price desc
+	    </if>
+	    <if test="price_order == null or price_order == ''">
+	        order by pnum desc
+	    </if>
 	</select>
 	
 	<delete id="deleteProduct">
@@ -46,13 +54,5 @@
 		set pname=#{pname}, pcategory=#{pcategory}, publisher=#{publisher}, pimage=#{pimage}, pqty=#{pqty}, price=#{price}, summary=#{summary}, point=#{point}
 		where pnum=#{pnum}
 	</update>
-	
-	<select id="ProductByPriceAsc" resultType="product.model.ProductBean">
-		select * from product order by price asc
-	</select>
-	
-	<select id="ProductByPriceDesc" resultType="product.model.ProductBean">
-		select * from product order by price desc
-	</select>
 	
 </mapper> 

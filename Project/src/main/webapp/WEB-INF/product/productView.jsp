@@ -10,16 +10,34 @@
 }
 </style>
 
+<script type="text/javascript" src="../../resources/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    var form = $('form[action="view.product"]');
+
+    // 낮은가격순 텍스트 클릭 시
+    $('#low_price').click(function() {
+        form.append('<input type="hidden" name="price_order" value="low">'); // hidden input 추가
+        form.submit(); // form 제출
+    });
+
+    // 높은가격순 텍스트 클릭 시
+    $('#high_price').click(function() {
+        form.append('<input type="hidden" name="price_order" value="high">'); // hidden input 추가
+        form.submit(); // form 제출
+    });
+});
+
+
+</script>
 
 <br>
 <div class="container-fluid bg-3 text-center" style="width: 80%;">
-  <div id="product_order_list" align="right" style="margin-bottom: 5px;">
-		  <a href="low.product">낮은가격</a>&nbsp&nbsp|&nbsp&nbsp
-		  <a href="high.product">높은가격</a>
-  </div>
+  <span id="low_price" style="cursor: pointer;">낮은가격순</span> | 
+  <span id="high_price" style="cursor: pointer;">높은가격순</span>
   
   <c:if test="${empty productList}">
-	    <font size="5"><b>등록된 상품이 없습니다.</b></font>
+	    <br><font size="5"><b>등록된 상품이 없습니다.</b></font>
   </c:if>
 
   <div class="row">
@@ -28,7 +46,7 @@
 	    	</div><div class="row"><hr>
 	    </c:if>
 	    <div class="col-sm-3" align="center">
-	      <a href="detail.product?pnum=${product.pnum}">
+	      <a href="detail.product?pnum=${product.pnum}&pageNumber=${productPageInfo.pageNumber}">
 	      	<img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" class="img-responsive product-image">
 	      </a>
 	      <font size="3"><b>${product.pname}</b></font><br>
