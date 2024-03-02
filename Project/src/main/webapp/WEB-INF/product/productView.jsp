@@ -16,18 +16,51 @@ $(document).ready(function () {
     var form = $('form[action="view.product"]');
 
     // 낮은가격순 텍스트 클릭 시
-    $('#low_price').click(function() {
-        form.append('<input type="hidden" name="price_order" value="low">'); // hidden input 추가
-        form.submit(); // form 제출
+    $('#low_price').click(function () {
+        updatePriceOrder('low');
     });
 
     // 높은가격순 텍스트 클릭 시
-    $('#high_price').click(function() {
-        form.append('<input type="hidden" name="price_order" value="high">'); // hidden input 추가
-        form.submit(); // form 제출
+    $('#high_price').click(function () {
+        updatePriceOrder('high');
     });
-});
 
+    function updatePriceOrder(order) {
+        var isSearch = $('select[name="whatColumn"]').val() !== 'all' || $('input[name="keyword"]').val() !== '';
+
+        if (isSearch) {
+            // 현재 검색 중인 경우에만 추가
+            $('input[name="price_order"]').remove(); // 기존 input 삭제
+            form.append('<input type="hidden" name="price_order" value="' + order + '">'); // 새로운 input 추가
+        } else {
+            // 현재 검색 중이 아닌 경우에는 URL의 'price_order' 파라미터만 변경
+            var currentUrl = window.location.href;
+            var urlParts = currentUrl.split('?');
+
+            if (urlParts.length > 1) {
+                // URL에 파라미터가 있을 경우
+                var params = urlParts[1].split('&');
+
+                for (var i = 0; i < params.length; i++) {
+                    if (params[i].startsWith('price_order=')) {
+                        params.splice(i, 1); // 기존 'price_order' 파라미터 삭제
+                        break;
+                    }
+                }
+
+                params.push('price_order=' + order); // 새로운 'price_order' 파라미터 추가
+                window.location.href = urlParts[0] + '?' + params.join('&');
+            } else {
+                // URL에 파라미터가 없을 경우
+                window.location.href = currentUrl + '?price_order=' + order;
+            }
+
+            return;
+        }
+
+        form.submit(); // form 제출
+    }
+});
 
 </script>
 
