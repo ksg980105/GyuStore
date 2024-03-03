@@ -42,6 +42,7 @@
 		    } else if (inputValue > total){
 		    	input.value = 0;
 		    	alert('상품가격을 초과한 포인트를 사용할 수 없습니다.');
+		    	alert(total);
 		    	check = false;
 		    } else {
 	            point = inputValue;
@@ -157,7 +158,7 @@
 				<tr>
 					<th>포인트 사용</th>
 					<td>
-						<input type="text" name="point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${productBean.point * pop_out})" onblur="fillZero(this); updatePrice();"> 
+						<input type="text" name="point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${productBean.price * pop_out})" onblur="fillZero(this); updatePrice();"> 
 						<font color="blue" size="2"><b>(사용 가능 포인트: ${loginInfo.point} p)</b></font>
 					</td>
 				</tr>
