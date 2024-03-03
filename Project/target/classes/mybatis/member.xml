@@ -25,6 +25,6 @@
 	</select>
 	
 	<update id="memberUpdate">
-		update member set nickname=#{nickname}, name=#{name}, password=#{password}, phone=#{phone}, email=#{email}, address1=#{address1}, address2=#{address2} where member_id=#{member_id}
+		update member set nickname=#{nickname}, name=#{name}, phone=#{phone}, email=#{email}, address1=#{address1}, address2=#{address2} where member_id=#{member_id}
 	</update>
 </mapper> 

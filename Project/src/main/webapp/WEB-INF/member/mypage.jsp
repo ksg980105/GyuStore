@@ -283,10 +283,6 @@ $(document).ready(function() {
 		  	<td>${loginInfo.name}</td>
 		  </tr>
 		  <tr>
-		  	<th>비밀번호</th>
-		  	<td>${loginInfo.password}</td>
-		  </tr>
-		  <tr>
 		  	<th>휴대폰번호</th>
 		  	<td>${loginInfo.phone}</td>
 		  </tr>
@@ -325,13 +321,7 @@ $(document).ready(function() {
 		  	<th>이름</th>
 		  	<td>${loginInfo.name}</td>
 		  </tr>
-		  <tr>
-		  	<th>비밀번호</th>
-		  	<td>
-		  		<input type="password" id="password" name="password" size="9" value="${loginInfo.password}" onkeyup="pwcheck()">
-		  		<span id="pwcheckmessage"></span>
-			</td>
-		  </tr>
+
 		  <tr>
 		  	<th>이메일</th>
 		  	<td>
