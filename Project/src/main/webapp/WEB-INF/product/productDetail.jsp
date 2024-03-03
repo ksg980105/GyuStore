@@ -32,6 +32,16 @@
 			    document.getElementById("price").innerText = (parseInt(currentCount) - 1) * price + " 원";
 		  }
 	}
+	
+	function goLogin(){
+		alert('로그인 후 이용해주세요.');
+	}
+	
+	// 주문 누르면 상품번호, 주문갯수 넘김
+	function goToOrder(pnum) {
+	    var popOut = document.getElementById('pop_out').value;
+	    location.href = "order.product?pnum=" + pnum + "&pop_out=" + popOut;
+	}
 </script>
 
 <html>
@@ -44,7 +54,7 @@
 	<div class="container" align="center">
 		<div class="row">
 			<div class="col-md-5">
-				<img alt="" src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" style="width:100%; height:50%; margin-left: 100px;">
+				<img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" style="width:100%; height:50%; margin-left: 100px;">
 			</div>
 			<div class="col-md-6">
 				<h3>${productBean.pname}</h3>
@@ -60,11 +70,15 @@
 		        </p>
 				<h4 id="price">${productBean.price} 원</h4>
 				
-				<p><form name="addForm" action="./addCart.jsp?id=" method="post">
-					<a href="#" class="btn btn-info">상품 주문&raquo;</a>
-					<a href="./cart.jsp" class="btn btn-warning" onclick="addToCart()">장바구니&raquo;</a>
+				    <c:if test="${empty loginInfo}">
+						<a href="login.member" class="btn btn-info" onclick="goLogin()">상품 주문&raquo;</a>
+						<a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니&raquo;</a>
+					</c:if>
+					<c:if test="${not empty loginInfo}">
+						<a href="javascript:void(0);" onclick="goToOrder(${productBean.pnum});" class="btn btn-info">상품 주문&raquo;</a>
+						<a href="./cart.jsp" class="btn btn-warning" onclick="addToCart()">장바구니&raquo;</a>
+					</c:if>
 					<a href="view.product?pageNumber=${pageNumber}" class="btn btn-secondary">상품 목록&raquo;</a>
-				</form>
 			</div>
 		</div>
 		<hr>

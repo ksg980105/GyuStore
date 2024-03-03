@@ -79,9 +79,9 @@ $(document).ready(function () {
 	    	</div><div class="row"><hr>
 	    </c:if>
 	    <div class="col-sm-3" align="center">
-	      <a href="detail.product?pnum=${product.pnum}&pageNumber=${productPageInfo.pageNumber}">
-	      	<img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" class="img-responsive product-image">
-	      </a>
+	        <a href="detail.product?pnum=${product.pnum}&pageNumber=${productPageInfo.pageNumber}">
+	      	  <img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" class="img-responsive product-image">
+	        </a>
 	      <font size="3"><b>${product.pname}</b></font><br>
 	      <font size="2"><b>${product.price} 원 </b></font>
 	    </div>

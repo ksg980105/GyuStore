@@ -28,8 +28,15 @@ public class MemberBean {
 	private String address1;
 	@NotEmpty(message = "상세주소를 입력하세요")
 	private String address2;
+	private int point;
 	
 	
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public String getRepassword() {
 		return repassword;
 	}
