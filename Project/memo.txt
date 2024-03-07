@@ -2,14 +2,17 @@ DROP TABLE member cascade constraints;
 DROP TABLE board cascade constraints;
 DROP TABLE category cascade constraints;
 DROP TABLE product cascade constraints;
+DROP TABLE order cascade constraints;
 
 drop sequence board_seq;
 drop sequence category_seq;
 drop sequence product_seq;
+drop sequence order_seq;
 
 create sequence board_seq;
 create sequence category_seq;
 create sequence product_seq;
+create sequence order_seq;
 
 CREATE TABLE member (
    member_id   varchar2(30)   PRIMARY KEY,
@@ -47,4 +50,20 @@ create table product(
 	price number,
 	summary varchar2(600),
 	point number
+);
+
+create table order(
+	order_number number primary key,
+	name varchar2(20),
+	email varchar2(30),
+	phone varchar2(20),
+	address1 varchar2(100),
+	address2 varchar2(100),
+	pname varchar2(50),
+	pop_out number,
+	point number,
+	requestOrder varchar2(50),
+	pimage varchar2(200),
+	productPrice number,
+	using_point number
 );
