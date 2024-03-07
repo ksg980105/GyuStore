@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   <style>
 	th{
 		width: 25%;
@@ -67,6 +69,41 @@
 	        }else{
 	        	document.getElementById('price').innerHTML = productPrice + ' 원';
 	        }
+	        
+	     // 아임포트에서 사용할 결제 정보 설정
+            var iamportInfo = {
+	    		pg: 'html5_inicis',
+	    		pay_method: 'card',
+                //merchant_uid: "order_no_0002",
+                name: '${productBean.pname}',
+                amount: totalPrice, // 변경된 변수 사용
+                buyer_email: '${loginInfo.email}',
+                buyer_name: '${loginInfo.name}',
+                buyer_tel: '${loginInfo.phone}',
+                buyer_addr: '${loginInfo.address1} ${loginInfo.address2}',
+                //buyer_postcode: '123-456',
+                m_redirect_url: '{모바일에서 결제 완료 후 리디렉션 될 URL}',
+                escrow: true,
+                vbank_due: 'YYYYMMDD'
+                // ... (기타 아임포트 설정)
+            };
+	     
+            $('#paymentButton').on('click', function (event) {
+                event.preventDefault();
+
+                // 아임포트 결제 화면 열기
+                IMP.init('imp07511880'); // 본인의 아임포트 키로 교체
+                IMP.request_pay(iamportInfo, function (rsp) {
+                    if (rsp.success) {
+                        // 결제 성공 시 처리
+                        alert('결제가 완료되었습니다.');
+                        location.href="order.product";
+                    } else {
+                        // 결제 실패 시 처리
+                        alert('결제에 실패하였습니다.\n에러 메시지: ' + rsp.error_msg);
+                    }
+                });
+            });
 	    }
 		
 		// 상품페이지로 이동
@@ -76,135 +113,123 @@
 	</script>
 </head>
 <body>
-	<form action="order.product" method="post">
-		<input type="hidden" name="name" value="${loginInfo.name}">
-		<input type="hidden" name="email" value="${loginInfo.email}">
-		<input type="hidden" name="phone" value="${loginInfo.phone}">
-		<input type="hidden" name="address1" value="${loginInfo.address1}">
-		<input type="hidden" name="address2" value="${loginInfo.address2}">
-		<input type="hidden" name="pname" value="${productBean.pname}">
-		<input type="hidden" name="pimage" value="${productBean.pimage}">
-		<input type="hidden" name="pop_out" value="${pop_out}">
-		<input type="hidden" name="point" value="${productBean.point}">
-		<input type="hidden" name="productPrice" id="productPrice" value="${productBean.price * pop_out}">
-		<div class="container" style="width: 1000px;">
-			<div class="row">
-				<h2><b>주문/결제</b></h2>
-				<hr>
-				
-				<h3>구매자 정보</h3>
-				<table border="1" class="table" style="width: 100%;">
-					<tr>
-						<th>이름</th>
-						<td>${loginInfo.name}</td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>${loginInfo.email}</td>
-					</tr>
-					<tr>
-						<th>휴대폰번호</th>
-						<td>${loginInfo.phone}</td>
-					</tr>
-				</table>
-				
-				<br>
-				<h3>받는사람 정보</h3>
-				<table border="1" class="table" style="width: 100%;">
-					<tr>
-						<th>이름</th>
-						<td>${loginInfo.name}</td>
-					</tr>
-					<tr>
-						<th>배송주소</th>
-						<td>${loginInfo.address1} ${loginInfo.address2} 
-							<font color="red" size="1"> &nbsp;&nbsp;*배송지 변경은 마이페이지 주소 변경 후 가능합니다.</font>
-						</td>
-					</tr>
-					<tr>
-						<th>휴대폰번호</th>
-						<td>${loginInfo.phone}</td>
-					</tr>
-					<tr>
-						<th>배송 요청사항</th>
-						<td>
-							<input type="radio" name="requestOrder" value="빠른배송 해주세요.">빠른배송 해주세요.<br>
-							<input type="radio" name="requestOrder" value="경비실에 맡겨주세요.">경비실에 맡겨주세요.<br>
-							<input type="radio" name="requestOrder" value="문앞에 놔주세요.">문앞에 놔주세요.<br>
-						</td>
-					</tr>
-				</table>
-				
-				<h3>상품 정보</h3>
-				<table border="1" class="table" style="width: 100%;">
-					<tr>
-						<th>상품이미지</th>
-						<td>
-							<img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" style="width:100px; height:100px;">
-						</td>
-					</tr>
-					<tr>
-						<th>상품명</th>
-						<td>${productBean.pname}</td>
-					</tr>
-					<tr>
-						<th>주문 갯수</th>
-						<td>${pop_out}</td>
-					</tr>
-					<tr>
-						<th>적립 포인트</th>
-						<td>
-							<font color="blue">${productBean.point}</font> point
-						</td>
-					</tr>
-				</table>
-				
-				<h3>결제 정보</h3>
-				<table border="1" class="table" style="width: 100%;">
-					<tr>
-						<th>총상품가격</th>
-						<td>${productBean.price * pop_out} 원</td>
-					</tr>
-					<tr>
-						<th>포인트 사용</th>
-						<td>
-							<input type="text" name="using_point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${productBean.price * pop_out})" onblur="fillZero(this); updatePrice();"> 
-							<font color="blue" size="2"><b>(사용 가능 포인트: ${loginInfo.point} p)</b></font>
-						</td>
-					</tr>
-					<tr>
-						<th>주문 수량</th>
-						<td>${pop_out}</td>
-					</tr>
-					<tr>
-						<th>배송비</th>
-						<td>0 원</td>
-					</tr>
-					<tr>
-						<th>적립 포인트</th>
-						<td>
-							<font color="blue">${productBean.point * pop_out}</font> point
-						</td>
-					</tr>
-					<tr>
-						<th>총결제금액</th>
-						<td id="price">${productBean.price * pop_out} 원</td>
-					</tr>
-				</table>
-				
-				<br>
-				<table style="margin: auto;">
-					<tr>
-						<td>
-							<input type="submit" class="btn btn-secondary btn-lg" value="결제하기"> &nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="button" class="btn btn-secondary btn-lg" onClick="goList()">취소</button>
-						</td>
-					</tr>
-				</table>
-				
-				<br><br><br><br><br>
-			</div>
+	<div class="container" style="width: 1000px;">
+		<div class="row">
+			<h2><b>주문/결제</b></h2>
+			<hr>
+			
+			<h3>구매자 정보</h3>
+			<table border="1" class="table" style="width: 100%;">
+				<tr>
+					<th>이름</th>
+					<td>${loginInfo.name}</td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td>${loginInfo.email}</td>
+				</tr>
+				<tr>
+					<th>휴대폰번호</th>
+					<td>${loginInfo.phone}</td>
+				</tr>
+			</table>
+			
+			<br>
+			<h3>받는사람 정보</h3>
+			<table border="1" class="table" style="width: 100%;">
+				<tr>
+					<th>이름</th>
+					<td>${loginInfo.name}</td>
+				</tr>
+				<tr>
+					<th>배송주소</th>
+					<td>${loginInfo.address1} ${loginInfo.address2} 
+						<font color="red" size="1"> &nbsp;&nbsp;*배송지 변경은 마이페이지 주소 변경 후 가능합니다.</font>
+					</td>
+				</tr>
+				<tr>
+					<th>휴대폰번호</th>
+					<td>${loginInfo.phone}</td>
+				</tr>
+				<tr>
+					<th>배송 요청사항</th>
+					<td>
+						<input type="radio" name="requestOrder" value="빠른배송 해주세요.">빠른배송 해주세요.<br>
+						<input type="radio" name="requestOrder" value="경비실에 맡겨주세요.">경비실에 맡겨주세요.<br>
+						<input type="radio" name="requestOrder" value="문앞에 놔주세요.">문앞에 놔주세요.<br>
+					</td>
+				</tr>
+			</table>
+			
+			<h3>상품 정보</h3>
+			<table border="1" class="table" style="width: 100%;">
+				<tr>
+					<th>상품이미지</th>
+					<td>
+						<img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" style="width:100px; height:100px;">
+					</td>
+				</tr>
+				<tr>
+					<th>상품명</th>
+					<td>${productBean.pname}</td>
+				</tr>
+				<tr>
+					<th>주문 갯수</th>
+					<td>${pop_out}</td>
+				</tr>
+				<tr>
+					<th>적립 포인트</th>
+					<td>
+						<font color="blue">${productBean.point}</font> point
+					</td>
+				</tr>
+			</table>
+			
+			<h3>결제 정보</h3>
+			<table border="1" class="table" style="width: 100%;">
+				<tr>
+					<th>총상품가격</th>
+					<td>${productBean.price * pop_out} 원</td>
+				</tr>
+				<tr>
+					<th>포인트 사용</th>
+					<td>
+						<input type="text" name="using_point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${productBean.price * pop_out})" onblur="fillZero(this); updatePrice();"> 
+						<font color="blue" size="2"><b>(사용 가능 포인트: ${loginInfo.point} p)</b></font>
+					</td>
+				</tr>
+				<tr>
+					<th>주문 수량</th>
+					<td>${pop_out}</td>
+				</tr>
+				<tr>
+					<th>배송비</th>
+					<td>0 원</td>
+				</tr>
+				<tr>
+					<th>적립 포인트</th>
+					<td>
+						<font color="blue">${productBean.point * pop_out}</font> point
+					</td>
+				</tr>
+				<tr>
+					<th>총결제금액</th>
+					<td id="price">${productBean.price * pop_out} 원</td>
+				</tr>
+			</table>
+			
+			<br>
+			<table style="margin: auto;">
+				<tr>
+					<td>
+						<input type="button" id="paymentButton" class="btn btn-secondary btn-lg" value="결제하기"> &nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-secondary btn-lg" onClick="goList()">취소</button>
+					</td>
+				</tr>
+			</table>
+			
+			<br><br><br><br><br>
 		</div>
-	</form>
+	</div>
 	</body>
 </html>
