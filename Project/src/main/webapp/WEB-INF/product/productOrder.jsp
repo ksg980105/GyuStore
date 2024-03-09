@@ -97,13 +97,46 @@
                     if (rsp.success) {
                         // 결제 성공 시 처리
                         alert('결제가 완료되었습니다.');
-                        location.href="order.product";
+                        
+                     	// 서버로 결제 성공 정보 전송
+                        payInfo(rsp);
+                       
                     } else {
                         // 결제 실패 시 처리
                         alert('결제에 실패하였습니다.\n에러 메시지: ' + rsp.error_msg);
                     }
                 });
             });
+	    }
+		
+		// 결제 성공 정보를 서버로 전송하는 함수
+	    function payInfo(rsp) {
+	        $.ajax({
+	            type: "POST",
+	            url: "order.product",
+	            data: {
+	                name: '${loginInfo.name}',
+	                email: '${loginInfo.email}',
+	                pop_out: '${pop_out}',
+	                address1: '${loginInfo.address1}',
+	                address2: '${loginInfo.address2}',
+	                phone: '${loginInfo.phone}',
+	                pimage: '${productBean.pimage}',
+	                pname: '${productBean.pname}',
+	                point: '${productBean.point}',
+	                productPrice: '${productBean.price * pop_out}',
+	                requestOrder: $('input[name="requestOrder"]:checked').val(),
+	                using_point: $('input[name="using_point"]').val()
+	            },
+	            success: function (response) {
+	                // 서버 응답을 처리하려면 필요한 경우 처리
+	                console.log("결제 정보가 서버로 전송되었습니다.");
+	            },
+	            error: function (error) {
+	                // 요청이 실패한 경우 에러를 처리
+	                console.error("서버로 결제 정보 전송 중 오류 발생", error);
+	            }
+	        });
 	    }
 		
 		// 상품페이지로 이동
