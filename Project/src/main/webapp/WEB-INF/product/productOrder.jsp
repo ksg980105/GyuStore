@@ -70,13 +70,13 @@
 	        	document.getElementById('price').innerHTML = productPrice + ' 원';
 	        }
 	        
-	     // 아임포트에서 사용할 결제 정보 설정
+	     	// 아임포트에서 사용할 결제 정보 설정
             var iamportInfo = {
 	    		pg: 'html5_inicis',
 	    		pay_method: 'card',
                 //merchant_uid: "order_no_0002",
                 name: '${productBean.pname}',
-                amount: totalPrice, // 변경된 변수 사용
+                amount: check ? totalPrice : productPrice, // 변경된 변수 사용
                 buyer_email: '${loginInfo.email}',
                 buyer_name: '${loginInfo.name}',
                 buyer_tel: '${loginInfo.phone}',
