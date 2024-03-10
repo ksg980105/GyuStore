@@ -9,4 +9,13 @@
 		values(order_seq.nextval, #{name}, #{email}, #{phone}, #{address1}, #{address2}, #{pname}, #{pop_out}, #{point}, #{requestOrder}, #{pimage}, #{productPrice}, #{using_point})
 	</insert>
 	
+	<select id="getRecentOrder" resultType="product.model.OrderBean">
+		select * from (
+        select ordertable.*, rownum as rn
+        from ordertable
+        where email=#{email}
+        order by order_number desc
+	    ) where rn = 1
+	</select>
+	
 </mapper> 
