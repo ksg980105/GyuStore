@@ -101,7 +101,7 @@
                      	// 서버로 결제 성공 정보 전송
                         payInfo(rsp);
                      	//페이지 이동
-                        window.location.href = "receipt.product";
+                        window.location.href = "view.main";
                     } else {
                         // 결제 실패 시 처리
                         alert('결제에 실패하였습니다.\n에러 메시지: ' + rsp.error_msg);

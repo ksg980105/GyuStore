@@ -9,15 +9,4 @@
 		values(order_seq.nextval, #{name}, #{email}, #{phone}, #{address1}, #{address2}, #{pname}, #{pop_out}, #{point}, #{requestOrder}, #{pimage}, #{productPrice}, #{using_point})
 	</insert>
 	
-	<select id="getRecentOrder" resultType="product.model.OrderBean">
-		SELECT *
-		FROM (
-		    SELECT *
-		    FROM ordertable
-		    WHERE email = #{email}
-		    ORDER BY order_number DESC
-		)
-		WHERE ROWNUM = 1
-	</select>
-	
 </mapper> 

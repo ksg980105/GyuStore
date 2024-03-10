@@ -19,9 +19,4 @@ public class OrderDao {
 		sqlSessionTemplate.insert(namespace + ".insertOrder", orderBean);
 		
 	}
-
-	public OrderBean getRecentOrder(String email) {
-		OrderBean orderBean = sqlSessionTemplate.selectOne(namespace + ".getRecentOrder", email);
-		return orderBean;
-	}
 }
