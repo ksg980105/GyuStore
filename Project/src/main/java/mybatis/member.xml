@@ -27,4 +27,10 @@
 	<update id="memberUpdate">
 		update member set nickname=#{nickname}, name=#{name}, phone=#{phone}, email=#{email}, address1=#{address1}, address2=#{address2} where member_id=#{member_id}
 	</update>
+	
+	<update id="reducePoint">
+		update member
+        set point = point - #{using_point}
+        where email = #{email}
+	</update>
 </mapper> 

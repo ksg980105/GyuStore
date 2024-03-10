@@ -1,5 +1,6 @@
 package member.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -44,6 +45,14 @@ public class MemberDao {
 
 	public void memberUpdate(MemberBean mb) {
 		sqlSessionTemplate.update(namespace + ".memberUpdate", mb);
+	}
+
+	public void reducePoint(String email, int using_point) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", email);
+	    paramMap.put("using_point", using_point);
+		sqlSessionTemplate.update(namespace + ".reducePoint", paramMap);
+		
 	}
 
 }

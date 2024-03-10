@@ -15,5 +15,10 @@
 	</bean>
 	
 	<context:component-scan base-package="member" />
+	<context:component-scan base-package="product" />
+	<context:component-scan base-package="category" />
+	<context:component-scan base-package="board" />
+	<context:component-scan base-package="main" />
+	
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 </beans>
