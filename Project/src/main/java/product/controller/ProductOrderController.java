@@ -45,17 +45,16 @@ public class ProductOrderController {
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public void orderPost(OrderBean orderBean, HttpSession session) {
-		
-		// 세션에서 사용자 정보 가져오기
-        MemberBean memberBean = (MemberBean) session.getAttribute("loginInfo");
-		
+				
 		//주문내역 추가
 		orderDao.insertOrder(orderBean);
 		
 		//사용자 포인트 차감
-		memberDao.reducePoint(orderBean.getEmail(), orderBean.getUsing_point());
+		memberDao.reducePoint(orderBean.getUsing_point(), orderBean.getEmail());
+		System.out.println("using_point:" + orderBean.getUsing_point());
 		
 		//구매포인트 적립
+		memberDao.updatePoint(orderBean.getPoint(), orderBean.getEmail());
 		
 	}
 

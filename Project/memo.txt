@@ -2,7 +2,7 @@ DROP TABLE member cascade constraints;
 DROP TABLE board cascade constraints;
 DROP TABLE category cascade constraints;
 DROP TABLE product cascade constraints;
-DROP TABLE order cascade constraints;
+DROP TABLE ordertable cascade constraints;
 
 drop sequence board_seq;
 drop sequence category_seq;
@@ -52,7 +52,7 @@ create table product(
 	point number
 );
 
-create table order(
+create table ordertable(
 	order_number number primary key,
 	name varchar2(20),
 	email varchar2(30),

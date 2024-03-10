@@ -10,12 +10,14 @@
 	</insert>
 	
 	<select id="getRecentOrder" resultType="product.model.OrderBean">
-		select * from (
-        select ordertable.*, rownum as rn
-        from ordertable
-        where email=#{email}
-        order by order_number desc
-	    ) where rn = 1
+		SELECT *
+		FROM (
+		    SELECT *
+		    FROM ordertable
+		    WHERE email = #{email}
+		    ORDER BY order_number DESC
+		)
+		WHERE ROWNUM = 1
 	</select>
 	
 </mapper> 

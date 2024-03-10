@@ -63,7 +63,7 @@
 				</tr>
 				<tr>
 					<th>가격</th>
-					<td>${orderBean.productPrice}</td>
+					<td>${orderBean.productPrice - orderBean.using_point}</td>
 				</tr>
 			</table>
 			

@@ -30,7 +30,13 @@
 	
 	<update id="reducePoint">
 		update member
-        set point = point - #{using_point}
+        set point = point-#{using_point}
         where email = #{email}
+	</update>
+	
+	<update id="updatePoint">
+		update member
+		set point = point+#{point}
+		where email = #{email}
 	</update>
 </mapper> 

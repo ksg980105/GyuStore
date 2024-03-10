@@ -47,11 +47,19 @@ public class MemberDao {
 		sqlSessionTemplate.update(namespace + ".memberUpdate", mb);
 	}
 
-	public void reducePoint(String email, int using_point) {
+	public void reducePoint(int using_point, String email) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("using_point", using_point);
 		paramMap.put("email", email);
-	    paramMap.put("using_point", using_point);
 		sqlSessionTemplate.update(namespace + ".reducePoint", paramMap);
+		
+	}
+
+	public void updatePoint(int point, String email) {
+		Map<String, Object> pointMap = new HashMap<String, Object>();
+		pointMap.put("point", point);
+		pointMap.put("email", email);
+		sqlSessionTemplate.update(namespace + ".updatePoint", pointMap);
 		
 	}
 
