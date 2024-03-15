@@ -25,6 +25,8 @@
   <script type="text/javascript">
 		var point = 0;
 		var check = false;
+		var productPrice = ${productBean.price * pop_out};
+		var totalPrice = 0;
 	
 		//포인트 초과, 문자 입력시 초기화
 		function checkPoint(input, availablePoint, total) {
@@ -62,53 +64,49 @@
 		
 		// 포인트 입력시 총결제금액에 반영
 		function updatePrice() {
-			var productPrice = ${productBean.price * pop_out};
-	        var totalPrice = productPrice - point; // 상품가격에서 포인트를 차감하여 총 가격 계산
+	        totalPrice = productPrice - point; // 상품가격에서 포인트를 차감하여 총 가격 계산
 	        if(check == true){
 	        	document.getElementById('price').innerHTML = totalPrice + ' 원';
 	        }else{
 	        	document.getElementById('price').innerHTML = productPrice + ' 원';
 	        }
 	        
-	     	// 아임포트에서 사용할 결제 정보 설정
-            var iamportInfo = {
-	    		pg: 'html5_inicis',
-	    		pay_method: 'card',
-                //merchant_uid: "order_no_0002",
-                name: '${productBean.pname}',
-                amount: check ? totalPrice : productPrice, // 변경된 변수 사용
-                buyer_email: '${loginInfo.email}',
-                buyer_name: '${loginInfo.name}',
-                buyer_tel: '${loginInfo.phone}',
-                buyer_addr: '${loginInfo.address1} ${loginInfo.address2}',
-                //buyer_postcode: '123-456',
-                m_redirect_url: '{모바일에서 결제 완료 후 리디렉션 될 URL}',
-                escrow: true,
-                vbank_due: 'YYYYMMDD'
-                // ... (기타 아임포트 설정)
-            };
-	     
-            $('#paymentButton').on('click', function (event) {
-                event.preventDefault();
-
-                // 아임포트 결제 화면 열기
-                IMP.init('imp07511880'); // 본인의 아임포트 키로 교체
-                IMP.request_pay(iamportInfo, function (rsp) {
-                    if (rsp.success) {
-                        // 결제 성공 시 처리
-                        alert('결제가 완료되었습니다.');
-                        
-                     	// 서버로 결제 성공 정보 전송
-                        payInfo(rsp);
-                     	//페이지 이동
-                        window.location.href = "view.main";
-                    } else {
-                        // 결제 실패 시 처리
-                        alert('결제에 실패하였습니다.\n에러 메시지: ' + rsp.error_msg);
-                    }
-                });
-            });
 	    }
+		
+		function payment(){
+       	  	IMP.init('imp07511880');
+       	  	//결제시 전달되는 정보
+       		IMP.request_pay({
+       				   pg: 'html5_inicis',
+       		    		pay_method: 'card',
+       	                //merchant_uid: "order_no_0002",
+       	                name: '${productBean.pname}',
+       	                amount: check ? totalPrice : productPrice, // 변경된 변수 사용
+       	                buyer_email: '${loginInfo.email}',
+       	                buyer_name: '${loginInfo.name}',
+       	                buyer_tel: '${loginInfo.phone}',
+       	                buyer_addr: '${loginInfo.address1} ${loginInfo.address2}',
+       	                //buyer_postcode: '123-456',
+       	                m_redirect_url: '{모바일에서 결제 완료 후 리디렉션 될 URL}',
+       	                escrow: true,
+       	                vbank_due: 'YYYYMMDD'	
+       	                // ... (기타 아임포트 설정)
+       				}, function(rsp) {
+       					var result = '';
+       				    if ( rsp.success ) {
+       				        // 결제 성공 시 처리
+       	                        alert('결제가 완료되었습니다.');
+       	                        
+       	                     	// 서버로 결제 성공 정보 전송
+       	                        payInfo(rsp);
+       	                     	//페이지 이동
+       	                        window.location.href = "view.main";
+       				    } else {
+       				        // 결제 실패 시 처리
+       	                        alert('결제에 실패하였습니다.\n에러 메시지: ' + rsp.error_msg);
+       				    }
+       				});
+		}
 		
 		// 결제 성공 정보를 서버로 전송하는 함수
 	    function payInfo(rsp) {
@@ -256,7 +254,7 @@
 			<table style="margin: auto;">
 				<tr>
 					<td>
-						<input type="button" id="paymentButton" class="btn btn-secondary btn-lg" value="결제하기"> &nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" id="paymentButton" class="btn btn-secondary btn-lg" value="결제하기" onClick="payment()"> &nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn btn-secondary btn-lg" onClick="goList()">취소</button>
 					</td>
 				</tr>
