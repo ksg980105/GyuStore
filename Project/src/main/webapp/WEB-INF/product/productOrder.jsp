@@ -74,6 +74,13 @@
 	    }
 		
 		function payment(){
+			var requestOrder = document.querySelector('input[name="requestOrder"]:checked');
+
+	        if (!requestOrder) {
+	            alert("배송 요청사항을 선택하세요.");
+	            return false;
+	        }
+			
        	  	IMP.init('imp07511880');
        	  	//결제시 전달되는 정보
        		IMP.request_pay({
