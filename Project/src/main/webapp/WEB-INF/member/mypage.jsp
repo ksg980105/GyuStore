@@ -375,8 +375,20 @@ $(document).ready(function() {
 	</div>
 	
 	<div id="Tab3" class="tabcontent">
-	  <h3>구매상품</h3>
 	  <table class="table table-bordered border-success" style="width: 1000px; margin: auto;">
+	  	<c:if test="${empty orderList}">
+	  	  <tr>
+		  	<th>상품이미지</th>
+		  	<th>상품명</th>
+		  	<th>수량</th>
+		  	<th>가격</th>
+		  	<th>적립포인트</th>
+		  	<th>환불</th>
+		  </tr>
+		  <tr>
+		  	<td colspan="6" align="center">구매한 상품이 없습니다.</td>
+		  </tr>
+	  	</c:if>
 	  	<c:forEach var="order" items="${orderList}">
 		  <tr>
 		  	<th>상품이미지</th>
