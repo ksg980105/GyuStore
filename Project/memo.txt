@@ -65,5 +65,6 @@ create table ordertable(
 	requestOrder varchar2(50),
 	pimage varchar2(200),
 	productPrice number,
-	using_point number
+	using_point number,
+	imp_uid varchar2(30)
 );
