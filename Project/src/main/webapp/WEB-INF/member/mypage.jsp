@@ -3,12 +3,18 @@
 <%@ include file="../main/top.jsp" %>
 
 <style>
-	th {
-        width: 25%;
+	#Tab1 th, #Tab2 th, #Tab4 th {
+        width: 20%;
         text-align: center;
         background-color: gray; /* 헤더 배경색 */
         color: white;
         padding: 10px;
+    }
+    
+    #Tab3 th {
+    	text-align: center;
+        background-color: gray; /* 헤더 배경색 */
+        color: white;
     }
 
     td {
@@ -58,6 +64,7 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="resources/js/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 var cert = false;
 var delcert = false;
@@ -260,6 +267,7 @@ $(document).ready(function() {
     });
     
  });
+
 </script>
 
 <body>
@@ -368,7 +376,28 @@ $(document).ready(function() {
 	
 	<div id="Tab3" class="tabcontent">
 	  <h3>구매상품</h3>
-	  
+	  <table class="table table-bordered border-success" style="width: 1000px; margin: auto;">
+	  	<c:forEach var="order" items="${orderList}">
+		  <tr>
+		  	<th>상품이미지</th>
+		  	<th>상품명</th>
+		  	<th>수량</th>
+		  	<th>가격</th>
+		  	<th>적립포인트</th>
+		  	<th>환불</th>
+		  </tr>
+		  <tr align="center">
+		  	<td><img src="<%=request.getContextPath()%>/resources/productImage/${order.pimage}" width="100" height="10"></td>
+		  	<td>${order.pname}</td>
+		  	<td>${order.pop_out}</td>
+		  	<td>${order.productPrice-order.using_point}</td>
+		  	<td>${order.point}</td>
+		  	<td>
+		  		<button onclick="cancelPay()">환불요청</button>
+		  	</td>
+		  </tr>
+		</c:forEach>
+	  </table>
 	</div>
 	
 	<div id="Tab4" class="tabcontent">
