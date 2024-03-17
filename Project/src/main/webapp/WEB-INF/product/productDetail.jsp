@@ -2,14 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../main/top.jsp" %>
 
+<script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript">
-	/* 장바구니에 추가하기 위한 헨들러 함수 */
-	function addToCart(pname) {
-		if(confirm('해당 상품을 장바구니에 추가하겠습니까?')) {
-			var popOut = document.getElementById('pop_out').value;
-		    location.href = "insert.cart?product_name=" + pname + "&pqty=" + popOut;
-		}
-	}
 	
 	function plusCount(pqty, price) {
 		  var currentCount = document.getElementById("pop_out").value;
@@ -33,6 +27,34 @@
 	
 	function goLogin(){
 		alert('로그인 후 이용해주세요.');
+	}
+
+	//장바구니 추가
+	function addToCart(pname, price) {
+		if(confirm('해당 상품을 장바구니에 추가하겠습니까?')) {
+			var popOut = document.getElementById('pop_out').value;
+			
+		    $.ajax({
+	            type: "GET",
+	            url: "insert.cart",
+	            data: {
+	                pname: pname,
+	                pqty: popOut,
+	                price: price
+	            },
+	            success: function(response) {
+	                console.log(response);
+	            	if (confirm('장바구니에 추가가 완료되었습니다. \n 장바구니로 이동하시겠습니까?')) {
+	            	    window.location.href = "list.cart"; // 장바구니 목록 페이지로 이동
+	            	}
+	            },
+	            error: function(error) {
+	                //에러 처리
+	                console.error("장바구니 추가 에러:", error);
+	                alert("장바구니 추가에 실패했습니다.");
+	            }
+	        });
+		}
 	}
 	
 	// 주문 누르면 상품번호, 주문갯수 넘김
@@ -74,7 +96,7 @@
 					</c:if>
 					<c:if test="${not empty loginInfo}">
 						<a href="javascript:void(0);" onclick="goToOrder(${productBean.pnum});" class="btn btn-info">상품 주문&raquo;</a>
-						<a href="" class="btn btn-warning" onclick="addToCart(${productBean.pname})">장바구니&raquo;</a>
+						<a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}');">장바구니&raquo;</a>
 					</c:if>
 					<a href="view.product?pageNumber=${pageNumber}" class="btn btn-secondary">상품 목록&raquo;</a>
 			</div>

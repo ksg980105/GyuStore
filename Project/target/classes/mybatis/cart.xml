@@ -4,4 +4,9 @@
 	
 <mapper namespace = "cart.CartBean">
 	
+	<insert id="insertCart" parameterType="cart.model.CartBean">
+	    insert into cart (cart_number, member_id, product_name, pqty, price)
+	    values (cart_seq.nextval, #{member_id}, #{product_name}, #{pqty}, #{price})
+	</insert>
+
 </mapper> 
