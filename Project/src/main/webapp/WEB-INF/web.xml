@@ -105,6 +105,21 @@
 		<url-pattern>*.product</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>cart</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/cart-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>cart</servlet-name>
+		<url-pattern>*.cart</url-pattern>
+	</servlet-mapping>
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>

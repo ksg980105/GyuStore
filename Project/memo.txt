@@ -3,16 +3,19 @@ DROP TABLE board cascade constraints;
 DROP TABLE category cascade constraints;
 DROP TABLE product cascade constraints;
 DROP TABLE ordertable cascade constraints;
+DROP TABLE cart cascade constraints;
 
 drop sequence board_seq;
 drop sequence category_seq;
 drop sequence product_seq;
 drop sequence order_seq;
+drop sequence cart_seq;
 
 create sequence board_seq;
 create sequence category_seq;
 create sequence product_seq;
 create sequence order_seq;
+create sequence cart_seq;
 
 CREATE TABLE member (
    member_id   varchar2(30)   PRIMARY KEY,
@@ -67,4 +70,12 @@ create table ordertable(
 	productPrice number,
 	using_point number,
 	imp_uid varchar2(30)
+);
+
+create table cart(
+	cart_number number primary key,
+	member_id varchar2(30),
+	product_name varchar2(100),
+	pqty number,
+	price number
 );

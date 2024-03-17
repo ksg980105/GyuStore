@@ -4,12 +4,10 @@
 
 <script type="text/javascript">
 	/* 장바구니에 추가하기 위한 헨들러 함수 */
-	function addToCart() {
+	function addToCart(pname) {
 		if(confirm('해당 상품을 장바구니에 추가하겠습니까?')) {
-			document.addForm.submit();
-		}
-		else {
-			document.addForm.reset();
+			var popOut = document.getElementById('pop_out').value;
+		    location.href = "insert.cart?product_name=" + pname + "&pqty=" + popOut;
 		}
 	}
 	
@@ -76,7 +74,7 @@
 					</c:if>
 					<c:if test="${not empty loginInfo}">
 						<a href="javascript:void(0);" onclick="goToOrder(${productBean.pnum});" class="btn btn-info">상품 주문&raquo;</a>
-						<a href="./cart.jsp" class="btn btn-warning" onclick="addToCart()">장바구니&raquo;</a>
+						<a href="" class="btn btn-warning" onclick="addToCart(${productBean.pname})">장바구니&raquo;</a>
 					</c:if>
 					<a href="view.product?pageNumber=${pageNumber}" class="btn btn-secondary">상품 목록&raquo;</a>
 			</div>
