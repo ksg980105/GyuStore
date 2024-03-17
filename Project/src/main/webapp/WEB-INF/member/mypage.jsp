@@ -306,6 +306,10 @@ $(document).ready(function() {
 		  	<th>상세주소</th>
 		  	<td>${loginInfo.address2}</td>
 		  </tr>
+		  <tr>
+		  	<th>보유포인트</th>
+		  	<td><font color="blue">${loginInfo.point}</font> point</td>
+		  </tr>
 	  </table>
 	</div>
 	
