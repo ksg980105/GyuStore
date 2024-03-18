@@ -83,7 +83,7 @@ $(document).ready(function () {
 	      	  <img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" class="img-responsive product-image">
 	        </a>
 	      <font size="3"><b>${product.pname}</b></font><br>
-	      <font size="2"><b>${product.price} 원 </b></font>
+	      <font size="2"><b><fmt:formatNumber pattern="###,###,###" value="${product.price}"/> 원 </b></font>
 	    </div>
 	    
       </c:forEach>

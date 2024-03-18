@@ -6,24 +6,32 @@
 <script type="text/javascript">
 	
 	function plusCount(pqty, price) {
-		  var currentCount = document.getElementById("pop_out").value;
-		  document.getElementById("pop_out").value = parseInt(currentCount) + 1;
-		  if(currentCount < pqty) {
-		    document.getElementById("pop_out").value = parseInt(currentCount) + 1;
-		    document.getElementById("price").innerText = (parseInt(currentCount) + 1) * price + " 원";
-		  }else{
-			alert('재고수량 부족!');
-			document.getElementById("pop_out").value = pqty;
-		  }
+	    var currentCount = parseInt(document.getElementById("pop_out").value);
+	    if (currentCount < pqty) {
+	        document.getElementById("pop_out").value = currentCount + 1;
+	        updateTotalPrice(currentCount + 1, price);
+	    } else {
+	        alert('재고수량 부족!');
+	    }
 	}
 	
 	function minusCount(pqty, price) {
 		  var currentCount = document.getElementById("pop_out").value;
 		  if(currentCount > 1 && currentCount <= pqty) {
-			    document.getElementById("pop_out").value = parseInt(currentCount) - 1;
-			    document.getElementById("price").innerText = (parseInt(currentCount) - 1) * price + " 원";
+			  document.getElementById("pop_out").value = currentCount - 1;
+	          updateTotalPrice(currentCount - 1, price);
 		  }
 	}
+	
+    // Total 가격을 업데이트하는 함수
+	function updateTotalPrice(quantity, price) {
+	    var totalPrice = quantity * price;
+	    // 숫자를 원하는 형식으로 형식화하여 문자열로 변환
+	    var formattedPrice = new Intl.NumberFormat('ko-KR').format(totalPrice);
+	    // Total 가격을 출력하는 요소에 업데이트된 가격을 설정
+	    document.getElementById("price").innerHTML = "<b>Total : " + formattedPrice + " 원</b>";
+	}
+
 	
 	function goLogin(){
 		alert('로그인 후 이용해주세요.');
@@ -87,8 +95,10 @@
 					<button type="button" onclick="minusCount(${productBean.pqty}, ${productBean.price})">-</button>
 			        <input type="text" name="pop_out" id="pop_out" value="1" readonly="readonly" style="text-align:center; width: 50px;"/>
 			        <button type ="button" onclick="plusCount(${productBean.pqty}, ${productBean.price})">+</button>
-		        </p>
-				<h4 id="price">${productBean.price} 원</h4>
+		        </p><hr>
+				<h4 id="price">
+					<b>Total : <fmt:formatNumber pattern="###,###,###" value="${productBean.price}"/> 원</b>
+				</h4>
 				
 				    <c:if test="${empty loginInfo}">
 						<a href="login.member" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>

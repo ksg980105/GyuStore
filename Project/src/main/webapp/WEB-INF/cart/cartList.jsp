@@ -61,7 +61,9 @@
 		                    <tr>
 		                        <td>${cart.product_name}</td>
 		                        <td>${cart.pqty}</td>
-		                        <td><b>${cart.price * cart.pqty} ₩</b></td>
+		                        <td>
+		                        	<b><fmt:formatNumber pattern="###,###,###" value="${cart.price * cart.pqty}"/> ₩</b>
+		                        </td>
 		                        <td><a href="delete.cart?product_name=${cart.product_name}" class="btn btn-danger btn-sm">삭제</a></td>
 		                    </tr>
 	                    <c:set var="totalPrice" value="${totalPrice + (cart.price * cart.pqty)}" />
@@ -70,7 +72,9 @@
                     <!-- 상품 행 끝 -->
                     <tr class="cart-footer">
                         <td colspan="3"></td>
-                        <td class="total-price"><b>총액 : ${totalPrice} ₩</b></td>
+                        <td class="total-price">
+                        	<b>총액 : <fmt:formatNumber pattern="###,###,###" value="${totalPrice}"/> ₩</b>
+                        </td>
                     </tr>
                 </tbody>
             </table>
