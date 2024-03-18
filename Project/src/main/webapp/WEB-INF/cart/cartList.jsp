@@ -84,7 +84,7 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="#" class="btn btn-secondary">쇼핑 계속하기 &raquo;</a>
+            <a href="view.product" class="btn btn-secondary">쇼핑 계속하기 &raquo;</a>
             <!-- 결제하기 버튼 위치 및 스타일 수정 -->
             <a href="#" class="checkout-btn">결제하기</a>
         </div>
