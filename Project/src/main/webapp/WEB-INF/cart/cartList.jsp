@@ -71,7 +71,7 @@
 		                        <td>${cart.product_name}</td>
 		                        <td>${cart.pqty}</td>
 		                        <td><b>${cart.price * cart.pqty} ₩</b></td>
-		                        <td><a href="#" class="btn btn-danger btn-sm">삭제</a></td>
+		                        <td><a href="delete.cart?product_name=${cart.product_name}" class="btn btn-danger btn-sm">삭제</a></td>
 		                    </tr>
 	                    <c:set var="totalPrice" value="${totalPrice + (cart.price * cart.pqty)}" />
 	                    </c:forEach>

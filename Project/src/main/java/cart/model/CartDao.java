@@ -27,8 +27,8 @@ public class CartDao {
 		return cartList;
 	}
 
-	public void deleteCart() {
-		sqlSessionTemplate.delete(namespace + ".deleteCart");
+	public void deleteCart(String product_name) {
+		sqlSessionTemplate.delete(namespace + ".deleteCart", product_name);
 	}
 
 	public CartBean getUser(String member_id) {
