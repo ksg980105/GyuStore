@@ -37,15 +37,15 @@
         </div>
     </div>
     <br><br>
-    <div class="container" style="width: 1000px;">
+    <div class="container" style="width: 800px;">
         <div class="row clearfix">
             <table class="table">
                 <thead class="cart-header">
                     <tr>
-                        <th scope="col">상품명</th>
-                        <th scope="col">수량</th>
-                        <th scope="col">가격</th>
-                        <th scope="col" width="20%;">작업</th>
+                        <th scope="col" style="text-align: center;">상품명</th>
+                        <th scope="col" style="text-align: right;">수량</th>
+                        <th scope="col" style="text-align: right;">가격</th>
+                        <th scope="col" width="20%;" style="text-align: right;">작업</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,12 +59,14 @@
                 		<c:set var="totalPrice" value="0"/>
 						<c:forEach var="cart" items="${cartList}">
 		                    <tr>
-		                        <td>${cart.product_name}</td>
-		                        <td>${cart.pqty}</td>
-		                        <td>
+		                        <td align="center">${cart.product_name}</td>
+		                        <td align="right">${cart.pqty}</td>
+		                        <td align="right">
 		                        	<b><fmt:formatNumber pattern="###,###,###" value="${cart.price * cart.pqty}"/> ₩</b>
 		                        </td>
-		                        <td><a href="delete.cart?product_name=${cart.product_name}" class="btn btn-danger btn-sm">삭제</a></td>
+		                        <td align="right">
+		                        	<a href="delete.cart?product_name=${cart.product_name}" class="btn btn-danger btn-sm">삭제</a>
+		                        </td>
 		                    </tr>
 	                    <c:set var="totalPrice" value="${totalPrice + (cart.price * cart.pqty)}" />
 	                    </c:forEach>
