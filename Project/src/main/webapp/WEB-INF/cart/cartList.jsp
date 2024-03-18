@@ -22,16 +22,6 @@
         .total-price {
             font-weight: bold;
         }
-        /* 결제하기 버튼 스타일 추가 */
-        .checkout-btn {
-            float: right; /* 오른쪽으로 정렬 */
-            background-color: green; /* 배경색 */
-            color: white; /* 글자색 */
-            border-radius: 5px;
-            padding: 10px 20px; /* 내부 여백 */
-            text-decoration: none; /* 밑줄 제거 */
-            font-size: 16px; /* 글자 크기 */
-        }
         .clearfix::after {
             content: "";
             clear: both;
@@ -55,7 +45,7 @@
                         <th scope="col">상품명</th>
                         <th scope="col">수량</th>
                         <th scope="col">가격</th>
-                        <th scope="col">작업</th>
+                        <th scope="col" width="20%;">작업</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,6 +53,7 @@
                 		<tr>
                 			<td colspan="4" align="center">장바구니가 비어있습니다.</td>
                 		</tr>
+                		<c:set var="totalPrice" value="0" />
                 	</c:if>
                 	<c:if test="${not empty cartList}">
                 		<c:set var="totalPrice" value="0"/>
@@ -78,15 +69,15 @@
                     </c:if>
                     <!-- 상품 행 끝 -->
                     <tr class="cart-footer">
-                        <td colspan="2"></td>
-                        <td class="total-price">총액</td>
-                        <td><b>${totalPrice} ₩</b></td>
+                        <td colspan="3"></td>
+                        <td class="total-price"><b>총액 : ${totalPrice} ₩</b></td>
                     </tr>
                 </tbody>
             </table>
-            <a href="view.product" class="btn btn-secondary">쇼핑 계속하기 &raquo;</a>
-            <!-- 결제하기 버튼 위치 및 스타일 수정 -->
-            <a href="#" class="checkout-btn">결제하기</a>
+            <div style="display: flex; justify-content: flex-end; gap: 20px;">
+			    <a href="#" class="btn btn-success" style="padding-right: 10px;">결제하기</a>
+			    <a href="view.product" class="btn btn-Info">쇼핑 계속하기 &raquo;</a>
+			</div>
         </div>
         <hr/>
     </div>

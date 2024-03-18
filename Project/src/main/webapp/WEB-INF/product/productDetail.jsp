@@ -91,14 +91,14 @@
 				<h4 id="price">${productBean.price} 원</h4>
 				
 				    <c:if test="${empty loginInfo}">
-						<a href="login.member" class="btn btn-info" onclick="goLogin()">상품 주문&raquo;</a>
-						<a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니&raquo;</a>
+						<a href="login.member" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>
+						<a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
 					</c:if>
 					<c:if test="${not empty loginInfo}">
-						<a href="javascript:void(0);" onclick="goToOrder(${productBean.pnum});" class="btn btn-info">상품 주문&raquo;</a>
-						<a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}');">장바구니&raquo;</a>
+						<a href="javascript:void(0);" onclick="goToOrder(${productBean.pnum});" class="btn btn-info">바로구매&raquo;</a>
+						<a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}');">장바구니 담기&raquo;</a>
 					</c:if>
-					<a href="view.product?pageNumber=${pageNumber}" class="btn btn-secondary">상품 목록&raquo;</a>
+					<a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
 			</div>
 		</div>
 		<hr>
