@@ -9,4 +9,31 @@
 	    values (cart_seq.nextval, #{member_id}, #{product_name}, #{pqty}, #{price})
 	</insert>
 
+	<select id="getUserList" resultType="cart.model.CartBean">
+		select * from cart
+		where member_id=#{member_id}
+		order by cart_number desc
+	</select>
+	
+	<delete id="deleteCart">
+		delete from cart
+	</delete>
+	
+	<select id="getUser" resultType="cart.model.CartBean">
+		select * from cart
+		where member_id=#{member_id}
+		and rownum = 1
+	</select>
+	
+	<select id="getProduct" resultType="cart.model.CartBean">
+		select * from cart
+		where product_name=#{pname}
+		and rownum = 1
+	</select>
+	
+	<update id="updateProductPqty">
+		update cart
+		set pqty=pqty+#{pqty}
+		where product_name=#{pname}
+	</update>
 </mapper> 

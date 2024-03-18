@@ -1,5 +1,8 @@
 package cart.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,5 +21,28 @@ public class CartDao {
 	public void insertCart(CartBean cartBean) {
         sqlSessionTemplate.insert(namespace + ".insertCart", cartBean);
     }
+
+	public List<CartBean> getUserList(String member_id) {
+		List<CartBean> cartList = sqlSessionTemplate.selectList(namespace + ".getUserList", member_id);
+		return cartList;
+	}
+
+	public void deleteCart() {
+		sqlSessionTemplate.delete(namespace + ".deleteCart");
+	}
+
+	public CartBean getUser(String member_id) {
+		CartBean cartBean = sqlSessionTemplate.selectOne(namespace + ".getUser", member_id);
+		return cartBean;
+	}
+
+	public CartBean getProduct(String pname) {
+		CartBean cartBean = sqlSessionTemplate.selectOne(namespace + ".getProduct", pname);
+		return cartBean;
+	}
+
+	public void updateProductPqty(Map<String, Object> map) {
+		sqlSessionTemplate.update(namespace + ".updateProductPqty", map);
+	}
 	
 }
