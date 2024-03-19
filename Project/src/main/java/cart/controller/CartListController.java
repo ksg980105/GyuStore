@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cart.model.CartBean;
 import cart.model.CartDao;
 import member.model.MemberBean;
+import product.model.ProductDao;
 
 @Controller
 public class CartListController {
@@ -22,13 +23,29 @@ public class CartListController {
 	@Autowired
 	private CartDao cartDao;
 	
+	@Autowired
+	private ProductDao productDao;
+	
 	@RequestMapping(value = command)
 	public String cartGet(HttpSession session, Model model) {
 		
 		MemberBean memberBean = (MemberBean) session.getAttribute("loginInfo");
 		
-			List<CartBean> cartList = cartDao.getUserList(memberBean.getMember_id());
-			model.addAttribute("cartList", cartList);
+		//로그인한 사용자 장바구니 목록 가져오기
+		List<CartBean> cartList = cartDao.getUserList(memberBean.getMember_id());
+		model.addAttribute("cartList", cartList);
+		
+		//총 적립포인트 가져오기
+	    int totalPoint = 0;
+	    for (CartBean cartBean : cartList) {
+	        // 장바구니에 있는 각 상품의 포인트 가져오기
+	        int point = productDao.getPointForProduct(cartBean.getProduct_name());
+	        
+	        // 상품의 포인트 * 수량 값을 총 포인트에 더하기
+	        totalPoint += point * cartBean.getPqty();
+	    }
+	    
+	    model.addAttribute("totalPoint", totalPoint);
 		
 		return viewPage;
 	}

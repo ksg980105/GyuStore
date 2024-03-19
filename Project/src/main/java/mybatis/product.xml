@@ -55,4 +55,9 @@
 		where pnum=#{pnum}
 	</update>
 	
+	<select id="getPointForProduct" resultType="int">
+		select point from product
+		where pname=#{product_name}
+	</select>
+	
 </mapper> 

@@ -44,5 +44,5 @@ public class CartDao {
 	public void updateProductPqty(Map<String, Object> map) {
 		sqlSessionTemplate.update(namespace + ".updateProductPqty", map);
 	}
-	
+
 }

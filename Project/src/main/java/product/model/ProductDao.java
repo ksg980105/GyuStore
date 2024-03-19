@@ -54,4 +54,9 @@ public class ProductDao {
 		return cnt;
 	}
 
+	public int getPointForProduct(String product_name) {
+		int totalPoint = sqlSessionTemplate.selectOne(namespace + ".getPointForProduct", product_name);
+		return totalPoint;
+	}
+
 }

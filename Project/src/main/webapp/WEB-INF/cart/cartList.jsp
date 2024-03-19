@@ -27,6 +27,9 @@
             clear: both;
             display: table;
         }
+        #tb th{
+        	width: 20%;
+        }
     </style>
 </head>
 <body>
@@ -80,6 +83,65 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <h3>주문 정보</h3>
+			<table class="table" id="tb">
+				<tr>
+					<th class="cart-header">이름</th>
+					<td>${loginInfo.name}</td>
+				</tr>
+				<tr>
+					<th class="cart-header">이메일</th>
+					<td>${loginInfo.email}</td>
+				</tr>
+				<tr>
+					<th class="cart-header">휴대폰번호</th>
+					<td>${loginInfo.phone}</td>
+				</tr>
+				<tr>
+					<th class="cart-header">배송주소</th>
+					<td>${loginInfo.address1} ${loginInfo.address2} 
+						<font color="red" size="1"> &nbsp;&nbsp;*배송지 변경은 마이페이지 주소 변경 후 가능합니다.</font>
+					</td>
+				</tr>
+				<tr>
+					<th class="cart-header">배송 요청사항</th>
+					<td>
+						<input type="radio" name="requestOrder" value="빠른배송 해주세요.">빠른배송 해주세요.<br>
+						<input type="radio" name="requestOrder" value="경비실에 맡겨주세요.">경비실에 맡겨주세요.<br>
+						<input type="radio" name="requestOrder" value="문앞에 놔주세요.">문앞에 놔주세요.<br>
+					</td>
+				</tr>
+			</table>
+			
+			<table class="table" id="tb">
+				<tr>
+					<th class="cart-header">총상품가격</th>
+					<td><fmt:formatNumber pattern="###,###,###" value="${totalPrice}"/> 원</td>
+				</tr>
+				<tr>
+					<th class="cart-header">포인트 사용</th>
+					<td>
+						<input type="text" name="using_point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${productBean.price * pop_out})" onblur="fillZero(this); updatePrice();"> 
+						<font color="blue" size="2"><b>(사용 가능 포인트: ${loginInfo.point} p)</b></font>
+					</td>
+				</tr>
+				<tr>
+					<th class="cart-header">배송비</th>
+					<td>0 원</td>
+				</tr>
+				<tr>
+					<th class="cart-header">적립 포인트</th>
+					<td>
+						<font color="blue">${totalPoint}</font> point
+					</td>
+				</tr>
+				<tr>
+					<th class="cart-header">총결제금액</th>
+					<td id="price">${productBean.price * pop_out} 원</td>
+				</tr>
+			</table>
+            
             <div style="display: flex; justify-content: flex-end; gap: 20px;">
 			    <a href="#" class="btn btn-success" style="padding-right: 10px;">결제하기</a>
 			    <a href="view.product" class="btn btn-Info">쇼핑 계속하기 &raquo;</a>
