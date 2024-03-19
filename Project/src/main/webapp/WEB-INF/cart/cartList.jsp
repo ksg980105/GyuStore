@@ -31,9 +31,68 @@
         	width: 20%;
         }
     </style>
+    
+    <script type="text/javascript">
+    var point = 0;
+	var check = false;
+	var usePointtotalPrice = 0;
+	var totalPrice = ${totalPrice};
+	
+	//포인트 초과, 문자 입력시 초기화
+	function checkPoint(input, availablePoint, total) {
+	    if (input.value === '') {
+	        return;  // 입력 값이 비어있으면 검사를 건너뜁니다.
+	    }
+	
+	    var inputValue = parseInt(input.value);
+	    if (isNaN(inputValue)) {
+	        input.value = 0;
+	        alert('숫자만 입력해주세요.');
+	        check = false;
+	    } else if (inputValue > availablePoint) {
+	        input.value = 0;
+	        alert('사용 가능한 포인트를 초과할 수 없습니다.');
+	        check = false;
+	    } else if (inputValue > total){
+	    	input.value = 0;
+	    	alert('상품가격을 초과한 포인트를 사용할 수 없습니다.');
+	    	alert(total);
+	    	check = false;
+	    } else {
+            point = inputValue;
+            check = true;
+        }
+		updatePrice();
+	}
+	
+	// 입력 값이 비어있으면 0으로 설정
+	function fillZero(input) {
+	    if (input.value === '') {
+	        input.value = '0';
+	    }
+	}
+	
+	// 포인트 입력시 총결제금액에 반영
+	function updatePrice() {
+        usePointtotalPrice = totalPrice - point; // 상품가격에서 포인트를 차감하여 총 가격 계산
+        if(check == true){
+        	document.getElementById('price').innerHTML = usePointtotalPrice + ' 원';
+        }else{
+        	document.getElementById('price').innerHTML = totalPrice + ' 원';
+        }
+    }
+	
+	function payment(){
+		var requestOrder = document.querySelector('input[name="requestOrder"]:checked');
+
+        if (!requestOrder) {
+            alert("배송 요청사항을 선택하세요.");
+            return false;
+        }
+	}
+    </script>
 </head>
 <body>
-
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h3 class="display-4" align="center">장바구니</h3>
@@ -59,7 +118,6 @@
                 		<c:set var="totalPrice" value="0" />
                 	</c:if>
                 	<c:if test="${not empty cartList}">
-                		<c:set var="totalPrice" value="0"/>
 						<c:forEach var="cart" items="${cartList}">
 		                    <tr>
 		                        <td align="center">${cart.product_name}</td>
@@ -71,7 +129,6 @@
 		                        	<a href="delete.cart?product_name=${cart.product_name}" class="btn btn-danger btn-sm">삭제</a>
 		                        </td>
 		                    </tr>
-	                    <c:set var="totalPrice" value="${totalPrice + (cart.price * cart.pqty)}" />
 	                    </c:forEach>
                     </c:if>
                     <!-- 상품 행 끝 -->
@@ -122,7 +179,7 @@
 				<tr>
 					<th class="cart-header">포인트 사용</th>
 					<td>
-						<input type="text" name="using_point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${productBean.price * pop_out})" onblur="fillZero(this); updatePrice();"> 
+						<input type="text" name="using_point" value="0" size="10" onkeyup="checkPoint(this, ${loginInfo.point}, ${totalPrice})" onblur="fillZero(this); updatePrice();"> 
 						<font color="blue" size="2"><b>(사용 가능 포인트: ${loginInfo.point} p)</b></font>
 					</td>
 				</tr>
@@ -138,17 +195,16 @@
 				</tr>
 				<tr>
 					<th class="cart-header">총결제금액</th>
-					<td id="price">${productBean.price * pop_out} 원</td>
+					<td id="price"><fmt:formatNumber pattern="###,###,###" value="${totalPrice}"/> 원</td>
 				</tr>
 			</table>
             
             <div style="display: flex; justify-content: flex-end; gap: 20px;">
-			    <a href="#" class="btn btn-success" style="padding-right: 10px;">결제하기</a>
+			    <a href="#" class="btn btn-success" style="padding-right: 10px;" onclick="payment()">결제하기</a>
 			    <a href="view.product" class="btn btn-Info">쇼핑 계속하기 &raquo;</a>
 			</div>
         </div>
         <hr/>
     </div>
-    
 </body>
 </html>

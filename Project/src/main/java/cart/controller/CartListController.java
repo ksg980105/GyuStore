@@ -35,6 +35,16 @@ public class CartListController {
 		List<CartBean> cartList = cartDao.getUserList(memberBean.getMember_id());
 		model.addAttribute("cartList", cartList);
 		
+		//총 상품가격 가져오기
+		int totalPrice = 0;
+		for (CartBean cartBean : cartList) {
+			// 장바구니에 있는 각 상품의 가격 가져오기
+	        int price = cartBean.getPrice()*cartBean.getPqty();
+	        
+	        // 카트 상품가격들 더하기
+	        totalPrice += price;
+		}
+		
 		//총 적립포인트 가져오기
 	    int totalPoint = 0;
 	    for (CartBean cartBean : cartList) {
@@ -45,6 +55,7 @@ public class CartListController {
 	        totalPoint += point * cartBean.getPqty();
 	    }
 	    
+	    model.addAttribute("totalPrice", totalPrice);
 	    model.addAttribute("totalPoint", totalPoint);
 		
 		return viewPage;
