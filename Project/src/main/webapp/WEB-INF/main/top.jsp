@@ -61,7 +61,7 @@
 	        <li><a href="view.main">Home</a></li>
 	        <li><a href="list.category">카테고리 관리</a></li>
 	        <li><a href="list.product">상품관리</a></li>
-	        <li><a href="product.board">회원관리</a></li>
+	        <li><a href="product.board">문의게시판</a></li>
       	</c:if>
       	<c:if test="${loginInfo.member_id ne 'admin'}">
       		<li><a href="view.main">Home</a></li>

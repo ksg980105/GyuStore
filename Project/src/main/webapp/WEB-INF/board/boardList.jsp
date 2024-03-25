@@ -57,12 +57,17 @@
 	    <tr>
 	      <th>${list.board_number}</th>
 	      <td>
-	      	<c:if test="${list.member_id eq loginInfo.member_id}">
-	      		<a href="detail.board?board_number=${list.board_number}">${list.title}</a>
-	      	</c:if>
-	      	<c:if test="${list.member_id ne loginInfo.member_id}">
-	      		${list.title}
-	      	</c:if>
+	      	<c:choose>
+			    <c:when test="${loginInfo.member_id == 'admin'}">
+			        <a href="detail.board?board_number=${list.board_number}">${list.title}</a>
+			    </c:when>
+			    <c:when test="${list.member_id eq loginInfo.member_id}">
+			        <a href="detail.board?board_number=${list.board_number}">${list.title}</a>
+			    </c:when>
+			    <c:otherwise>
+			        ${list.title}
+			    </c:otherwise>
+			</c:choose>
 	      </td>
 	      <td>${list.member_id}</td>
 	      <td><fmt:formatDate value="${list.write_date}" pattern="yyyy-MM-dd"/></td>
