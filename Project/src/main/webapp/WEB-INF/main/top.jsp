@@ -66,7 +66,7 @@
       	<c:if test="${loginInfo.member_id ne 'admin'}">
       		<li><a href="view.main">Home</a></li>
 	        <li><a href="view.product">상품</a></li>
-	        <li><a href="product.board">상품문의</a></li>
+	        <li><a href="product.board">문의게시판</a></li>
 	    </c:if>
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -83,7 +83,7 @@
 	  	<th>카테고리</th>
 	  	<td>
 	  		<select name="board_category">
-	  		 	<option value="사이즈문의">사이즈문의</option>
+	  		 	<option value="회원문의">회원문의</option>
 	  		 	<option value="배송문의">배송문의</option>
 	  		 	<option value="제품문의">제품문의</option>
 	  		 	<option value="기타">기타</option>
