@@ -386,11 +386,10 @@ $(document).ready(function() {
 		  	<th>상품명</th>
 		  	<th>수량</th>
 		  	<th>가격</th>
-		  	<th>적립포인트</th>
 		  	<th>환불</th>
 		  </tr>
 		  <tr>
-		  	<td colspan="6" align="center">구매한 상품이 없습니다.</td>
+		  	<td colspan="5" align="center">구매한 상품이 없습니다.</td>
 		  </tr>
 	  	</c:if>
 	  	<c:forEach var="order" items="${orderList}">
@@ -399,14 +398,12 @@ $(document).ready(function() {
 		  	<th>상품명</th>
 		  	<th>수량</th>
 		  	<th>가격</th>
-		  	<th>적립포인트</th>
 		  	<th>환불</th>
 		  </tr>
 		  <tr align="center">
 		  	<td><img src="<%=request.getContextPath()%>/resources/productImage/${order.pimage}" width="100" height="10"></td>
 		  	<td>${order.pname}</td>
 		  	<td>${order.pop_out}</td>
-		  	<td>${order.productPrice-order.using_point}</td>
 		  	<td>${order.point}</td>
 		  	<td>
 		  		<button onclick="cancelPay()">환불요청</button>
