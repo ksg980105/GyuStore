@@ -150,12 +150,12 @@
 		            address1: '${loginInfo.address1}',
 		            address2: '${loginInfo.address2}',
 		            phone: '${loginInfo.phone}',
-		            pimage: '${productBean.pimage}',
+		            pimage: 'null',
 		            pname: productNamesString,
 		            point: ${totalPoint},
-		            productPrice: ${totalPrice},
+		            productPrice: '${totalPrice}',
 		            requestOrder: $('input[name="requestOrder"]:checked').val(),
-		            using_point: $('#using_point').val()
+		            using_point: $('input[name="using_point"]').val()
 		        },
 		        success: function (response) {
 		            // 서버 응답을 처리하려면 필요한 경우 처리
