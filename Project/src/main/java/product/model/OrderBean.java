@@ -8,7 +8,7 @@ public class OrderBean {
 	private String address1;
 	private String address2;
 	private String pname;
-	private int pop_out;
+	private String pop_out;
 	private int point;
 	private String requestOrder;
 	private String pimage;
@@ -65,10 +65,10 @@ public class OrderBean {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public int getPop_out() {
+	public String getPop_out() {
 		return pop_out;
 	}
-	public void setPop_out(int pop_out) {
+	public void setPop_out(String pop_out) {
 		this.pop_out = pop_out;
 	}
 	public int getPoint() {

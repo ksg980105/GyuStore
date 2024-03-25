@@ -45,7 +45,8 @@ public class ProductOrderController {
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public void orderPost(OrderBean orderBean, HttpSession session) {
-				
+		System.out.println(orderBean.getUsing_point());
+		
 		//주문내역 추가
 		orderDao.insertOrder(orderBean);
 		

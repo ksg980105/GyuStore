@@ -140,33 +140,34 @@
 		
 		// 결제 성공 정보를 서버로 전송하는 함수
 	    function payInfo(rsp, productNamesString, productPqtyHidden) {
-	        $.ajax({
-	            type: "POST",
-	            url: "order.product",
-	            data: {
-	                name: '${loginInfo.name}',
-	                email: '${loginInfo.email}',
-	                pop_out: productPqtyHidden,
-	                address1: '${loginInfo.address1}',
-	                address2: '${loginInfo.address2}',
-	                phone: '${loginInfo.phone}',
-	                pimage: '${productBean.pimage}',
-	                pname: productNamesString,
-	                point: '${totalPoint}',
-	                productPrice: '${totalPrice}',
-	                requestOrder: $('input[name="requestOrder"]:checked').val(),
-	                using_point: $('input[name="using_point"]').val()
-	            },
-	            success: function (response) {
-	                // 서버 응답을 처리하려면 필요한 경우 처리
-	                console.log("결제 정보가 서버로 전송되었습니다.");
-	            },
-	            error: function (error) {
-	                // 요청이 실패한 경우 에러를 처리
-	                console.error("서버로 결제 정보 전송 중 오류 발생", error);
-	            }
-	        });
-	    }
+		    $.ajax({
+		        type: "POST",
+		        url: "order.product",
+		        data: {
+		            name: '${loginInfo.name}',
+		            email: '${loginInfo.email}',
+		            pop_out: productPqtyHidden,
+		            address1: '${loginInfo.address1}',
+		            address2: '${loginInfo.address2}',
+		            phone: '${loginInfo.phone}',
+		            pimage: '${productBean.pimage}',
+		            pname: productNamesString,
+		            point: ${totalPoint},
+		            productPrice: ${totalPrice},
+		            requestOrder: $('input[name="requestOrder"]:checked').val(),
+		            using_point: $('#using_point').val()
+		        },
+		        success: function (response) {
+		            // 서버 응답을 처리하려면 필요한 경우 처리
+		            console.log("결제 정보가 서버로 전송되었습니다.");
+		        },
+		        error: function (error) {
+		            // 요청이 실패한 경우 에러를 처리
+		            console.error("서버로 결제 정보 전송 중 오류 발생", error);
+		        }
+		    });
+		}
+
     </script>
 </head>
 <body>
