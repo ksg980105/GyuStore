@@ -69,6 +69,11 @@ public class ProductOrderController {
 		if(cartLists.size() >= 1) {
 			cartDao.deleteAll();
 		}
+		
+		//환불완료시 차감된포인트 반환
+		
+		//환불완료시 적립된 포인트 반환
+		
 	}
 
 }

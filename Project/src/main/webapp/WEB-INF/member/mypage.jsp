@@ -273,7 +273,12 @@ $(document).ready(function() {
 <body>
 	<button class="tablink" onclick="openPage('Tab1', this, 'black')" id="defaultOpen">내정보</button>
 	<button class="tablink" onclick="openPage('Tab2', this, 'black')">정보수정</button>
-	<button class="tablink" onclick="openPage('Tab3', this, 'black')">구매상품</button>
+	<c:if test="${loginInfo.member_id == 'admin'}">
+		<button class="tablink" onclick="openPage('Tab3', this, 'black')">환불처리</button>
+	</c:if>
+	<c:if test="${loginInfo.member_id != 'admin'}">
+		<button class="tablink" onclick="openPage('Tab3', this, 'black')">구매상품</button>
+	</c:if>
 	<button class="tablink" onclick="openPage('Tab4', this, 'black')">회원탈퇴</button>
 	
 	<div id="Tab1" class="tabcontent">
@@ -380,45 +385,63 @@ $(document).ready(function() {
 	
 	<div id="Tab3" class="tabcontent">
 	  <table class="table table-bordered border-success" style="width: 1000px; margin: auto;">
-	  	<c:if test="${empty orderList}">
-	  	  <tr>
-		  	<th>상품이미지</th>
-		  	<th>상품명</th>
-		  	<th>수량</th>
-		  	<th>가격</th>
-		  	<th>환불</th>
-		  </tr>
-		  <tr>
-		  	<td colspan="5" align="center">구매한 상품이 없습니다.</td>
-		  </tr>
+	  	<c:if test="${loginInfo.member_id == 'admin'}">
+	  		<tr>
+	  			<th>번호</th>
+	  			<th>환불신청자</th>
+	  			<th>신청상품</th>
+	  			<th>신청사유</th>
+	  			<th>신청현황</th>
+	  		</tr>
+	  		<tr align="center">
+	  			<td>1</td>
+	  			<td>userid</td>
+	  			<td>책</td>
+	  			<td>필요없어짐</td>
+	  			<td>true => 환불완료, false => 대기중</td>
+	  		</tr>
 	  	</c:if>
-	  	<c:forEach var="order" items="${orderList}">
-		  <tr>
-		  	<th>상품이미지</th>
-		  	<th>상품명</th>
-		  	<th>수량</th>
-		  	<th>가격</th>
-		  	<th>적립포인트</th>
-		  	<th>환불</th>
-		  </tr>
-		  <tr align="center">
-		    <!-- 장바구니로 여러 책 담아서 구매했을 경우 -->
-		  	<c:if test="${order.pimage == 'null'}">
-		  		<td><img src="resources/img/books.jpg" width="200" height="10"></td> 
+	  	<c:if test="${loginInfo.member_id != 'admin'}">
+		  	<c:if test="${empty orderList}">
+		  	  <tr>
+			  	<th>상품이미지</th>
+			  	<th>상품명</th>
+			  	<th>수량</th>
+			  	<th>가격</th>
+			  	<th>환불</th>
+			  </tr>
+			  <tr>
+			  	<td colspan="5" align="center">구매한 상품이 없습니다.</td>
+			  </tr>
 		  	</c:if>
-		  	<!-- 책 한권만 구매했을 경우 -->
-		  	<c:if test="${order.pimage != 'null'}">
-		  		<td><img src="<%=request.getContextPath()%>/resources/productImage/${order.pimage}" width="200" height="10"></td>
-		  	</c:if>
-		  	<td>${order.pname}</td>
-		  	<td>${order.pop_out}</td>
-		  	<td>${order.productPrice - order.using_point} 원</td>
-		  	<td>${order.point} p</td>
-		  	<td>
-		  		<button onclick="cancelPay()">환불요청</button>
-		  	</td>
-		  </tr>
-		</c:forEach>
+		  	<c:forEach var="order" items="${orderList}">
+			  <tr>
+			  	<th>상품이미지</th>
+			  	<th>상품명</th>
+			  	<th>수량</th>
+			  	<th>가격</th>
+			  	<th>적립포인트</th>
+			  	<th>환불</th>
+			  </tr>
+			  <tr align="center">
+			    <!-- 장바구니로 여러 책 담아서 구매했을 경우 -->
+			  	<c:if test="${order.pimage == 'null'}">
+			  		<td><img src="resources/img/books.jpg" width="200" height="10"></td> 
+			  	</c:if>
+			  	<!-- 책 한권만 구매했을 경우 -->
+			  	<c:if test="${order.pimage != 'null'}">
+			  		<td><img src="<%=request.getContextPath()%>/resources/productImage/${order.pimage}" width="200" height="10"></td>
+			  	</c:if>
+			  	<td>${order.pname}</td>
+			  	<td>${order.pop_out}</td>
+			  	<td>${order.productPrice - order.using_point} 원</td>
+			  	<td>${order.point} p</td>
+			  	<td>
+			  		<button onclick="cancelPay()">환불신청</button>
+			  	</td>
+			  </tr>
+			</c:forEach>
+		</c:if>
 	  </table>
 	</div>
 	
