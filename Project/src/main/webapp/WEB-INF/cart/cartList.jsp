@@ -87,10 +87,15 @@
 		
 		function payment(){
 		    var requestOrder = document.querySelector('input[name="requestOrder"]:checked');
-
+			
 		    if (!requestOrder) {
 		        alert("배송 요청사항을 선택하세요.");
 		        return false;
+		    }
+		    
+		    if (totalPrice == 0){
+		    	alert("장바구니에 상품이 없습니다.");
+		    	return false;
 		    }
 		    
 		    var amount = check ? usePointtotalPrice : totalPrice;
@@ -123,7 +128,7 @@
 		            alert('결제가 완료되었습니다.');
 		            
 		            // 서버로 결제 성공 정보 전송
-		            payInfo(rsp);
+		            payInfo(rsp, productNamesString, productPqtyHidden);
 		            //페이지 이동
 		            window.location.href = "view.main";
 		        } else {
@@ -134,21 +139,21 @@
 		}
 		
 		// 결제 성공 정보를 서버로 전송하는 함수
-	    function payInfo(rsp) {
+	    function payInfo(rsp, productNamesString, productPqtyHidden) {
 	        $.ajax({
 	            type: "POST",
 	            url: "order.product",
 	            data: {
 	                name: '${loginInfo.name}',
 	                email: '${loginInfo.email}',
-	                pop_out: '${pop_out}',
+	                pop_out: productPqtyHidden,
 	                address1: '${loginInfo.address1}',
 	                address2: '${loginInfo.address2}',
 	                phone: '${loginInfo.phone}',
 	                pimage: '${productBean.pimage}',
-	                pname: '${productBean.pname}',
-	                point: '${productBean.point}',
-	                productPrice: '${productBean.price * pop_out}',
+	                pname: productNamesString,
+	                point: '${totalPoint}',
+	                productPrice: '${totalPrice}',
 	                requestOrder: $('input[name="requestOrder"]:checked').val(),
 	                using_point: $('input[name="using_point"]').val()
 	            },
