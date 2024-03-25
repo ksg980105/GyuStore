@@ -1,5 +1,7 @@
 package product.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cart.model.CartBean;
+import cart.model.CartDao;
 import member.model.MemberBean;
 import member.model.MemberDao;
 import product.model.OrderBean;
@@ -31,6 +35,9 @@ public class ProductOrderController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private CartDao cartDao;
+	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String orderGet(@RequestParam("pnum") int pnum, @RequestParam("pop_out") int popOut,
 							Model model) {
@@ -45,7 +52,7 @@ public class ProductOrderController {
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public void orderPost(OrderBean orderBean, HttpSession session) {
-
+		
 		//주문내역 추가
 		orderDao.insertOrder(orderBean);
 		
@@ -56,6 +63,12 @@ public class ProductOrderController {
 		//구매포인트 적립
 		memberDao.updatePoint(orderBean.getPoint(), orderBean.getEmail());
 		
+		//결제 완료시 장바구니 상품 비우기
+		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		List<CartBean> cartLists = cartDao.getUserList(memberBean.getMember_id());
+		if(cartLists.size() >= 1) {
+			cartDao.deleteAll();
+		}
 	}
 
 }

@@ -45,4 +45,8 @@ public class CartDao {
 		sqlSessionTemplate.update(namespace + ".updateProductPqty", map);
 	}
 
+	public void deleteAll() {
+		sqlSessionTemplate.delete(namespace + ".deleteAll");
+	}
+
 }

@@ -37,4 +37,8 @@
 		set pqty=pqty+#{pqty}
 		where product_name=#{pname}
 	</update>
+	
+	<delete id="deleteAll">
+		delete from cart
+	</delete>
 </mapper> 
