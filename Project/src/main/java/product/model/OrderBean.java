@@ -14,15 +14,7 @@ public class OrderBean {
 	private String pimage;
 	private int productPrice;
 	private int using_point;
-	private String imp_uid;
 	
-	
-	public String getImp_uid() {
-		return imp_uid;
-	}
-	public void setImp_uid(String imp_uid) {
-		this.imp_uid = imp_uid;
-	}
 	public int getOrder_number() {
 		return order_number;
 	}

@@ -398,13 +398,22 @@ $(document).ready(function() {
 		  	<th>상품명</th>
 		  	<th>수량</th>
 		  	<th>가격</th>
+		  	<th>적립포인트</th>
 		  	<th>환불</th>
 		  </tr>
 		  <tr align="center">
-		  	<td><img src="<%=request.getContextPath()%>/resources/productImage/${order.pimage}" width="100" height="10"></td>
+		    <!-- 장바구니로 여러 책 담아서 구매했을 경우 -->
+		  	<c:if test="${order.pimage == 'null'}">
+		  		<td><img src="resources/img/books.jpg" width="200" height="10"></td> 
+		  	</c:if>
+		  	<!-- 책 한권만 구매했을 경우 -->
+		  	<c:if test="${order.pimage != 'null'}">
+		  		<td><img src="<%=request.getContextPath()%>/resources/productImage/${order.pimage}" width="200" height="10"></td>
+		  	</c:if>
 		  	<td>${order.pname}</td>
 		  	<td>${order.pop_out}</td>
-		  	<td>${order.point}</td>
+		  	<td>${order.productPrice - order.using_point} 원</td>
+		  	<td>${order.point} p</td>
 		  	<td>
 		  		<button onclick="cancelPay()">환불요청</button>
 		  	</td>

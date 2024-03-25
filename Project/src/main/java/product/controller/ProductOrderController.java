@@ -45,21 +45,7 @@ public class ProductOrderController {
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public void orderPost(OrderBean orderBean, HttpSession session) {
-		System.out.println(orderBean.getOrder_number());
-		System.out.println(orderBean.getName());
-		System.out.println(orderBean.getEmail());
-		System.out.println(orderBean.getPhone());
-		System.out.println(orderBean.getAddress1());
-		System.out.println(orderBean.getAddress2());
-		System.out.println(orderBean.getPname());
-		System.out.println(orderBean.getPop_out());
-		System.out.println(orderBean.getPoint());
-		System.out.println(orderBean.getRequestOrder());
-		System.out.println(orderBean.getPimage());
-		System.out.println(orderBean.getProductPrice());
-		System.out.println(orderBean.getUsing_point());
-		System.out.println(orderBean.getImp_uid());
-		
+
 		//주문내역 추가
 		orderDao.insertOrder(orderBean);
 		

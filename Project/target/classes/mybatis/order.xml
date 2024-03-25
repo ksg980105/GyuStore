@@ -5,8 +5,8 @@
 <mapper namespace = "product.OrderBean">
 	
 	<insert id="insertOrder">
-		insert into ordertable (order_number, name, email, phone, address1, address2, pname, pop_out, point, requestOrder, pimage, productPrice, using_point, imp_uid)
-		values(order_seq.nextval, #{name}, #{email}, #{phone}, #{address1}, #{address2}, #{pname}, #{pop_out}, #{point}, #{requestOrder}, #{pimage}, #{productPrice}, #{using_point}, #{imp_uid})
+		insert into ordertable (order_number, name, email, phone, address1, address2, pname, pop_out, point, requestOrder, pimage, productPrice, using_point)
+		values(order_seq.nextval, #{name}, #{email}, #{phone}, #{address1}, #{address2}, #{pname}, #{pop_out}, #{point}, #{requestOrder}, #{pimage}, #{productPrice}, #{using_point})
 	</insert>
 	
 	<select id="getAllOrder" resultType="product.model.OrderBean">
