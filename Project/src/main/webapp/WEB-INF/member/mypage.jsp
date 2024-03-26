@@ -267,6 +267,11 @@ $(document).ready(function() {
     });
     
  });
+ 
+ //환불신청버튼 클릭시
+ function cancelPay(pname, pop_out){
+	 window.open("refund.member?pname="+pname+"&&pop_out="+pop_out, "_blank", "width=500, height=500, left=450, top=150");
+ }
 
 </script>
 
@@ -437,7 +442,7 @@ $(document).ready(function() {
 			  	<td>${order.productPrice - order.using_point} 원</td>
 			  	<td>${order.point} p</td>
 			  	<td>
-			  		<button onclick="cancelPay()">환불신청</button>
+			  		<button onclick="cancelPay('${order.pname}', '${order.pop_out}')">환불신청</button>
 			  	</td>
 			  </tr>
 			</c:forEach>

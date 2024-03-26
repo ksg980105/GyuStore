@@ -11,6 +11,7 @@
 		<typeAlias type="product.model.ProductBean" alias="ProductBean"/>
 		<typeAlias type="product.model.OrderBean" alias="ProductBean"/>
 		<typeAlias type="cart.model.CartBean" alias="CartBean"/>
+		<typeAlias type="member.model.RefundBean" alias="RefundBean"/>
 	</typeAliases>
 	
 	<mappers>
@@ -20,5 +21,6 @@
 		<mapper resource="mybatis/product.xml"/>
 		<mapper resource="mybatis/order.xml"/>
 		<mapper resource="mybatis/cart.xml"/>
+		<mapper resource="mybatis/refund.xml"/>
 	</mappers>
 </configuration>
