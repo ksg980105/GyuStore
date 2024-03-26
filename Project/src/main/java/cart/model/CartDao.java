@@ -1,5 +1,6 @@
 package cart.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +48,14 @@ public class CartDao {
 
 	public void deleteAll() {
 		sqlSessionTemplate.delete(namespace + ".deleteAll");
+	}
+
+	public CartBean getCartByUserAndProduct(String member_id, String product_name) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("member_id", member_id);
+		map.put("product_name", product_name);
+		CartBean cartBean = sqlSessionTemplate.selectOne(namespace + ".getCartByUserAndProduct", map);
+		return cartBean;
 	}
 
 }

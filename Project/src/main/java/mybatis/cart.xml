@@ -35,10 +35,15 @@
 	<update id="updateProductPqty">
 		update cart
 		set pqty=pqty+#{pqty}
-		where product_name=#{pname}
+		where member_id=#{member_id} and product_name=#{pname}
 	</update>
 	
 	<delete id="deleteAll">
 		delete from cart
 	</delete>
+	
+	<select id="getCartByUserAndProduct" resultType="cart.model.CartBean">
+		select * from cart
+		where member_id=#{member_id} and product_name=#{product_name}
+	</select>
 </mapper> 
