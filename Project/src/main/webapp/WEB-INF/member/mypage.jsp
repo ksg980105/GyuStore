@@ -65,6 +65,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 var cert = false;
 var delcert = false;
@@ -201,6 +202,33 @@ function isValidEmail(email) {
 }
 
 $(document).ready(function() {
+	$('.order_id').each(function() {
+        var orderId = $(this).val();
+        checkRefundStatus(orderId);
+    });
+	
+	function checkRefundStatus(orderId) {
+	    // Ajax를 이용하여 서버에 상태 확인 요청
+	    $.ajax({
+	        url: "refundCheck.member",
+	        type: "GET",
+	        data: ({ order_id: orderId }),
+	        success: function(response) {
+	            if (response === "1") {
+	                // 환불이 완료되었을 경우 버튼을 숨기고 대신 환불 완료 메시지를 표시
+	                $('#refundButton_' + orderId).hide();
+	                $('#refundStatus_' + orderId).text('환불신청 완료');
+	            }else if (response === "2"){
+	            	$('#refundButton_' + orderId).hide();
+	                $('#refundStatus_' + orderId).text('환불 완료');
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error(error);
+	        }
+	    });
+	}
+    
     $('#nickname').keyup(function(){ // 닉네임 중복체크
 
         $.ajax({
@@ -269,10 +297,10 @@ $(document).ready(function() {
  });
  
  //환불신청버튼 클릭시
- function cancelPay(pname, pop_out){
-	 window.open("refund.member?pname="+pname+"&&pop_out="+pop_out, "_blank", "width=500, height=500, left=450, top=150");
+ function cancelPay(order_id){
+	 window.open("refund.member?order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
  }
-
+ 
 </script>
 
 <body>
@@ -426,7 +454,7 @@ $(document).ready(function() {
 			  	<th>수량</th>
 			  	<th>가격</th>
 			  	<th>적립포인트</th>
-			  	<th>환불</th>
+			  	<th>환불현황</th>
 			  </tr>
 			  <tr align="center">
 			    <!-- 장바구니로 여러 책 담아서 구매했을 경우 -->
@@ -442,9 +470,11 @@ $(document).ready(function() {
 			  	<td>${order.productPrice - order.using_point} 원</td>
 			  	<td>${order.point} p</td>
 			  	<td>
-			  		<button onclick="cancelPay('${order.pname}', '${order.pop_out}')">환불신청</button>
+			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button>
+			  		<span id="refundStatus_${order.order_id}"></span>
 			  	</td>
 			  </tr>
+			  <input type="hidden" class="order_id" value="${order.order_id}">
 			</c:forEach>
 		</c:if>
 	  </table>

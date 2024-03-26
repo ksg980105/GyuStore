@@ -5,6 +5,11 @@
 <mapper namespace = "member.RefundBean">
 	<insert id="insertRefund">
 		insert into refund
-		values(refund_seq.nextval, #{member_id}, #{pname}, #{pop_out}, #{reason}, #{state})
+		values(#{order_id}, #{member_id}, #{pname}, #{pop_out}, #{reason}, #{state})
 	</insert>
+	
+	<select id="getAllByOrderId" resultType="member.model.RefundBean">
+		select * from refund
+		where order_id = #{order_id}
+	</select>
 </mapper> 

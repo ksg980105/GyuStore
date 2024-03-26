@@ -67,7 +67,7 @@ public class ProductOrderController {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		List<CartBean> cartLists = cartDao.getUserList(memberBean.getMember_id());
 		if(cartLists.size() >= 1) {
-			cartDao.deleteAll();
+			cartDao.deleteCart(memberBean.getMember_id());
 		}
 		
 		//환불완료시 차감된포인트 반환

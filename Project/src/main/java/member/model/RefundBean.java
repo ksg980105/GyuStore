@@ -1,18 +1,18 @@
 package member.model;
 
 public class RefundBean {
-	private int refund_number;
+	private String order_id;
 	private String member_id;
 	private String pname;
 	private String pop_out;
 	private String reason;
 	private int state;
 	
-	public int getRefund_number() {
-		return refund_number;
+	public String getOrder_id() {
+		return order_id;
 	}
-	public void setRefund_number(int refund_number) {
-		this.refund_number = refund_number;
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
 	}
 	public String getMember_id() {
 		return member_id;

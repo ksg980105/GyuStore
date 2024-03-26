@@ -106,6 +106,7 @@
 	        }
 	    	
 	    	var formData = {
+	    		order_id: $("#order_id").text(),
     	        member_id: $("#member_id").text(),
     	        pname: $("#productName").text(),
     	        pop_out: $("#productQuantity").text(),
@@ -132,12 +133,16 @@
 	    <h2>환불 신청</h2>
 		<form id="refundForm">
 			<div class="form-group">
+		        <span class="form-label">주문 번호:</span> 
+		        <span id="order_id">${orderBean.order_id}</span>
+		    </div>
+			<div class="form-group">
 		        <span class="form-label">신청자:</span> 
-		        <span id="member_id">${member_id}</span>
+		        <span id="member_id">${orderBean.name}</span>
 		    </div>
 		    <div class="form-group">
 		        <span class="form-label">환불 상품:</span>
-		        <span id="productName">${pname}</span>, <span id="productQuantity">${pop_out}</span>
+		        <span id="productName">${orderBean.pname}</span>, <span id="productQuantity">${orderBean.pop_out}</span>
 		    </div>
 		    <div class="form-group">
 		        <span class="form-label">환불 사유:</span>

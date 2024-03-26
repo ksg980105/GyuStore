@@ -1,7 +1,7 @@
 package product.model;
 
 public class OrderBean {
-	private int order_number;
+	private String order_id;
 	private String name;
 	private String email;
 	private String phone;
@@ -15,11 +15,11 @@ public class OrderBean {
 	private int productPrice;
 	private int using_point;
 	
-	public int getOrder_number() {
-		return order_number;
+	public String getOrder_id() {
+		return order_id;
 	}
-	public void setOrder_number(int order_number) {
-		this.order_number = order_number;
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
 	}
 	public String getName() {
 		return name;

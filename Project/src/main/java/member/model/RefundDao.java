@@ -18,4 +18,9 @@ public class RefundDao {
 	public void insertRefund(RefundBean refundBean) {
 		sqlSessionTemplate.insert(namespace + ".insertRefund", refundBean);
 	}
+
+	public RefundBean getAllByOrderId(String order_id) {
+		RefundBean refundBean = sqlSessionTemplate.selectOne(namespace + ".getAllByOrderId", order_id);
+		return refundBean;
+	}
 }

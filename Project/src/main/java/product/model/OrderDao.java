@@ -26,4 +26,9 @@ public class OrderDao {
 		List<OrderBean> orderList = sqlSessionTemplate.selectList(namespace + ".getAllOrder", email);
 		return orderList;
 	}
+
+	public OrderBean getAllByOrderId(String order_id) {
+		OrderBean orderBean = sqlSessionTemplate.selectOne(namespace + ".getAllByOrderId", order_id);
+		return orderBean;
+	}
 }

@@ -9,16 +9,12 @@ DROP TABLE refund cascade constraints;
 drop sequence board_seq;
 drop sequence category_seq;
 drop sequence product_seq;
-drop sequence order_seq;
 drop sequence cart_seq;
-drop sequence refund_seq;
 
 create sequence board_seq;
 create sequence category_seq;
 create sequence product_seq;
-create sequence order_seq;
 create sequence cart_seq;
-create sequence refund_seq;
 
 CREATE TABLE member (
    member_id   varchar2(30)   PRIMARY KEY,
@@ -59,7 +55,7 @@ create table product(
 );
 
 create table ordertable(
-	order_number number primary key,
+	order_id VARCHAR2(8) PRIMARY KEY,
 	name varchar2(20),
 	email varchar2(30),
 	phone varchar2(20),
@@ -83,10 +79,12 @@ create table cart(
 );
 
 create table refund(
-	refund_number number primary key,
+	order_id VARCHAR2(8) PRIMARY KEY,
 	member_id varchar2(30),
 	pname varchar2(200),
 	pop_out varchar2(30),
 	reason varchar2(30),
 	state number default 0
 );
+
+commit;
