@@ -24,6 +24,12 @@ public class RefundCheckController {
 		//주문 아이디로 환불정보 가져오기
 		RefundBean refundBean = refundDao.getAllByOrderId(order_id);
 		
-		return String.valueOf(refundBean.getState());
+		if (refundBean != null) {
+	        return String.valueOf(refundBean.getState());
+	    } else {
+	        // 환불정보가 null일 경우, No refund 메시지로 넘김
+	        return "No refund";
+	    }
+		
 	}
 }
