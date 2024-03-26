@@ -45,9 +45,9 @@ create table category(
 
 create table product(
 	pnum number primary key,
-	pname varchar2(30),
-	pcategory varchar2(30),
-	publisher varchar2(50),
+	pname varchar2(200),
+	pcategory varchar2(200),
+	publisher varchar2(200),
 	pimage varchar2(200),
 	pqty number,
 	price number,
