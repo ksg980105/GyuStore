@@ -217,10 +217,10 @@ $(document).ready(function() {
 	            if (response === "1") {
 	                // 환불이 완료되었을 경우 버튼을 숨기고 대신 환불 완료 메시지를 표시
 	                $('#refundButton_' + orderId).hide();
-	                $('#refundStatus_' + orderId).text('환불신청 완료');
+	                $('#refundStatus_' + orderId).text('환불신청 완료').css('color','red');
 	            }else if (response === "2"){
 	            	$('#refundButton_' + orderId).hide();
-	                $('#refundStatus_' + orderId).text('환불 완료');
+	                $('#refundStatus_' + orderId).text('환불 완료').css('color','blue');
 	            }
 	        },
 	        error: function(xhr, status, error) {
