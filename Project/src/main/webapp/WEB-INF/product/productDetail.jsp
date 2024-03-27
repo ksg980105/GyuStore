@@ -112,6 +112,26 @@
 			</div>
 		</div>
 		<hr>
+		
+		<div class="row">
+		    <div class="col-md-12">
+		        <h3>리뷰</h3>
+		        
+		    </div>
+		</div>
+		<hr>
+		<c:if test="${not empty loginInfo}">
+            <!-- 로그인한 사용자만 상품평을 작성할 수 있습니다 -->
+            <form action="addReview.action" method="post">
+                <input type="hidden" name="pnum" value="${productBean.pnum}"/>
+                <textarea name="reviewContent" rows="4" cols="50" required="required" placeholder="상품평을 작성해주세요."></textarea><br>
+                <input type="submit" value="상품평 등록"/>
+            </form>
+        </c:if>
+        <c:if test="${empty loginInfo}">
+            <!-- 로그인하지 않은 사용자에게 로그인 페이지로 유도 -->
+            <p>상품평을 작성하시려면 <a href="login.member">로그인</a>이 필요합니다.</p>
+        </c:if>
 	</div>
 	 
 </body>
