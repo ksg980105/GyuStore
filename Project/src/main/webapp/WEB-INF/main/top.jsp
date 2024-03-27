@@ -73,9 +73,13 @@
       	<c:if test="${empty loginInfo}">
         	<li><a href="login.member"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </c:if>
-        <c:if test="${not empty loginInfo}">
+        <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
         	<li><a href="mypage.member"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
         	<li><a href="list.cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        	<li><a href="javascript:goLogout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </c:if>
+        <c:if test="${not empty loginInfo and loginInfo.member_id eq 'admin'}">
+        	<li><a href=""><span class="glyphicon glyphicon-usd"></span> 환불처리</a></li>
         	<li><a href="javascript:goLogout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </c:if>
       </ul>

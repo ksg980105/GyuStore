@@ -306,12 +306,7 @@ $(document).ready(function() {
 <body>
 	<button class="tablink" onclick="openPage('Tab1', this, 'black')" id="defaultOpen">내정보</button>
 	<button class="tablink" onclick="openPage('Tab2', this, 'black')">정보수정</button>
-	<c:if test="${loginInfo.member_id == 'admin'}">
-		<button class="tablink" onclick="openPage('Tab3', this, 'black')">환불처리</button>
-	</c:if>
-	<c:if test="${loginInfo.member_id != 'admin'}">
-		<button class="tablink" onclick="openPage('Tab3', this, 'black')">구매상품</button>
-	</c:if>
+	<button class="tablink" onclick="openPage('Tab3', this, 'black')">구매상품</button>
 	<button class="tablink" onclick="openPage('Tab4', this, 'black')">회원탈퇴</button>
 	
 	<div id="Tab1" class="tabcontent">
