@@ -215,15 +215,18 @@ $(document).ready(function() {
 	        data: ({ order_id: orderId }),
 	        success: function(response) {
 	        	if(response === "0"){
+	        		$('#reviewButton_' + orderId).hide();
 	        		$('#payStatus_' + orderId).text('결제 완료').css('color','green');
 	        	}else if (response === "1") {
 	                // 환불이 완료되었을 경우 버튼을 숨기고 대신 환불 완료 메시지를 표시
 	                $('#refundButton_' + orderId).hide();
 	                $('#checkButton_' + orderId).hide();
+	                $('#reviewButton_' + orderId).hide();
 	                $('#refundStatus_' + orderId).text('환불신청 완료').css('color','red');
 	            }else if (response === "2"){
 	            	$('#refundButton_' + orderId).hide();
 	            	$('#checkButton_' + orderId).hide();
+	            	$('#reviewButton_' + orderId).hide();
 	                $('#refundStatus_' + orderId).text('환불 완료').css('color','red');
 	            }else if (response === "3"){
 	            	$('#refundButton_' + orderId).hide();
@@ -493,7 +496,8 @@ $(document).ready(function() {
 			  		<span id="payStatus_${order.order_id}"></span><br>
 			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button><br><br>
 			  		<button id="checkButton_${order.order_id}" onclick="confirmBuy('${order.order_id}')">구매확정</button>
-			  		<span id="refundStatus_${order.order_id}"></span>
+			  		<span id="refundStatus_${order.order_id}"></span><br>
+			  		<button id="reviewButton_${order.order_id}" onclick="reviewSub('${order.order_id}')">리뷰작성</button>
 			  	</td>
 			  </tr>
 			  <input type="hidden" class="order_id" value="${order.order_id}">
