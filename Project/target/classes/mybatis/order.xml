@@ -12,6 +12,7 @@
 	<select id="getAllOrder" resultType="product.model.OrderBean">
 		select * from ordertable
 		where email = #{email}
+		order by created_at desc
 	</select>
 	
 	<select id="getAllByOrderId" resultType="product.model.OrderBean">

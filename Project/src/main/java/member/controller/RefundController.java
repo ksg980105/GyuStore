@@ -43,9 +43,7 @@ public class RefundController {
 		
 		
 		//환불 상태 변경 0:결제완료, 1:신청중, 2:환불 완료, 3:구매 확정
-		String order_id = refundBean.getOrder_id();
-		//refund 테이블에 저장
-		refundDao.updaterefundState(order_id);
+		refundDao.updaterefundState(refundBean);
 		
 		return gotoPage;
 	}

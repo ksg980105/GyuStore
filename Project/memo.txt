@@ -70,7 +70,8 @@ create table ordertable(
 	requestOrder varchar2(50),
 	pimage varchar2(200),
 	productPrice number,
-	using_point number
+	using_point number,
+	created_at timestamp default current_timestamp
 );
 
 create table cart(
@@ -87,7 +88,8 @@ create table refund(
 	pname varchar2(200),
 	pop_out varchar2(30),
 	reason varchar2(30),
-	state number default 0
+	state number default 0,
+	created_at timestamp default current_timestamp
 );
 
 create table review(

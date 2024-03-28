@@ -39,7 +39,7 @@ public class RefundDao {
 		sqlSessionTemplate.update(namespace + ".updateConfirmState", order_id);
 	}
 
-	public void updaterefundState(String order_id) {
-		sqlSessionTemplate.update(namespace + ".updaterefundState", order_id);
+	public void updaterefundState(RefundBean refundBean) {
+		sqlSessionTemplate.update(namespace + ".updaterefundState", refundBean);
 	}
 }

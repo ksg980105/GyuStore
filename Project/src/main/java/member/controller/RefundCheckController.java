@@ -19,7 +19,6 @@ public class RefundCheckController {
 	@RequestMapping(value = command)
 	@ResponseBody
 	public String check(String order_id) {
-		System.out.println(order_id);
 		
 		//주문 아이디로 환불정보 가져오기
 		RefundBean refundBean = refundDao.getAllByOrderId(order_id);

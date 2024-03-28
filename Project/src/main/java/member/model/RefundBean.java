@@ -1,5 +1,7 @@
 package member.model;
 
+import java.sql.Timestamp;
+
 public class RefundBean {
 	private String order_id;
 	private String member_id;
@@ -7,7 +9,15 @@ public class RefundBean {
 	private String pop_out;
 	private String reason;
 	private int state;
+	private Timestamp created_at;
 	
+	
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
 	public String getOrder_id() {
 		return order_id;
 	}

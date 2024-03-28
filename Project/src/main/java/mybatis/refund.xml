@@ -4,7 +4,7 @@
 	
 <mapper namespace = "member.RefundBean">
 	<insert id="insertRefund">
-		insert into refund
+		insert into refund (order_id, member_id, pname, pop_out, reason, state)
 		values(#{order_id}, #{member_id}, #{pname}, #{pop_out}, #{reason}, #{state})
 	</insert>
 	
@@ -16,20 +16,24 @@
 	<select id="getAllRefund" resultType="member.model.RefundBean">
 		select * from refund
 		where state = #{standard_state}
+		order by created_at desc
 	</select>
 	
 	<update id="updaterefundState">
 		update refund set
-		state=1	where order_id=#{order_id}
+		state=1, reason=#{reason}, created_at=CURRENT_TIMESTAMP
+		where order_id=#{order_id}
 	</update>
 	
 	<update id="updateState">
 		update refund set
-		state=2 where order_id=#{order_id}
+		state=2, reason='환불완료', created_at=CURRENT_TIMESTAMP
+		where order_id=#{order_id}
 	</update>
 	
 	<update id="updateConfirmState">
 		update refund set
-		state=3	where order_id=#{order_id}
+		state=3, reason='구매확정', created_at=CURRENT_TIMESTAMP
+		where order_id=#{order_id}
 	</update>
 </mapper> 
