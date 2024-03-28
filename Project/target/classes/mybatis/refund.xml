@@ -12,4 +12,14 @@
 		select * from refund
 		where order_id = #{order_id}
 	</select>
+	
+	<select id="getAllRefund" resultType="member.model.RefundBean">
+		select * from refund
+		where state = #{standard_state}
+	</select>
+	
+	<update id="updateState">
+		update refund set
+		state=2 where order_id=#{order_id}
+	</update>
 </mapper> 

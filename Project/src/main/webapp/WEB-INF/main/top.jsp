@@ -79,7 +79,7 @@
         	<li><a href="javascript:goLogout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </c:if>
         <c:if test="${not empty loginInfo and loginInfo.member_id eq 'admin'}">
-        	<li><a href=""><span class="glyphicon glyphicon-usd"></span> 환불처리</a></li>
+        	<li><a href="refundHandle.member"><span class="glyphicon glyphicon-usd"></span> 환불처리</a></li>
         	<li><a href="javascript:goLogout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </c:if>
       </ul>

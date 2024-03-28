@@ -1,5 +1,7 @@
 package member.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,5 +24,14 @@ public class RefundDao {
 	public RefundBean getAllByOrderId(String order_id) {
 		RefundBean refundBean = sqlSessionTemplate.selectOne(namespace + ".getAllByOrderId", order_id);
 		return refundBean;
+	}
+
+	public List<RefundBean> getAllRefund(int standard_state) {
+		List<RefundBean> refundList = sqlSessionTemplate.selectList(namespace + ".getAllRefund", standard_state);
+		return refundList;
+	}
+
+	public void updateState(String order_id) {
+		sqlSessionTemplate.update(namespace + ".updateState", order_id);
 	}
 }
