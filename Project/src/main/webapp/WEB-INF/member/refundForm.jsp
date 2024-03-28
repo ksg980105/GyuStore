@@ -138,7 +138,7 @@
 		    </div>
 			<div class="form-group">
 		        <span class="form-label">신청자:</span> 
-		        <span id="member_id">${orderBean.name}</span>
+		        <span id="member_id">${orderBean.member_id}</span>
 		    </div>
 		    <div class="form-group">
 		        <span class="form-label">환불 상품:</span>

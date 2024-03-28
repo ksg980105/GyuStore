@@ -2,7 +2,7 @@ package product.model;
 
 public class OrderBean {
 	private String order_id;
-	private String name;
+	private String member_id;
 	private String email;
 	private String phone;
 	private String address1;
@@ -21,11 +21,11 @@ public class OrderBean {
 	public void setOrder_id(String order_id) {
 		this.order_id = order_id;
 	}
-	public String getName() {
-		return name;
+	public String getMember_id() {
+		return member_id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	public String getEmail() {
 		return email;

@@ -214,13 +214,21 @@ $(document).ready(function() {
 	        type: "GET",
 	        data: ({ order_id: orderId }),
 	        success: function(response) {
-	            if (response === "1") {
+	        	if(response === "0"){
+	        		$('#payStatus_' + orderId).text('결제 완료').css('color','green');
+	        	}else if (response === "1") {
 	                // 환불이 완료되었을 경우 버튼을 숨기고 대신 환불 완료 메시지를 표시
 	                $('#refundButton_' + orderId).hide();
+	                $('#checkButton_' + orderId).hide();
 	                $('#refundStatus_' + orderId).text('환불신청 완료').css('color','red');
 	            }else if (response === "2"){
 	            	$('#refundButton_' + orderId).hide();
-	                $('#refundStatus_' + orderId).text('환불 완료').css('color','blue');
+	            	$('#checkButton_' + orderId).hide();
+	                $('#refundStatus_' + orderId).text('환불 완료').css('color','red');
+	            }else if (response === "3"){
+	            	$('#refundButton_' + orderId).hide();
+	            	$('#checkButton_' + orderId).hide();
+	                $('#refundStatus_' + orderId).text('구매 확정').css('color','blue');
 	            }
 	        },
 	        error: function(xhr, status, error) {
@@ -299,6 +307,22 @@ $(document).ready(function() {
  //환불신청버튼 클릭시
  function cancelPay(order_id){
 	 window.open("refund.member?order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
+ }
+ 
+ function confirmBuy(order_id){
+	 $.ajax({
+         type: "GET",
+         url: "confirm.member", // 서버의 환불 처리 컨트롤러 경로
+         data: {
+         	order_id: order_id
+         },
+         success: function(response) {
+             alert("구매확정이 완료되었습니다.");
+         },
+         error: function() {
+             alert("구매확정중 문제가 발생했습니다.");
+         }
+     });
  }
  
 </script>
@@ -436,7 +460,8 @@ $(document).ready(function() {
 			  	<th>상품명</th>
 			  	<th>수량</th>
 			  	<th>가격</th>
-			  	<th>환불</th>
+			  	<th>적립포인트</th>
+			  	<th>구매현황</th>
 			  </tr>
 			  <tr>
 			  	<td colspan="5" align="center">구매한 상품이 없습니다.</td>
@@ -449,7 +474,7 @@ $(document).ready(function() {
 			  	<th>수량</th>
 			  	<th>가격</th>
 			  	<th>적립포인트</th>
-			  	<th>환불현황</th>
+			  	<th>구매현황</th>
 			  </tr>
 			  <tr align="center">
 			    <!-- 장바구니로 여러 책 담아서 구매했을 경우 -->
@@ -465,7 +490,9 @@ $(document).ready(function() {
 			  	<td>${order.productPrice - order.using_point} 원</td>
 			  	<td>${order.point} p</td>
 			  	<td>
-			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button>
+			  		<span id="payStatus_${order.order_id}"></span><br>
+			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button><br><br>
+			  		<button id="checkButton_${order.order_id}" onclick="confirmBuy('${order.order_id}')">구매확정</button>
 			  		<span id="refundStatus_${order.order_id}"></span>
 			  	</td>
 			  </tr>

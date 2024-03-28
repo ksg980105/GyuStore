@@ -18,8 +18,18 @@
 		where state = #{standard_state}
 	</select>
 	
+	<update id="updaterefundState">
+		update refund set
+		state=1	where order_id=#{order_id}
+	</update>
+	
 	<update id="updateState">
 		update refund set
 		state=2 where order_id=#{order_id}
+	</update>
+	
+	<update id="updateConfirmState">
+		update refund set
+		state=3	where order_id=#{order_id}
 	</update>
 </mapper> 

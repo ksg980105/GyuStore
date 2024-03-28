@@ -90,7 +90,7 @@
        	                name: '${productBean.pname}',
        	                amount: check ? totalPrice : productPrice, // 변경된 변수 사용
        	                buyer_email: '${loginInfo.email}',
-       	                buyer_name: '${loginInfo.name}',
+       	                buyer_id: '${loginInfo.member_id}',
        	                buyer_tel: '${loginInfo.phone}',
        	                buyer_addr: '${loginInfo.address1} ${loginInfo.address2}',
        	                //buyer_postcode: '123-456',
@@ -121,7 +121,7 @@
 	            type: "POST",
 	            url: "order.product",
 	            data: {
-	                name: '${loginInfo.name}',
+	            	member_id: '${loginInfo.member_id}',
 	                email: '${loginInfo.email}',
 	                pop_out: '${pop_out}',
 	                address1: '${loginInfo.address1}',

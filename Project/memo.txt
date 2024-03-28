@@ -59,7 +59,7 @@ create table product(
 
 create table ordertable(
 	order_id VARCHAR2(8) PRIMARY KEY,
-	name varchar2(20),
+	member_id varchar2(30),
 	email varchar2(30),
 	phone varchar2(20),
 	address1 varchar2(100),

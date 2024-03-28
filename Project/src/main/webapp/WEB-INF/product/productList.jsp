@@ -115,7 +115,9 @@
 		  <tr align="center" style="font: bold;">
 		  	<td>${product.pnum}</td>
 		  	<td>
-		  		<img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" width="200">
+		  		<a href="detail.product?pnum=${product.pnum}">
+		  			<img src="<%=request.getContextPath()%>/resources/productImage/${product.pimage}" width="200">
+		  		</a>
 		  	</td>
 		  	<td>${product.pcategory}</td>
 		  	<td>${product.pname}</td>

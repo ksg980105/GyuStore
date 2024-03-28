@@ -34,8 +34,8 @@
 			
 			<table border="1" class="table" style="width: 100%;">
 				<tr>
-					<th>이름</th>
-					<td>${orderBean.name}</td>
+					<th>아이디</th>
+					<td>${orderBean.member_id}</td>
 				</tr>
 				<tr>
 					<th>이메일</th>

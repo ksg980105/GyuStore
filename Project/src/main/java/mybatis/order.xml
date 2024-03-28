@@ -5,8 +5,8 @@
 <mapper namespace = "product.OrderBean">
 	
 	<insert id="insertOrder">
-		insert into ordertable (order_id, name, email, phone, address1, address2, pname, pop_out, point, requestOrder, pimage, productPrice, using_point)
-		values(dbms_random.string('U', 8), #{name}, #{email}, #{phone}, #{address1}, #{address2}, #{pname}, #{pop_out}, #{point}, #{requestOrder}, #{pimage}, #{productPrice}, #{using_point})
+		insert into ordertable (order_id, member_id, email, phone, address1, address2, pname, pop_out, point, requestOrder, pimage, productPrice, using_point)
+		values(#{order_id}, #{member_id}, #{email}, #{phone}, #{address1}, #{address2}, #{pname}, #{pop_out}, #{point}, #{requestOrder}, #{pimage}, #{productPrice}, #{using_point})
 	</insert>
 	
 	<select id="getAllOrder" resultType="product.model.OrderBean">

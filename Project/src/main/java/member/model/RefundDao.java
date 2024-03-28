@@ -34,4 +34,12 @@ public class RefundDao {
 	public void updateState(String order_id) {
 		sqlSessionTemplate.update(namespace + ".updateState", order_id);
 	}
+
+	public void updateConfirmState(String order_id) {
+		sqlSessionTemplate.update(namespace + ".updateConfirmState", order_id);
+	}
+
+	public void updaterefundState(String order_id) {
+		sqlSessionTemplate.update(namespace + ".updaterefundState", order_id);
+	}
 }
