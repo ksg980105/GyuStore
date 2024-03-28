@@ -36,4 +36,10 @@
 		state=3, reason='구매확정', created_at=CURRENT_TIMESTAMP
 		where order_id=#{order_id}
 	</update>
+	
+	<update id="updateCancelState">
+		update refund set
+		state=0, reason='환불취소'
+		where order_id=#{order_id}
+	</update>
 </mapper> 

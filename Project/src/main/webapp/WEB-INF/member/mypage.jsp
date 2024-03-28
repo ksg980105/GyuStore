@@ -216,6 +216,7 @@ $(document).ready(function() {
 	        success: function(response) {
 	        	if(response === "0"){
 	        		$('#reviewButton_' + orderId).hide();
+	        		$('#cancelButton_' + orderId).hide();
 	        		$('#payStatus_' + orderId).text('결제 완료').css('color','green');
 	        	}else if (response === "1") {
 	                // 환불이 완료되었을 경우 버튼을 숨기고 대신 환불 완료 메시지를 표시
@@ -227,10 +228,12 @@ $(document).ready(function() {
 	            	$('#refundButton_' + orderId).hide();
 	            	$('#checkButton_' + orderId).hide();
 	            	$('#reviewButton_' + orderId).hide();
+	            	$('#cancelButton_' + orderId).hide();
 	                $('#refundStatus_' + orderId).text('환불 완료').css('color','red');
 	            }else if (response === "3"){
 	            	$('#refundButton_' + orderId).hide();
 	            	$('#checkButton_' + orderId).hide();
+	            	$('#cancelButton_' + orderId).hide();
 	                $('#refundStatus_' + orderId).text('구매 확정').css('color','blue');
 	            }
 	        },
@@ -321,9 +324,27 @@ $(document).ready(function() {
          },
          success: function(response) {
              alert("구매확정이 완료되었습니다.");
+             location.reload();
          },
          error: function() {
              alert("구매확정중 문제가 발생했습니다.");
+         }
+     });
+ }
+ 
+ function cancelRequest(order_id){
+	 $.ajax({
+         type: "GET",
+         url: "cancel.member", // 서버의 환불 처리 컨트롤러 경로
+         data: {
+         	order_id: order_id
+         },
+         success: function(response) {
+             alert("환불취소가 완료되었습니다.");
+             location.reload();
+         },
+         error: function() {
+             alert("환불취소중 문제가 발생했습니다.");
          }
      });
  }
@@ -497,6 +518,7 @@ $(document).ready(function() {
 			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button><br><br>
 			  		<button id="checkButton_${order.order_id}" onclick="confirmBuy('${order.order_id}')">구매확정</button>
 			  		<span id="refundStatus_${order.order_id}"></span><br>
+			  		<button id="cancelButton_${order.order_id}" onclick="cancelRequest('${order.order_id}')">환불취소</button><br>
 			  		<button id="reviewButton_${order.order_id}" onclick="reviewSub('${order.order_id}')">리뷰작성</button>
 			  	</td>
 			  </tr>

@@ -42,4 +42,8 @@ public class RefundDao {
 	public void updaterefundState(RefundBean refundBean) {
 		sqlSessionTemplate.update(namespace + ".updaterefundState", refundBean);
 	}
+
+	public void updateCancelState(String order_id) {
+		sqlSessionTemplate.update(namespace + ".updateCancelState", order_id);
+	}
 }
