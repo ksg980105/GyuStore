@@ -14,5 +14,9 @@ public class ReviewDao {
 	public ReviewDao() {
 		
 	}
+
+	public void insertReview(ReviewBean reviewBean) {
+		sqlSessionTemplate.insert(namespace + ".insertReview", reviewBean);
+	}
 	
 }

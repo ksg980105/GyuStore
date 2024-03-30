@@ -119,6 +119,7 @@
 	            data: formData,
 	            success: function(response) {
 	                alert("환불 신청이 접수되었습니다.");
+	                window.opener.location.reload(); // 부모 창 새로고침
 	                window.close(); // 환불 신청이 성공적으로 완료되면 창을 닫음
 	            },
 	            error: function() {

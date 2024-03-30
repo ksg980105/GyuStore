@@ -60,4 +60,9 @@
 		where pname=#{product_name}
 	</select>
 	
+	<select id="getpnumByPname" resultType="int">
+		select pnum from product
+		where pname=#{pname}
+	</select>
+	
 </mapper> 

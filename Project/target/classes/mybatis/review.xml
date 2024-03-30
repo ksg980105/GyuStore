@@ -3,5 +3,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace = "review.ReviewBean">
-	
-</mapper> 
+	<insert id="insertReview">
+		insert into review (review_number, product_number, user_id, rating, content, write_date)
+		values(review_seq.nextval, #{product_number}, #{user_id}, #{rating}, #{content}, CURRENT_TIMESTAMP)
+	</insert>
+</mapper>

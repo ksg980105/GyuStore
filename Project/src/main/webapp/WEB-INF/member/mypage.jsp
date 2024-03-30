@@ -315,6 +315,10 @@ $(document).ready(function() {
 	 window.open("refund.member?order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
  }
  
+ function reviewSub(pname,member_id){
+	 window.open("insert.review?pname="+pname+"&&member_id="+member_id, "_blank", "width=500, height=500, left=450, top=150");
+ }
+ 
  function confirmBuy(order_id){
 	 $.ajax({
          type: "GET",
@@ -503,7 +507,7 @@ $(document).ready(function() {
 			  		<button id="checkButton_${order.order_id}" onclick="confirmBuy('${order.order_id}')">구매확정</button>
 			  		<span id="refundStatus_${order.order_id}"></span><br>
 			  		<button id="cancelButton_${order.order_id}" onclick="cancelRequest('${order.order_id}')">환불취소</button><br>
-			  		<button id="reviewButton_${order.order_id}" onclick="reviewSub('${order.order_id}')">리뷰작성</button>
+			  		<button id="reviewButton_${order.order_id}" onclick="reviewSub('${order.pname}','${loginInfo.member_id}')">리뷰작성</button>
 			  	</td>
 			  </tr>
 			  <input type="hidden" class="order_id" value="${order.order_id}">

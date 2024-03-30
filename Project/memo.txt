@@ -96,7 +96,7 @@ create table review(
 	review_number number primary key,
 	product_number number not null,
 	user_id varchar2(30) not null,
-	rating number(1, 0) check (rating between 1 and 5),
+	rating number,
 	content varchar2(4000) not null,
 	write_date timestamp default current_timestamp not null
 );

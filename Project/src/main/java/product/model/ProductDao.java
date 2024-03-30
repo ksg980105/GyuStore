@@ -59,4 +59,9 @@ public class ProductDao {
 		return totalPoint;
 	}
 
+	public int getpnumByPname(String pname) {
+		int pnum = sqlSessionTemplate.selectOne(namespace + ".getpnumByPname", pname);
+		return pnum;
+	}
+
 }
