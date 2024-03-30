@@ -235,6 +235,13 @@ $(document).ready(function() {
 	            	$('#checkButton_' + orderId).hide();
 	            	$('#cancelButton_' + orderId).hide();
 	                $('#refundStatus_' + orderId).text('구매 확정').css('color','blue');
+	            }else if (response === "4"){
+	            	$('#payStatus_' + orderId).text('결제 완료').css('color','green');
+	            	$('#refundButton_' + orderId).hide();
+	            	$('#reviewStatus_' + orderId).text('리뷰작성 완료').css('color','blue');
+	            	$('#checkButton_' + orderId).hide();
+	            	$('#cancelButton_' + orderId).hide();
+	            	$('#reviewButton_' + orderId).hide();
 	            }
 	        },
 	        error: function(xhr, status, error) {
@@ -315,8 +322,8 @@ $(document).ready(function() {
 	 window.open("refund.member?order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
  }
  
- function reviewSub(pname,member_id){
-	 window.open("insert.review?pname="+pname+"&&member_id="+member_id, "_blank", "width=500, height=500, left=450, top=150");
+ function reviewSub(pname,member_id,order_id){
+	 window.open("insert.review?pname="+pname+"&&member_id="+member_id+"&&order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
  }
  
  function confirmBuy(order_id){
@@ -503,11 +510,12 @@ $(document).ready(function() {
 			  	<td>${order.point} p</td>
 			  	<td>
 			  		<span id="payStatus_${order.order_id}"></span><br>
-			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button><br><br>
+			  		<button id="refundButton_${order.order_id}" onclick="cancelPay('${order.order_id}')">환불신청</button><br>
 			  		<button id="checkButton_${order.order_id}" onclick="confirmBuy('${order.order_id}')">구매확정</button>
 			  		<span id="refundStatus_${order.order_id}"></span><br>
 			  		<button id="cancelButton_${order.order_id}" onclick="cancelRequest('${order.order_id}')">환불취소</button><br>
-			  		<button id="reviewButton_${order.order_id}" onclick="reviewSub('${order.pname}','${loginInfo.member_id}')">리뷰작성</button>
+			  		<button id="reviewButton_${order.order_id}" onclick="reviewSub('${order.pname}','${loginInfo.member_id}','${order.order_id}')">리뷰작성</button><br>
+			  		<span id="reviewStatus_${order.order_id}"></span><br>
 			  	</td>
 			  </tr>
 			  <input type="hidden" class="order_id" value="${order.order_id}">

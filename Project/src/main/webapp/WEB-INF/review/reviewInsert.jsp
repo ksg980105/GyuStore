@@ -79,7 +79,8 @@
                     product_number: "${pnum}",
                     user_id: "${member_id}",
                     rating: $('input[name="rating"]:checked').val(),
-                    content: $('#reviewContent').val()
+                    content: $('#reviewContent').val(),
+                    order_id: "${order_id}"
                 },
                 success: function (response) {
                     alert('리뷰 등록 성공!');
