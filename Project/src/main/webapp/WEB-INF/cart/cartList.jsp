@@ -144,7 +144,7 @@
 		        type: "POST",
 		        url: "order.product",
 		        data: {
-		            name: '${loginInfo.name}',
+		            member_id: '${loginInfo.member_id}',
 		            email: '${loginInfo.email}',
 		            pop_out: productPqtyHidden,
 		            address1: '${loginInfo.address1}',
