@@ -323,7 +323,11 @@ $(document).ready(function() {
  }
  
  function reviewSub(pname,member_id,order_id){
-	 window.open("insert.review?pname="+pname+"&&member_id="+member_id+"&&order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
+	 if (pname.indexOf(",") === -1) {
+		 window.open("insert.review?pname="+pname+"&&member_id="+member_id+"&&order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");		 
+	 }else{
+		 window.open("cartInsert.review?pname="+pname+"&&member_id="+member_id+"&&order_id="+order_id, "_blank", "width=500, height=500, left=450, top=150");
+	 }
  }
  
  function confirmBuy(order_id){
