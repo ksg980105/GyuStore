@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import product.model.OrderBean;
+
 @Component("MemberDao")
 public class MemberDao {
 
@@ -61,6 +63,10 @@ public class MemberDao {
 		pointMap.put("email", email);
 		sqlSessionTemplate.update(namespace + ".updatePoint", pointMap);
 		
+	}
+
+	public void returnPoint(OrderBean orderBean) {
+		sqlSessionTemplate.update(namespace + ".returnPoint", orderBean);
 	}
 
 }

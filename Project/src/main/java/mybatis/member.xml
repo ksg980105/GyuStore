@@ -39,4 +39,10 @@
 		set point = point+#{point}
 		where email = #{email}
 	</update>
+	
+	<update id="returnPoint">
+		update member
+		set point = point+#{using_point}
+		where email = #{email}
+	</update>
 </mapper> 

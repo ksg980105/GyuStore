@@ -54,8 +54,8 @@
 <body>
 
 <!-- member_id와 order_id를 위한 숨겨진 입력 필드 -->
-<input type="hidden" id="memberId" value="여기에 회원 ID">
-<input type="hidden" id="orderId" value="여기에 주문 ID">
+<input type="hidden" id="memberId" value="${member_id}">
+<input type="hidden" id="orderId" value="${order_id}">
 
 <select id="productSelect" onchange="goToReviewPage()">
     <option value="">상품 선택</option>
