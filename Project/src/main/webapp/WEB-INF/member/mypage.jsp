@@ -461,22 +461,6 @@ $(document).ready(function() {
 	
 	<div id="Tab3" class="tabcontent">
 	  <table class="table table-bordered border-success" style="width: 1000px; margin: auto;">
-	  	<c:if test="${loginInfo.member_id == 'admin'}">
-	  		<tr>
-	  			<th>번호</th>
-	  			<th>환불신청자</th>
-	  			<th>신청상품</th>
-	  			<th>신청사유</th>
-	  			<th>신청현황</th>
-	  		</tr>
-	  		<tr align="center">
-	  			<td>1</td>
-	  			<td>userid</td>
-	  			<td>책</td>
-	  			<td>필요없어짐</td>
-	  			<td>true => 환불완료, false => 대기중</td>
-	  		</tr>
-	  	</c:if>
 	  	<c:if test="${loginInfo.member_id != 'admin'}">
 		  	<c:if test="${empty orderList}">
 		  	  <tr>
@@ -488,7 +472,7 @@ $(document).ready(function() {
 			  	<th>구매현황</th>
 			  </tr>
 			  <tr>
-			  	<td colspan="5" align="center">구매한 상품이 없습니다.</td>
+			  	<td colspan="6" align="center">구매한 상품이 없습니다.</td>
 			  </tr>
 		  	</c:if>
 		  	<c:forEach var="order" items="${orderList}">
