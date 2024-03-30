@@ -7,4 +7,10 @@
 		insert into review (review_number, product_number, user_id, rating, content, write_date)
 		values(review_seq.nextval, #{product_number}, #{user_id}, #{rating}, #{content}, CURRENT_TIMESTAMP)
 	</insert>
+	
+	<select id="getAllReviewByPnum" resultType="review.model.ReviewBean">
+		select * from review
+		where product_number = #{pnum}
+		order by write_date desc
+	</select>
 </mapper>

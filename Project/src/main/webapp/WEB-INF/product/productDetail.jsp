@@ -2,8 +2,94 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../main/top.jsp" %>
 
+<style>
+	/* 상품평 컨테이너 스타일링 */
+	.review-container {
+	    max-width: 900px;
+	    margin: 20px auto;
+	    background-color: #f8f8f8;
+	    padding: 20px;
+	    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	    border-radius: 8px;
+	}
+	
+	/* 리뷰 박스 스타일링 */
+	.review {
+	    padding: 15px;
+	    border-bottom: 1px solid #eee;
+	    margin-bottom: 10px;
+	    border-radius: 5px;
+	    background-color: #f8f8f8;
+	}
+	
+	.review:last-child {
+	    border-bottom: none;
+	}
+	
+	/* 리뷰 내용 스타일링 */
+	.review h3, .review h2 {
+	    color: #333;
+	}
+	
+	.review p {
+	    color: #666;
+	    line-height: 1.5;
+	}
+	
+	/* 사용자 ID 및 작성 날짜 스타일링 */
+	.review h3 {
+	    display: inline;
+	    font-size: 1rem;
+	}
+	
+	.review h2 {
+	    display: inline;
+	    font-size: 0.8rem;
+	    color: #999;
+	    margin-left: 10px;
+	}
+	
+	/* 평점 스타일링 */
+	.review p:last-child {
+	    font-weight: bold;
+	    color: #007bff;
+	}
+	
+	/* 별 스타일 */
+	.star-rating {
+	    color: #ffc107; /* 노란색 */
+	    font-size: 1.25rem;
+	}
+	
+	/* 리뷰 내용에서 평점 숫자를 숨깁니다. */
+	.review p.rating {
+	    display: none;
+	}
+	
+
+</style>
+
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript">
+
+	window.addEventListener('DOMContentLoaded', (event) => {
+	    document.querySelectorAll('.rating').forEach(function(ratingElem) {
+	        const ratingValue = parseInt(ratingElem.textContent);
+	        let stars = '';
+	        for (let i = 0; i < 5; i++) {
+	            if (i < ratingValue) {
+	                stars += '★'; // 별 표시
+	            } else {
+	                stars += '☆'; // 별 표시되지 않음
+	            }
+	        }
+	        
+	        const starsSpan = document.createElement('span');
+	        starsSpan.innerHTML = stars;
+	        starsSpan.classList.add('star-rating');
+	        ratingElem.parentNode.insertBefore(starsSpan, ratingElem.nextSibling);
+	    });
+	});
     
     function plusCount(pqty, price) {
         var currentCount = parseInt(document.getElementById("pop_out").value);
@@ -115,5 +201,26 @@
         </div>
     </div>
     <hr>
+    <h3 style="padding-left: 260px;">상품평</h3>
+    <div class="review-container">
+	    <div class="review-list">
+	        <!-- 상품평 리스트 -->
+	        <c:if test="${empty reviewList}">
+	        	<div class="review">
+	        		<p>아직 등록된 리뷰가 없습니다.</p>
+	        	</div>
+	        </c:if>
+	        <c:if test="${not empty reviewList}">
+		        <c:forEach var="review" items="${reviewList}">
+		        <div class="review">
+		            <h3>${review.user_id}</h3> <h2>${review.write_date}</h2>
+		            <p class="rating">${review.rating}</p>
+		            <p>${review.content}</p>
+		        </div>
+		        </c:forEach>
+	        </c:if>
+	    </div>
+	</div>
+    <br><br><br><br>
 </body>
 </html>
