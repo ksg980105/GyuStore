@@ -8,12 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import member.model.MemberBean;
 import member.model.MemberDao;
 import member.model.RefundBean;
 import member.model.RefundDao;
 import product.model.OrderBean;
 import product.model.OrderDao;
+import product.model.ProductDao;
 
 @Controller
 public class RefundController {
@@ -30,6 +30,9 @@ public class RefundController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ProductDao productDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String refundGet(String order_id, Model model, HttpSession session) {
@@ -56,6 +59,9 @@ public class RefundController {
 		
 		//환불완료시 적립된 포인트 반환
 		memberDao.returnUsingPoint(orderBean);
+		
+		//상품재고 반환
+		productDao.returnPqty(orderBean);
 		
 		return gotoPage;
 	}

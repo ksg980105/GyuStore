@@ -73,6 +73,9 @@ public class ProductOrderController {
 		//구매포인트 적립
 		memberDao.updatePoint(orderBean.getPoint(), orderBean.getEmail());
 		
+		//상품재고 차감
+		productDao.reducePqty(orderBean);
+		
 		//환불테이블에 결제완료 상태로 등록
 		RefundBean refundBean = new RefundBean();
 		refundBean.setOrder_id(orderBean.getOrder_id());

@@ -64,4 +64,12 @@ public class ProductDao {
 		return pnum;
 	}
 
+	public void reducePqty(OrderBean orderBean) {
+		sqlSessionTemplate.update(namespace + ".reducePqty", orderBean);
+	}
+
+	public void returnPqty(OrderBean orderBean) {
+		sqlSessionTemplate.update(namespace + ".returnPqty", orderBean);
+	}
+
 }

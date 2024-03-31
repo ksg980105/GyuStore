@@ -65,4 +65,16 @@
 		where pname=#{pname}
 	</select>
 	
+	<update id="reducePqty">
+		update product set
+		pqty = pqty - #{pop_out}
+		where pname = #{pname}
+	</update>
+	
+	<update id="returnPqty">
+		update product set
+		pqty = pqty + #{pop_out}
+		where pname = #{pname}
+	</update>
+	
 </mapper> 
