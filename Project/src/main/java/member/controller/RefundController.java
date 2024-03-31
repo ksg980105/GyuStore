@@ -1,5 +1,8 @@
 package member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,24 +54,6 @@ public class RefundController {
 		
 		//환불 상태 변경 0:결제완료, 1:신청중, 2:환불 완료, 3:구매 확정
 		refundDao.updaterefundState(refundBean);
-		
-		//환불시 포인트 되돌리기 위해 order_id에 맞는 정보 가져오기
-		OrderBean orderBean = orderDao.getAllByOrderId(refundBean.getOrder_id());
-		
-		//환불완료시 사용한포인트 반환
-		memberDao.returnPoint(orderBean);
-		
-		//환불완료시 적립된 포인트 반환
-		memberDao.returnUsingPoint(orderBean);
-		
-		// 사용자 정보 업데이트를 위해 데이터베이스에서 최신 정보 조회
-		MemberBean updatedMemberBean = memberDao.getMemberByEmail(orderBean.getEmail());
-
-		// 세션의 loginInfo를 최신 정보로 업데이트
-		session.setAttribute("loginInfo", updatedMemberBean);
-		
-		//상품재고 반환
-		productDao.returnPqty(orderBean);
 		
 		return gotoPage;
 	}

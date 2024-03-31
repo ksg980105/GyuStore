@@ -83,4 +83,10 @@
 		where pname = #{pname}
 	</update>
 	
+	<update id="updateCartPqty">
+		update product set
+		pqty = pqty + #{pop_out}
+		where pname = #{pname}
+	</update>
+	
 </mapper> 

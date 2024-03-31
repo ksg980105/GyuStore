@@ -76,4 +76,8 @@ public class ProductDao {
 		sqlSessionTemplate.update(namespace + ".reduceCartPqty", cartmap);
 	}
 
+	public void updateCartPqty(Map<String, Object> cartmap) {
+		sqlSessionTemplate.update(namespace + ".updateCartPqty", cartmap);
+	}
+
 }
