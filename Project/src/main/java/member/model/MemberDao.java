@@ -73,4 +73,9 @@ public class MemberDao {
 		sqlSessionTemplate.update(namespace + ".returnUsingPoint", orderBean);
 	}
 
+	public MemberBean getMemberByEmail(String email) {
+		MemberBean memberBean = sqlSessionTemplate.selectOne(namespace + ".getMemberByEmail", email);
+		return memberBean;
+	}
+
 }

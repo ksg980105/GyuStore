@@ -1,7 +1,8 @@
 package product.controller;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -59,6 +60,7 @@ public class ProductOrderController {
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public void orderPost(OrderBean orderBean, HttpSession session) {
+		Map<String, Object> cartmap = new HashMap<String, Object>();
 		
 		MemberBean memberBean = (MemberBean) session.getAttribute("loginInfo");
 		
@@ -73,8 +75,11 @@ public class ProductOrderController {
 		//구매포인트 적립
 		memberDao.updatePoint(orderBean.getPoint(), orderBean.getEmail());
 		
-		//상품재고 차감
-		productDao.reducePqty(orderBean);
+		// 사용자 정보 업데이트를 위해 데이터베이스에서 최신 정보 조회
+		MemberBean updatedMemberBean = memberDao.getMemberByEmail(orderBean.getEmail());
+
+		// 세션의 loginInfo를 최신 정보로 업데이트
+		session.setAttribute("loginInfo", updatedMemberBean);
 		
 		//환불테이블에 결제완료 상태로 등록
 		RefundBean refundBean = new RefundBean();
@@ -86,6 +91,27 @@ public class ProductOrderController {
 		refundBean.setState(0);
 		
 		refundDao.insertRefund(refundBean);
+		
+		// 장바구니에 여러 상품 담아서 결제 시 재고 차감
+		if(orderBean.getPname().contains(",")) {
+	        String[] pnameArr = orderBean.getPname().split(",");
+	        String[] popArr = orderBean.getPop_out().split(",");
+
+	        //장바구니로 여러 상품 결제했을 때 상품명과 수량 가져와서 넣기
+	        for (int i = 0; i < pnameArr.length; i++) {
+	            // 공백 제거
+	            String singlePname = pnameArr[i].trim();
+	            int singlePop = Integer.parseInt(popArr[i].trim()); // 문자열을 정수로 변환
+
+	            cartmap.put("pname", singlePname);
+	            cartmap.put("pop_out", singlePop);
+	            productDao.reduceCartPqty(cartmap);
+	        }
+	        
+	    }else {
+	    	//단일상품 재고 차감
+			productDao.reducePqty(orderBean);
+	    }
 		
 		//결제 완료시 장바구니 상품 비우기
 		List<CartBean> cartLists = cartDao.getUserList(memberBean.getMember_id());

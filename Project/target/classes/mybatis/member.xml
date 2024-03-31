@@ -16,6 +16,10 @@
 		values (#{member_id},#{nickname},#{name},#{password},#{phone},#{email},#{address1},#{address2})
 	</insert>
 	
+	<select id="getMemberByEmail" resultType="member.model.MemberBean">
+		select * from member where email=#{email}
+	</select>
+	
 	<select id="getInfoByNameAndPhone" resultType="member.model.MemberBean">
 		select * from member where name=#{name} and phone=#{phone}
 	</select>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import member.model.MemberBean;
 import member.model.MemberDao;
 import member.model.RefundBean;
 import member.model.RefundDao;
@@ -59,6 +60,12 @@ public class RefundController {
 		
 		//환불완료시 적립된 포인트 반환
 		memberDao.returnUsingPoint(orderBean);
+		
+		// 사용자 정보 업데이트를 위해 데이터베이스에서 최신 정보 조회
+		MemberBean updatedMemberBean = memberDao.getMemberByEmail(orderBean.getEmail());
+
+		// 세션의 loginInfo를 최신 정보로 업데이트
+		session.setAttribute("loginInfo", updatedMemberBean);
 		
 		//상품재고 반환
 		productDao.returnPqty(orderBean);
