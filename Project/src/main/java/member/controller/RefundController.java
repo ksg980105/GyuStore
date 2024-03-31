@@ -55,6 +55,7 @@ public class RefundController {
 		memberDao.returnPoint(orderBean);
 		
 		//환불완료시 적립된 포인트 반환
+		memberDao.returnUsingPoint(orderBean);
 		
 		return gotoPage;
 	}

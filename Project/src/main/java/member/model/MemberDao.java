@@ -69,4 +69,8 @@ public class MemberDao {
 		sqlSessionTemplate.update(namespace + ".returnPoint", orderBean);
 	}
 
+	public void returnUsingPoint(OrderBean orderBean) {
+		sqlSessionTemplate.update(namespace + ".returnUsingPoint", orderBean);
+	}
+
 }

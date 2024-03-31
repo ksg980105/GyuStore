@@ -129,7 +129,7 @@
 	                phone: '${loginInfo.phone}',
 	                pimage: '${productBean.pimage}',
 	                pname: '${productBean.pname}',
-	                point: '${productBean.point}',
+	                point: '${productBean.point * pop_out}',
 	                productPrice: '${productBean.price * pop_out}',
 	                requestOrder: $('input[name="requestOrder"]:checked').val(),
 	                using_point: $('input[name="using_point"]').val()
