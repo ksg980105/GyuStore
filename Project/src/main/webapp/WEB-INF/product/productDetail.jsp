@@ -185,7 +185,13 @@
                 <p><b>카테고리 : </b><span class="badge badge-danger">${productBean.pcategory}<span></p>
                 <p><b>출판사 : </b>${productBean.publisher}</p>
                 <p><b>줄거리 : </b>${productBean.summary}</p>
-                <p><b>재고 수 : </b>${productBean.pqty} 권</p>
+                <p><b>재고 수 : </b>
+                	<c:if test="${productBean.pqty == 0}">
+                		<font color="red">품절</font>
+                	</c:if>
+                	<c:if test="${productBean.pqty != 0}">
+	                	${productBean.pqty} 권</p>
+                	</c:if>
                 <p><b>포인트 : </b>${productBean.point} p</p><br>
                 <p><b>수량 : </b>
                     <button type="button" onclick="minusCount(${productBean.pqty}, ${productBean.price})">-</button>
@@ -203,6 +209,12 @@
                     <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
                         <a href="javascript:void(0);" onclick="goToOrder('${productBean.pnum}','${productBean.pqty}');" class="btn btn-info">바로구매&raquo;</a>
                         <a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}','${productBean.pqty}');">장바구니 담기&raquo;</a>
+                    	<c:if test="${empty pageNumber}">
+                    		<a href="view.main" class="btn btn-success">상품목록&raquo;</a>
+                    	</c:if>
+                    	<c:if test="${not empty pageNumber}">
+	                    	<a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
+                    	</c:if>
                     </c:if>
                     <c:if test="${not empty loginInfo and loginInfo.member_id eq 'admin'}">
                         <a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
