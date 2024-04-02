@@ -17,7 +17,7 @@
 	
 	<delete id="deleteCart">
 		delete from cart
-		where member_id=#{member_id}
+		where product_name=#{product_name}
 	</delete>
 	
 	<select id="getUser" resultType="cart.model.CartBean">
