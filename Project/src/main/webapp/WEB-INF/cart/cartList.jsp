@@ -59,7 +59,6 @@
 		    } else if (inputValue > total){
 		    	input.value = 0;
 		    	alert('상품가격을 초과한 포인트를 사용할 수 없습니다.');
-		    	alert(total);
 		    	check = false;
 		    } else {
 	            point = inputValue;

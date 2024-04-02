@@ -124,7 +124,12 @@
     }
     
     //장바구니 추가
-    function addToCart(pname, price) {
+    function addToCart(pname, price, pqty) {
+    	if(pqty == 0){
+        	alert('재고가 없습니다.');
+        	return;
+        }
+    	
         if(confirm('해당 상품을 장바구니에 추가하겠습니까?')) {
             var popOut = document.getElementById('pop_out').value;
             
@@ -152,7 +157,12 @@
     }
     
     // 주문 누르면 상품번호, 주문갯수 넘김
-    function goToOrder(pnum) {
+    function goToOrder(pnum, pqty) {
+    	if(pqty == 0){
+        	alert('재고가 없습니다.');
+        	return;
+        }
+    	
         var popOut = document.getElementById('pop_out').value;
         location.href = "order.product?pnum=" + pnum + "&pop_out=" + popOut;
     }
@@ -191,10 +201,10 @@
                         <a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
                     </c:if>
                     <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
-                        <a href="javascript:void(0);" onclick="goToOrder(${productBean.pnum});" class="btn btn-info">바로구매&raquo;</a>
-                        <a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}');">장바구니 담기&raquo;</a>
+                        <a href="javascript:void(0);" onclick="goToOrder('${productBean.pnum}','${productBean.pqty}');" class="btn btn-info">바로구매&raquo;</a>
+                        <a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}','${productBean.pqty}');">장바구니 담기&raquo;</a>
                     </c:if>
-                    <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
+                    <c:if test="${not empty loginInfo and loginInfo.member_id eq 'admin'}">
                         <a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
                     </c:if>
             </div>
