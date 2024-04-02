@@ -106,11 +106,17 @@ public class ProductOrderController {
 	            cartmap.put("pname", singlePname);
 	            cartmap.put("pop_out", singlePop);
 	            productDao.reduceCartPqty(cartmap);
+	            
+	            //여러상품 구매시 orderCount +1
+	    		productDao.updateCartCount(singlePname);
 	        }
 	        
 	    }else {
 	    	//단일상품 재고 차감
 			productDao.reducePqty(orderBean);
+			
+			//단일상품 구매시 orderCount +1
+			productDao.updateCount(orderBean.getPname());
 	    }
 		
 		//결제 완료시 장바구니 상품 비우기

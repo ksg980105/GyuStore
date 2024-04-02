@@ -89,4 +89,21 @@
 		where pname = #{pname}
 	</update>
 	
+	<update id="updateCartCount">
+		update product set
+		orderCount = orderCount + 1
+		where pname = #{singlePname}
+	</update>
+	
+	<update id="updateCount">
+		update product set
+		orderCount = orderCount + 1
+		where pname = #{pname}
+	</update>
+	
+	<select id="getProductCount" resultType="product.model.ProductBean">
+		select * from product
+		order by orderCount desc
+	</select>
+	
 </mapper> 

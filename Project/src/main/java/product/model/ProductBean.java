@@ -1,5 +1,7 @@
 package product.model;
 
+import java.sql.Timestamp;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductBean {
@@ -12,6 +14,9 @@ public class ProductBean {
 	private int price;
 	private String summary;
 	private int point;
+	private int orderCount;
+	private Timestamp created_at;
+	
 	private MultipartFile upload; // 파일 업로드를 위한 변수
 	
 	public MultipartFile getUpload() {
@@ -27,6 +32,20 @@ public class ProductBean {
 		}
 	}
 	
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
+	public int getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+
 	public int getPnum() {
 		return pnum;
 	}

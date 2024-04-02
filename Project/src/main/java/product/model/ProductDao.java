@@ -80,4 +80,17 @@ public class ProductDao {
 		sqlSessionTemplate.update(namespace + ".updateCartPqty", cartmap);
 	}
 
+	public void updateCartCount(String singlePname) {
+		sqlSessionTemplate.update(namespace + ".updateCartCount", singlePname);
+	}
+
+	public void updateCount(String pname) {
+		sqlSessionTemplate.update(namespace + ".updateCount", pname);
+	}
+
+	public List<ProductBean> getProductCount() {
+		List<ProductBean> productList = sqlSessionTemplate.selectList(namespace + ".getProductCount");
+		return productList;
+	}
+
 }

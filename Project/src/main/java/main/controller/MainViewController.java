@@ -20,7 +20,11 @@ public class MainViewController {
 	ProductDao productDao;
 	
 	@RequestMapping(value = command)
-	public String main() {
+	public String main(Model model) {
+		
+		List<ProductBean> productList = productDao.getProductCount();
+		
+		model.addAttribute("productList", productList);
 		
 		return viewPage;
 	}
