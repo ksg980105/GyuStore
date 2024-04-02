@@ -89,8 +89,13 @@ public class ProductDao {
 	}
 
 	public List<ProductBean> getProductCount() {
-		List<ProductBean> productList = sqlSessionTemplate.selectList(namespace + ".getProductCount");
-		return productList;
+		List<ProductBean> productCountList = sqlSessionTemplate.selectList(namespace + ".getProductCount");
+		return productCountList;
+	}
+
+	public List<ProductBean> getProductNew() {
+		List<ProductBean> productNewList = sqlSessionTemplate.selectList(namespace + ".getProductNew");
+		return productNewList;
 	}
 
 }

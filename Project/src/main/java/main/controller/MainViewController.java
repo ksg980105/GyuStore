@@ -22,9 +22,14 @@ public class MainViewController {
 	@RequestMapping(value = command)
 	public String main(Model model) {
 		
-		List<ProductBean> productList = productDao.getProductCount();
+		//구매카운트순 조회
+		List<ProductBean> productCountList = productDao.getProductCount();
 		
-		model.addAttribute("productList", productList);
+		//최신등록순 조회
+		List<ProductBean> productNewList = productDao.getProductNew();
+		
+		model.addAttribute("productCountList", productCountList);
+		model.addAttribute("productNewList", productNewList);
 		
 		return viewPage;
 	}

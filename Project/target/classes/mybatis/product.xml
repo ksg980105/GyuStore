@@ -106,4 +106,9 @@
 		order by orderCount desc
 	</select>
 	
+	<select id="getProductNew" resultType="product.model.ProductBean">
+		select * from product
+		order by created_at desc
+	</select>
+	
 </mapper> 
