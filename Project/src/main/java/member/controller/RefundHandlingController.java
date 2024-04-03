@@ -67,8 +67,15 @@ public class RefundHandlingController {
 		// 사용자 정보 업데이트를 위해 데이터베이스에서 최신 정보 조회
 		MemberBean updatedMemberBean = memberDao.getMemberByEmail(orderBean.getEmail());
 		
-		// 세션의 loginInfo를 최신 정보로 업데이트
-		session.setAttribute("loginInfo", updatedMemberBean);
+		// 현재 세션에 저장된 로그인 정보 가져오기
+		MemberBean currentLoginInfo = (MemberBean) session.getAttribute("loginInfo");
+
+		// 환불 요청 주문의 이메일(사용자 식별 정보)와 현재 로그인된 사용자의 이메일이 동일한지 확인
+		if(currentLoginInfo.getEmail().equals(orderBean.getEmail())) {
+		    // 동일한 경우에만 세션 정보 업데이트
+		    session.setAttribute("loginInfo", updatedMemberBean);
+		}
+
 		
 		// 장바구니에 여러 상품 담아서 결제 시 재고 복구
 		if(orderBean.getPname().contains(",")) {
