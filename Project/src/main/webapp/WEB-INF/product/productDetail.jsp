@@ -184,7 +184,7 @@
                 <h3>${productBean.pname}</h3>
                 <p><b>카테고리 : </b><span class="badge badge-danger">${productBean.pcategory}<span></p>
                 <p><b>출판사 : </b>${productBean.publisher}</p>
-                <p><b>줄거리 : </b>${productBean.summary}</p>
+                <p><b>줄거리 : </b><br>${productBean.summary}</p>
                 <p><b>재고 수 : </b>
                 	<c:if test="${productBean.pqty == 0}">
                 		<font color="red">품절</font>
