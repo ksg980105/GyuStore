@@ -42,7 +42,7 @@ public class ProductViewController {
 		System.out.println("totalCount:" + totalCount);
 		String url = request.getContextPath() + command;
 		
-		Paging pageInfo = new Paging(pageNumber, "8", totalCount, url, whatColumn, keyword);
+		Paging pageInfo = new Paging(pageNumber, "100", totalCount, url, whatColumn, keyword);
 		
 		List<ProductBean> lists = productDao.getAllProduct(map, pageInfo);
 		model.addAttribute("productList", lists);
