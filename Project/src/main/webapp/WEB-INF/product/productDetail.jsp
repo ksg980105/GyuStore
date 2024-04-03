@@ -86,9 +86,12 @@
 	}
 	
 	.product-details p {
+		margin: 0;
+        padding: 0;
+        text-align: left;
 	    font-size: 16px;
 	    color: #555;
-	    margin-bottom: 5px;
+	    margin-bottom: 10px;
 	}
 	
 	.product-details span.badge {
@@ -108,7 +111,6 @@
 	    padding: 5px 10px;
 	    border-radius: 3px;
 	    cursor: pointer;
-	    margin-right: 5px;
 	}
 	
 	.product-details button:hover {
@@ -122,6 +124,12 @@
 	.btn-container .btn {
 	    margin-right: 10px;
 	}
+	
+	.summary-content {
+	    display: block;
+	    margin-left: 60px;
+	}
+	
 	
 </style>
 
@@ -237,10 +245,10 @@
             <img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" alt="${productBean.pname}">
         </div>
         <div class="col-md-6 product-details">
-            <h3>${productBean.pname}</h3>
+            <h3><b>${productBean.pname}</b></h3>
             <p><b>카테고리:</b> <span class="badge badge-danger">${productBean.pcategory}</span></p>
             <p><b>출판사:</b> ${productBean.publisher}</p>
-            <p><b>줄거리:</b><br>${productBean.summary}</p>
+            <p><b>줄거리:</b><span class="summary-content">${productBean.summary}</span></p>
             <p><b>재고 수:</b>
                 <c:choose>
                     <c:when test="${productBean.pqty == 0}">
