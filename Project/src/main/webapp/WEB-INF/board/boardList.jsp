@@ -46,7 +46,7 @@
   </thead>
   <c:if test = "${empty lists}">
    	  <tr>
-   	  	<td colspan="4" align="center">
+   	  	<td colspan="5" align="center">
    	  		검색된 항목이 없습니다.
    	  	</td>
    	  </tr>
