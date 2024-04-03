@@ -3,65 +3,65 @@
 <%@ include file="../main/top.jsp" %>
 
 <style>
-.row {
-	width: 80%;
-	margin: auto;
-}
-
-/* 상품 이미지 스타일링 */
-.product-image {
-    width: 80%;
-    height: 200px;
-    object-fit: fill;
-    border-radius: 5px;
-}
-
-/* 가격 정렬 옵션 스타일링 */
-.price-sort-option {
-    cursor: pointer;
-    color: #007bff;
-    margin: 0 10px;
-}
-
-.price-sort-option:hover {
-    text-decoration: underline;
-}
-
-/* 상품 목록 스타일링 */
-.product-item {
-    margin-bottom: 20px;
-}
-
-/* 상품 이름과 가격 스타일링 */
-.product-name, .product-price {
-    display: block;
-    margin: 5px 0;
-}
-
-/* 검색 폼 스타일링 */
-.search-form {
-    margin: 20px 0;
-}
-
-.search-form select, .search-form input[type="text"] {
-    padding: 5px 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-form input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 5px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-form input[type="submit"]:hover {
-    background-color: #0056b3;
-}
+	.row {
+		width: 80%;
+		margin: auto;
+	}
+	
+	/* 상품 이미지 스타일링 */
+	.product-image {
+	    width: 80%;
+	    height: 200px;
+	    object-fit: fill;
+	    border-radius: 5px;
+	}
+	
+	/* 가격 정렬 옵션 스타일링 */
+	.price-sort-option {
+	    cursor: pointer;
+	    color: #007bff;
+	    margin: 0 10px;
+	}
+	
+	.price-sort-option:hover {
+	    text-decoration: underline;
+	}
+	
+	/* 상품 목록 스타일링 */
+	.product-item {
+	    margin-bottom: 20px;
+	}
+	
+	/* 상품 이름과 가격 스타일링 */
+	.product-name, .product-price {
+	    display: block;
+	    margin: 5px 0;
+	}
+	
+	/* 검색 폼 스타일링 */
+	.search-form {
+	    margin: 20px 0;
+	}
+	
+	.search-form select, .search-form input[type="text"] {
+	    padding: 5px 10px;
+	    margin-right: 10px;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	}
+	
+	.search-form input[type="submit"] {
+	    background-color: #007bff;
+	    color: white;
+	    padding: 5px 15px;
+	    border: none;
+	    border-radius: 5px;
+	    cursor: pointer;
+	}
+	
+	.search-form input[type="submit"]:hover {
+	    background-color: #0056b3;
+	}
 </style>
 
 

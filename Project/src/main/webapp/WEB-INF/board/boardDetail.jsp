@@ -3,58 +3,52 @@
 <%@ include file="../main/top.jsp" %>
 
 <style>
-	th {
-        width: 25%;
-        text-align: center;
-        background-color: gray; /* 헤더 배경색 */
-        color: white;
-        padding: 10px;
-    }
+  /* 테이블 기본 설정 */
+  .table {
+    width: 600px;
+    margin: auto;
+  }
 
-    td {
-        padding: 10px;
-    }
-	body, html {
-	  margin: 0;
-	  font-family: Arial;
-	}
-	
-	.tablink {
-	  background-color: #555;
-	  color: white;
-	  float: left;
-	  border: none;
-	  outline: none;
-	  cursor: pointer;
-	  padding: 14px 16px;
-	  font-size: 17px;
-	  width: 25%;
-	}
-	
-	.tablink:hover {
-	  background-color: #777;
-	}
-	
-	.tabcontent {
-	  color: white;
-	  display: none;
-	  padding: 100px 20px;
-	}
-	.mybutton {
-        background-color: gray; /* 버튼 배경색 */
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-top: 10px;
-        cursor: pointer;
-        border-radius: 5px; /* 버튼 모서리 둥글게 */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    }
+  /* 테이블 헤더 스타일 */
+  th {
+    background-color: gray; /* Bootstrap의 .border-success 색상 */
+    color: white;
+    text-align: center;
+  }
+
+  /* 테이블 데이터 셀 스타일 */
+  td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* 마지막 행의 하단 경계선 삭제 */
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* 버튼 스타일 */
+  .mybutton {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+  }
+
+  /* 링크 스타일 제거 */
+  a {
+    text-decoration: none;
+  }
 </style>
+
 
 <br>
 <table class="table table-bordered border-success" style="width: 600px; margin: auto;">

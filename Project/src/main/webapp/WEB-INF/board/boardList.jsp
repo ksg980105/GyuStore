@@ -3,19 +3,52 @@
 <%@ include file="../main/top.jsp" %>
 
 <style>
-	.mybutton {
-        background-color: gray; /* 버튼 배경색 */
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px; /* 버튼 모서리 둥글게 */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    }
+	  .table {
+	    border-collapse: collapse;
+	    width: 800px;
+	    margin: auto;
+	    box-shadow: 0 2px 3px #ccc;
+	    background-color: #f8f9fa;
+	  }
+	  
+	  .table th, .table td {
+	    text-align: center;
+	    padding: 8px;
+	    border-bottom: 1px solid #ddd;
+	  }
+	  
+	  .mybutton {
+	    background-color: #007bff;
+	    color: white;
+	    border: none;
+	    cursor: pointer;
+	    padding: 5px 10px;
+	    border-radius: 5px;
+	  }
+	  
+	  .mybutton:hover {
+	    background-color: #0056b3;
+	  }
+	  
+	  select, input[type="text"], input[type="submit"] {
+	    padding: 5px;
+	    margin: 5px;
+	    border-radius: 5px;
+	    border: 1px solid #ccc;
+	  }
+	  
+	  input[type="submit"] {
+	    background-color: #007bff;
+	    color: white;
+	    cursor: pointer;
+	  }
+	  
+	  input[type="submit"]:hover {
+	    background-color: #0056b3;
+	  }
+	.center {
+	  text-align: center;
+	}
 </style>
 
 <script type="text/javascript">
@@ -78,18 +111,18 @@
 </table>
 <br>
 
-<center>
-	${pageInfo.pagingHtml}
-</center>
+<div class="center">
+  ${pageInfo.pagingHtml}
+</div>
 
-<center>
-	<form action="product.board" method="get">
-		<select name="whatColumn">
-			<option value="all">전체검색
-			<option value="title">제목
-			<option value="member_id">작성자
-		</select>
-		<input type="text" name="keyword">
-		<input type="submit" value="검색">
-	</form>
-</center>
+<div class="center">
+  <form action="product.board" method="get">
+    <select name="whatColumn">
+      <option value="all">전체검색
+      <option value="title">제목
+      <option value="member_id">작성자
+    </select>
+    <input type="text" name="keyword">
+    <input type="submit" value="검색">
+  </form>
+</div>
