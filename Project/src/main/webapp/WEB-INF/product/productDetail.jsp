@@ -205,6 +205,12 @@
                     <c:if test="${empty loginInfo and loginInfo.member_id ne 'admin'}">
                         <a href="login.member" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>
                         <a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
+                        <c:if test="${empty pageNumber}">
+                    		<a href="view.main" class="btn btn-success">상품목록&raquo;</a>
+                    	</c:if>
+                    	<c:if test="${not empty pageNumber}">
+	                    	<a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
+                    	</c:if>
                     </c:if>
                     <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
                         <a href="javascript:void(0);" onclick="goToOrder('${productBean.pnum}','${productBean.pqty}');" class="btn btn-info">바로구매&raquo;</a>
