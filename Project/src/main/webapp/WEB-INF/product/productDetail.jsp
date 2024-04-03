@@ -66,7 +66,63 @@
 	    display: none;
 	}
 	
-
+	.container {
+    margin-top: 50px;
+	}
+	
+	.col-md-5 img {
+	    max-width: 100%;
+	    height: auto;
+	    margin-left: 100px;
+	}
+	
+	.product-details {
+	    margin-left: 50px;
+	}
+	
+	.product-details h3 {
+	    font-size: 24px;
+	    color: #333;
+	}
+	
+	.product-details p {
+	    font-size: 16px;
+	    color: #555;
+	    margin-bottom: 5px;
+	}
+	
+	.product-details span.badge {
+	    padding: 5px 10px;
+	}
+	
+	.product-details hr {
+	    border: 0;
+	    border-top: 1px solid #ccc;
+	    margin: 20px 0;
+	}
+	
+	.product-details button {
+	    background-color: #007bff;
+	    color: #fff;
+	    border: none;
+	    padding: 5px 10px;
+	    border-radius: 3px;
+	    cursor: pointer;
+	    margin-right: 5px;
+	}
+	
+	.product-details button:hover {
+	    background-color: #0056b3;
+	}
+	
+	.btn-container {
+	    margin-top: 20px;
+	}
+	
+	.btn-container .btn {
+	    margin-right: 10px;
+	}
+	
 </style>
 
 <script type="text/javascript" src="resources/js/jquery.js"></script>
@@ -176,58 +232,58 @@
 <body>
     <br><br>
     <div class="container" align="center">
-        <div class="row">
-            <div class="col-md-5">
-                <img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" style="width:300px; height:300px; margin-left: 100px;">
-            </div>
-            <div class="col-md-6">
-                <h3>${productBean.pname}</h3>
-                <p><b>카테고리 : </b><span class="badge badge-danger">${productBean.pcategory}<span></p>
-                <p><b>출판사 : </b>${productBean.publisher}</p>
-                <p><b>줄거리 : </b><br>${productBean.summary}</p>
-                <p><b>재고 수 : </b>
-                	<c:if test="${productBean.pqty == 0}">
-                		<font color="red">품절</font>
-                	</c:if>
-                	<c:if test="${productBean.pqty != 0}">
-	                	${productBean.pqty} 권</p>
-                	</c:if>
-                <p><b>포인트 : </b>${productBean.point} p</p><br>
-                <p><b>수량 : </b>
-                    <button type="button" onclick="minusCount(${productBean.pqty}, ${productBean.price})">-</button>
-                    <input type="text" name="pop_out" id="pop_out" value="1" readonly="readonly" style="text-align:center; width: 50px;"/>
-                    <button type ="button" onclick="plusCount(${productBean.pqty}, ${productBean.price})">+</button>
-                </p><hr>
-                <h4 id="price">
-                    <b>Total : <fmt:formatNumber pattern="###,###,###" value="${productBean.price}"/> 원</b>
-                </h4>
-                
-                    <c:if test="${empty loginInfo and loginInfo.member_id ne 'admin'}">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" alt="${productBean.pname}">
+        </div>
+        <div class="col-md-6 product-details">
+            <h3>${productBean.pname}</h3>
+            <p><b>카테고리:</b> <span class="badge badge-danger">${productBean.pcategory}</span></p>
+            <p><b>출판사:</b> ${productBean.publisher}</p>
+            <p><b>줄거리:</b><br>${productBean.summary}</p>
+            <p><b>재고 수:</b>
+                <c:choose>
+                    <c:when test="${productBean.pqty == 0}">
+                        <font color="red">품절</font>
+                    </c:when>
+                    <c:otherwise>
+                        ${productBean.pqty} 권
+                    </c:otherwise>
+                </c:choose>
+            </p>
+            <p><b>포인트:</b> ${productBean.point} p</p>
+            <p><b>수량:</b>
+                <button type="button" onclick="minusCount(${productBean.pqty}, ${productBean.price})">-</button>
+                <input type="text" name="pop_out" id="pop_out" value="1" readonly="readonly" style="text-align:center; width: 50px;"/>
+                <button type="button" onclick="plusCount(${productBean.pqty}, ${productBean.price})">+</button>
+            </p>
+            <hr>
+            <h4 id="price">
+                <b>Total: <fmt:formatNumber pattern="###,###,###" value="${productBean.price}"/> 원</b>
+            </h4>
+            <div class="btn-container">
+                <c:choose>
+                    <c:when test="${empty loginInfo or loginInfo.member_id != 'admin'}">
                         <a href="login.member" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>
                         <a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
-                        <c:if test="${empty pageNumber}">
-                    		<a href="view.main" class="btn btn-success">상품목록&raquo;</a>
-                    	</c:if>
-                    	<c:if test="${not empty pageNumber}">
-	                    	<a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
-                    	</c:if>
-                    </c:if>
-                    <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
+                    </c:when>
+                    <c:otherwise>
                         <a href="javascript:void(0);" onclick="goToOrder('${productBean.pnum}','${productBean.pqty}');" class="btn btn-info">바로구매&raquo;</a>
                         <a href="javascript:void(0);" class="btn btn-warning" onclick="addToCart('${productBean.pname}', '${productBean.price}','${productBean.pqty}');">장바구니 담기&raquo;</a>
-                    	<c:if test="${empty pageNumber}">
-                    		<a href="view.main" class="btn btn-success">상품목록&raquo;</a>
-                    	</c:if>
-                    	<c:if test="${not empty pageNumber}">
-	                    	<a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
-                    	</c:if>
-                    </c:if>
-                    <c:if test="${not empty loginInfo and loginInfo.member_id eq 'admin'}">
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${empty pageNumber}">
+                        <a href="view.main" class="btn btn-success">상품목록&raquo;</a>
+                    </c:when>
+                    <c:otherwise>
                         <a href="view.product?pageNumber=${pageNumber}" class="btn btn-success">상품목록&raquo;</a>
-                    </c:if>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
+	</div>
     <hr>
     <h3 style="padding-left: 260px;">상품평</h3>
     <div class="review-container">
