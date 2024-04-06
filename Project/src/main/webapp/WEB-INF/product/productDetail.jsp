@@ -271,7 +271,7 @@
             </h4>
             <div class="btn-container">
                 <c:choose>
-                    <c:when test="${empty loginInfo or loginInfo.member_id != 'admin'}">
+                    <c:when test="${empty loginInfo or loginInfo.member_id == 'admin'}">
                         <a href="login.member" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>
                         <a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
                     </c:when>
