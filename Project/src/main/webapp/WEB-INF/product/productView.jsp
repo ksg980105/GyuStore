@@ -151,12 +151,17 @@ $(document).ready(function () {
 
 <center class="search-form">
 	<form action="view.product" method="get">
+		<select name="category">
+            <option value="all" ${param.category == 'all' ? 'selected' : ''}>전체카테고리</option>
+            <c:forEach var="cate" items="${categoryList}">
+	            <option value="${cate.category_name}" ${cate.category_name == param.category ? 'selected' : ''}>${cate.category_name}</option>
+            </c:forEach>
+        </select>
 		<select name="whatColumn">
-			<option value="all">전체검색
-			<option value="pname">제목
-			<option value="pcategory">카테고리
+			<option value="all" ${param.whatColumn == 'all' ? 'selected' : ''}>전체검색</option>
+			<option value="pname" ${param.whatColumn == 'pname' ? 'selected' : ''}>제목</option>
 		</select>
-		<input type="text" name="keyword">
+		<input type="text" name="keyword" value="${param.keyword}">
 		<input type="submit" value="검색">
 	</form>
 </center>

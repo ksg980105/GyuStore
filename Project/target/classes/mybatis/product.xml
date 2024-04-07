@@ -13,34 +13,40 @@
 	</select>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(*) from product
-		<if test="whatColumn == 'pname'">
-			where pname like #{keyword}
-		</if>
-		<if test="whatColumn == 'pcategory'">
-			where pcategory like #{keyword}
-		</if>
+	    select count(*) from product
+	    <where>
+	        <if test="category != null and category != 'all'">
+	            and pcategory like #{category}
+	        </if>
+	        <if test="whatColumn == 'pname'">
+	            and pname like #{keyword}
+	        </if>
+	    </where>
 	</select>
 	
 	<select id="getAllProduct" resultType="product.model.ProductBean">
-		select * from product 
-		<if test="whatColumn == 'pname'">
-			where pname like #{keyword}
-		</if>
-		<if test="whatColumn == 'pcategory'">
-			where pcategory like #{keyword}
-		</if>
-		<if test="price_order == 'low'">
-        	order by price asc
-	    </if>
-	    <if test="price_order == 'high'">
-	        order by price desc
-	    </if>
-	    <if test="price_order == null or price_order == ''">
-	        order by pnum desc
-	    </if>
+	    select * from product
+	    <where>
+	        <if test="category != null and category != 'all'">
+	            and pcategory like #{category}
+	        </if>
+	        <if test="whatColumn == 'pname'">
+	            and pname like #{keyword}
+	        </if>
+	    </where>
+	    <choose>
+	        <when test="price_order == 'low'">
+	            order by price asc
+	        </when>
+	        <when test="price_order == 'high'">
+	            order by price desc
+	        </when>
+	        <otherwise>
+	            order by pnum desc
+	        </otherwise>
+	    </choose>
 	</select>
-	
+
 	<delete id="deleteProduct">
 		delete from product where pnum=#{pnum}
 	</delete>
