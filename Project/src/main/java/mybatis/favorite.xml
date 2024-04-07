@@ -14,4 +14,9 @@
 		where pnum=#{pnum} and member_id=#{member_id}
 	</select>
 	
+	<select id="getAllFavorite" resultType="Integer">
+		select pnum from favorite
+		where member_id=#{member_id}
+	</select>
+	
 </mapper> 

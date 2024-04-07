@@ -75,6 +75,7 @@
         </c:if>
         <c:if test="${not empty loginInfo and loginInfo.member_id ne 'admin'}">
         	<li><a href="mypage.member"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
+        	<li><a href="list.favorite"><span class="glyphicon glyphicon-bookmark"></span> BookMark</a></li>
         	<li><a href="list.cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
         	<li><a href="javascript:goLogout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </c:if>

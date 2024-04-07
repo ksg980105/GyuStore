@@ -32,7 +32,7 @@
 	  border: none;
 	  outline: none;
 	  cursor: pointer;
-	  padding: 14px 16px;
+	  padding: 10px 12px;
 	  font-size: 17px;
 	  width: 25%;
 	}

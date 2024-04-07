@@ -1,5 +1,6 @@
 package favorite.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,5 +29,11 @@ public class FavoriteDao {
 		System.out.println("daocnt:"+cnt);
 		return cnt;
 	}
+
+	public List<Integer> getAllFavorite(String member_id) {
+		List<Integer> favoriteList = sqlSessionTemplate.selectList(namespace + ".getAllFavorite", member_id);
+		return favoriteList;
+	}
+
 	
 }
