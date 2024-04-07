@@ -35,5 +35,9 @@ public class FavoriteDao {
 		return favoriteList;
 	}
 
+	public void deleteFavorite(Map<String, Object> map) {
+		sqlSessionTemplate.delete(namespace + ".deleteFavorite", map);
+	}
+
 	
 }

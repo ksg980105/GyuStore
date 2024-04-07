@@ -246,14 +246,26 @@
                 success: function(response) {
                     alert('즐겨찾기 추가되었습니다.');
                 },
-                error: function(xhr, status, error) {
+                error: function() {
                     alert('즐겨찾기 추가 실패');
                 }
             });
             
         } else {
             image.src = currentPath + "staroff.jpeg";
-            alert('즐겨찾기 해제되었습니다.');
+            
+          	//DB에 데이터 삭제
+            $.ajax({
+                url: 'delete.favorite',
+                type: 'GET',
+                data: { pnum: pnum },
+                success: function(response) {
+                	alert('즐겨찾기 해제되었습니다.');
+                },
+                error: function() {
+                    alert('즐겨찾기 추가 실패');
+                }
+            });
         }
     }
     
