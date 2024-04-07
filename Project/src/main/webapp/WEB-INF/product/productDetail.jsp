@@ -259,23 +259,29 @@
     
     //즐겨찾기 상태 확인
     function checkFavoriteStatus(pnum) {
-        $.ajax({
-            url: 'check.favorite',
-            type: 'GET',
-            data: { pnum: pnum },
-            success: function(isFavorite) { //true false로 상태 확인
-                var image = document.getElementById("starImage");
-                var currentPath = "<%=request.getContextPath()%>/resources/img/";
-                if (isFavorite == "true") {
-                    image.src = currentPath + "staron.jpeg";
-                } else {
-                    image.src = currentPath + "staroff.jpeg";
-                }
-            },
-            error: function(xhr, status, error) {
-                alert('즐겨찾기 확인 실패');
-            }
-        });
+    	// 세션에 로그인 정보가 있는지 확인
+        var isLoggedIn = <%= session.getAttribute("loginInfo") != null %>;
+    	
+        //로그인정보가 있을때만 실행
+        if(isLoggedIn){
+	        $.ajax({
+	            url: 'check.favorite',
+	            type: 'GET',
+	            data: { pnum: pnum },
+	            success: function(isFavorite) { //true false로 상태 확인
+	                var image = document.getElementById("starImage");
+	                var currentPath = "<%=request.getContextPath()%>/resources/img/";
+	                if (isFavorite == "true") {
+	                    image.src = currentPath + "staron.jpeg";
+	                } else {
+	                    image.src = currentPath + "staroff.jpeg";
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                alert('즐겨찾기 확인 실패');
+	            }
+	        });
+        }
     }
 </script>
 
