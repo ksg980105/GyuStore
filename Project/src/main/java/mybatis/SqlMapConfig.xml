@@ -13,6 +13,7 @@
 		<typeAlias type="cart.model.CartBean" alias="CartBean"/>
 		<typeAlias type="member.model.RefundBean" alias="RefundBean"/>
 		<typeAlias type="review.model.ReviewBean" alias="ReviewBean"/>
+		<typeAlias type="favorite.model.FavoriteBean" alias="ReviewBean"/>
 	</typeAliases>
 	
 	<mappers>
@@ -24,5 +25,6 @@
 		<mapper resource="mybatis/cart.xml"/>
 		<mapper resource="mybatis/refund.xml"/>
 		<mapper resource="mybatis/review.xml"/>
+		<mapper resource="mybatis/favorite.xml"/>
 	</mappers>
 </configuration>

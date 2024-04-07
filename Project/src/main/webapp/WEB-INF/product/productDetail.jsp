@@ -230,6 +230,53 @@
         var popOut = document.getElementById('pop_out').value;
         location.href = "order.product?pnum=" + pnum + "&pop_out=" + popOut;
     }
+    
+    function toggleStar(pnum) {
+        var image = document.getElementById("starImage");
+        var currentPath = "<%=request.getContextPath()%>/resources/img/";
+        
+        if (image.src.includes("staroff.jpeg")) {
+            image.src = currentPath + "staron.jpeg";
+            
+            //DB에 데이터 추가
+            $.ajax({
+                url: 'insert.favorite',
+                type: 'GET',
+                data: { pnum: pnum },
+                success: function(response) {
+                    alert('즐겨찾기 추가되었습니다.');
+                },
+                error: function(xhr, status, error) {
+                    alert('즐겨찾기 추가 실패');
+                }
+            });
+            
+        } else {
+            image.src = currentPath + "staroff.jpeg";
+            alert('즐겨찾기 해제되었습니다.');
+        }
+    }
+    
+    //즐겨찾기 상태 확인
+    function checkFavoriteStatus(pnum) {
+        $.ajax({
+            url: 'check.favorite',
+            type: 'GET',
+            data: { pnum: pnum },
+            success: function(isFavorite) { //true false로 상태 확인
+                var image = document.getElementById("starImage");
+                var currentPath = "<%=request.getContextPath()%>/resources/img/";
+                if (isFavorite == "true") {
+                    image.src = currentPath + "staron.jpeg";
+                } else {
+                    image.src = currentPath + "staroff.jpeg";
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('즐겨찾기 확인 실패');
+            }
+        });
+    }
 </script>
 
 <html>
@@ -237,12 +284,13 @@
   <meta charset="UTF-8">
   <title>상품 상세 정보</title>
 </head>
-<body>
+<body onload="checkFavoriteStatus('${productBean.pnum}')">
     <br><br>
     <div class="container" align="center">
     <div class="row">
         <div class="col-md-5">
             <img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" alt="${productBean.pname}">
+        	<img src="<%=request.getContextPath()%>/resources/img/staroff.jpeg" id="starImage" width="30px;" align="right" style="margin-right: 27px; cursor: pointer;" onclick="toggleStar('${productBean.pnum}')">
         </div>
         <div class="col-md-6 product-details">
             <h3><b>${productBean.pname}</b></h3>

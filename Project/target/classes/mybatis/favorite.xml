@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "favorite.FavoriteBean">
+	
+	<insert id="insertFavorite">
+		insert into favorite
+		values(favorite_seq.nextval, #{member_id}, #{pnum})
+	</insert>
+	
+	<select id="checkFavorite" resultType="int">
+		select count(*) from favorite
+		where pnum=#{pnum} and member_id=#{member_id}
+	</select>
+	
+</mapper> 

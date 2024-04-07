@@ -7,21 +7,21 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<mvc:annotation-driven /> <!-- 유효성검사 -->
-
+	<mvc:annotation-driven/>
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/main/"/>
-		<property name="suffix" value=".jsp"/>
+		<property name="prefix" value="/WEB-INF/favorite/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<context:component-scan base-package="main" />
+	
+	<context:component-scan base-package="favorite" />
+	<context:component-scan base-package="cart" />
 	<context:component-scan base-package="board" />
 	<context:component-scan base-package="category" />
-	<context:component-scan base-package="product" />
+	<context:component-scan base-package="main" />
 	<context:component-scan base-package="member" />
-	<context:component-scan base-package="cart" />
+	<context:component-scan base-package="product" />
 	<context:component-scan base-package="review" />
-	<context:component-scan base-package="favorite" />
 	
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 </beans>

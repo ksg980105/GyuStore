@@ -6,18 +6,20 @@ DROP TABLE ordertable cascade constraints;
 DROP TABLE cart cascade constraints;
 DROP TABLE refund cascade constraints;
 DROP TABLE review cascade constraints;
+DROP TABLE favorite cascade constraints;
 
 drop sequence board_seq;
 drop sequence category_seq;
 drop sequence product_seq;
 drop sequence cart_seq;
-drop review cart_seq;
+drop sequence favorite_seq;
 
 create sequence board_seq;
 create sequence category_seq;
 create sequence product_seq;
 create sequence cart_seq;
 create sequence review_seq;
+create sequence favorite_seq;
 
 CREATE TABLE member (
    member_id   varchar2(30)   PRIMARY KEY,
@@ -101,6 +103,12 @@ create table review(
 	rating number,
 	content varchar2(4000) not null,
 	write_date timestamp default current_timestamp not null
+);
+
+create table favorite(
+	favorite_number number primary key,
+	member_id varchar2(30),
+	pnum number
 );
 
 commit;
