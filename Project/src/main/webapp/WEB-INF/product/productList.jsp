@@ -66,6 +66,28 @@
 
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+	    $(".more-link").click(function(e) {
+	      e.preventDefault();
+	      var $summaryContainer = $(this).closest('.summary-container');
+	      $summaryContainer.find('.summary-short').hide();
+	      $summaryContainer.find('.summary-full').show();
+	      $(this).hide();
+	      $summaryContainer.find('.less-link').show();
+	    });
+	    
+	    $(".less-link").click(function(e) {
+	        e.preventDefault();
+	        var $summaryContainer = $(this).closest('.summary-container');
+	        $summaryContainer.find('.summary-full').hide();
+	        $summaryContainer.find('.summary-short').show();
+	        $(this).hide();
+	        $summaryContainer.find('.more-link').show();
+	    });
+	    
+	    $(".less-link").hide();
+	});
+  
 	function deleteNum(){
 		var deleteNum = prompt("삭제할 번호를 입력하세요.", "");
 		if(deleteNum == "" || isNaN(deleteNum)){
@@ -124,7 +146,14 @@
 		  	<td>${product.publisher}</td>
 		  	<td>${product.pqty}</td>
 		  	<td>${product.price}</td>
-		  	<td>${product.summary}</td>
+		  	<td>
+				<div class="summary-container">
+			        <div class="summary-short">${product.summary.substring(0, 10)}...</div>
+			        <div class="summary-full" style="display: none;">${product.summary}</div>
+			        <a href="#" class="more-link">더보기</a>
+			        <a href="#" class="less-link">닫기</a>
+			    </div>
+			</td>
 		  	<td>${product.point}</td>
 		  </tr>
 	  </c:forEach>
