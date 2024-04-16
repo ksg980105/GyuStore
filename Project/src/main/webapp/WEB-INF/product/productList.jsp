@@ -173,7 +173,7 @@
   		</td>
     </tr>
   </c:if>
-  <c:if test="${not empty productList}">
+  <c:if test="${not empty productList }">
 	  <tr>
 	  	<td colspan="9" align="center">
 	  		<a href="insert.product">
