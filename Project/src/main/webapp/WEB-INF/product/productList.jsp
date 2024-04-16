@@ -148,10 +148,16 @@
 		  	<td>${product.price}</td>
 		  	<td>
 				<div class="summary-container">
+				<c:if test="${fn:length(product.summary) >= 10}">
 			        <div class="summary-short">${product.summary.substring(0, 10)}...</div>
 			        <div class="summary-full" style="display: none;">${product.summary}</div>
 			        <a href="#" class="more-link">더보기</a>
 			        <a href="#" class="less-link">닫기</a>
+			    </c:if>
+			    <c:if test="${fn:length(product.summary) < 10}">
+			        <div class="summary-short">${product.summary}</div>
+			    </c:if>
+			        
 			    </div>
 			</td>
 		  	<td>${product.point}</td>
