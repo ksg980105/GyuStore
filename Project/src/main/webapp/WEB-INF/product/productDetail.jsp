@@ -308,7 +308,12 @@
     <div class="row">
         <div class="col-md-5">
             <img src="<%=request.getContextPath()%>/resources/productImage/${productBean.pimage}" alt="${productBean.pname}">
-        	<img src="<%=request.getContextPath()%>/resources/img/staroff.jpeg" id="starImage" width="30px;" align="right" style="margin-right: 27px; cursor: pointer;" onclick="toggleStar('${productBean.pnum}')">
+        	<c:if test="${not empty loginInfo}">
+        		<img src="<%=request.getContextPath()%>/resources/img/staroff.jpeg" id="starImage" width="30px;" align="right" style="margin-right: 27px; cursor: pointer;" onclick="toggleStar('${productBean.pnum}')">
+        	</c:if>
+        	<c:if test="${empty loginInfo}">
+        		<img src="<%=request.getContextPath()%>/resources/img/staroff.jpeg" id="starImage" width="30px;" align="right" style="margin-right: 27px; cursor: pointer;" onclick="goLogin()">
+        	</c:if>
         </div>
         <div class="col-md-6 product-details">
             <h3><b>${productBean.pname}</b></h3>
@@ -338,8 +343,8 @@
             <div class="btn-container">
                 <c:choose>
                     <c:when test="${empty loginInfo or loginInfo.member_id == 'admin'}">
-                        <a href="login.member" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>
-                        <a href="login.member" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
+                        <a href="" class="btn btn-info" onclick="goLogin()">바로구매&raquo;</a>
+                        <a href="" class="btn btn-warning" onclick="goLogin()">장바구니 담기&raquo;</a>
                     </c:when>
                     <c:otherwise>
                         <a href="javascript:void(0);" onclick="goToOrder('${productBean.pnum}','${productBean.pqty}');" class="btn btn-info">바로구매&raquo;</a>
